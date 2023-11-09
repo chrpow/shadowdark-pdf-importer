@@ -1,0 +1,47 @@
+{
+    "id": "shadowdark-pdf-importer",
+    "title": "Shadowdark PDF Importer",
+    "description": "",
+    "version": "0.0.0",
+    "authors": [
+        {
+            "name": "fryguy",
+            "discord": "fryguy#3851"
+        },
+        {
+            "name": "chrpow",
+            "url": "https://github.com/chrpow"
+        }
+    ],
+    "scripts": [],
+    "esmodules": [
+        "shadowdark-pdf-importer.mjs",
+        "vendor.mjs"
+    ],
+    "flags": {},
+    "compatibility": {
+        "minimum": "11",
+        "verified": "11.306"
+    },
+    "relationships": {
+        "systems": [
+            {
+                "id": "shadowdark",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "1.0.0",
+                    "verified": "5.1.0"
+                }
+            }
+        ]
+    },
+    "styles": ["shadowdark-pdf-importer.css"],
+    "packs": [],
+    "languages": [],
+    "socket": true,
+    "url": "https://github.com/chrpow/shadowdark-pdf-importer",
+    "bugs": "https://github.com/chrpow/shadowdark-pdf-importer/issues",
+    "changelog": "https://github.com/chrpow/shadowdark-pdf-importer/releases/CHANGELOG.md",
+    "manifest": "https://github.com/chrpow/shadowdark-pdf-importer/releases/latest/download/module.json",
+    "download": "https://github.com/chrpow/shadowdark-pdf-importer/releases/latest/download/shadowdark-pdf-importer.zip"
+}
