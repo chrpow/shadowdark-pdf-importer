@@ -1,21 +1,3 @@
-This is module that lets you take pdfs that contain certain adventures (listed in the application),
-and export them to a format that is compatible with Foundry Virtual Tabletop for the Pathfinder
-2nd edition system.
+This module will automatically generate monsters in FoundryVTT from a Shadowdark Rulebook PDF.
 
-To use, follow the following steps:
-
-* Download the module into your FoundryVTT instance on the setup page under modules. Either find It
-  in the list of modules or paste in the following url as the manifest json:
-
-  https://github.com/fryguy1013/pdftofoundry/releases/latest/download/module.json
-
-* In your world, go to the settings tab, under module settings find the PDF to
-  Foundry module and enable it by clicking the checkbox.
-* Go to the settings tab, and click the "Import PDF" button.
-* Choose a PDF to import from your hard drive, and select the import option.
-  Please be patient as it imports your PDF.
-* You should now see the items from your PDF in your Foundry world.
-
-It will not work with modified or pirated PDFs.
-
-For personal use only.
+"[Product Name] is an independent product published under the Shadowdark RPG Third-Party License and is not affiliated with The Arcane Library, LLC. Shadowdark RPG © 2023 The Arcane Library, LLC."
