@@ -281,9 +281,317 @@ const map = new Map([
                 features: ['Clever']
             }
     ]}],
-
-
-
+    [209, {
+        entries: [
+            {
+                name: 'Djinni',
+                features: ['Impervious', 'Whirlwind', 'Wish']
+            },
+            {
+                name: 'Doppelganger',
+                features: ['Change Shape', 'Telepathy']
+            }
+    ]}],
+    [210, {
+        entries: [
+            {
+                name: 'Dragon, Desert',
+                features: ['Stormblood', 'Lightning Breath', 'Mirage']
+            },
+            {
+                name: 'Demon, Fire',
+                features: ['Fireblood', 'Fire Breath']
+            }            
+    ]}],
+    [211, {
+        entries: [
+            {
+                name: 'Dragon, Forest',
+                features: ['Animate Plants', 'Poison Breath']
+            },
+            {
+                name: 'Dragon, Frost',
+                features: ['Frostblood', 'Ice Breath']
+            },
+            {
+                name: 'Dragon, Sea',
+                features: ['Steam Breath', 'Water Spout']
+            }
+            {
+                name: 'Dragon, Swamp',
+                features: ['Smog Breath']
+            }
+    ]}],
+    [212, {
+        exclude: '212.*goddess\.',
+        entries: [
+            {
+                name: 'Drow',
+                features: ['Poison', 'Sunblind']
+            },
+            {
+                name: 'Drow, Drider',
+                features: ['Poison', 'Sunblind']
+            },
+            {
+                name: 'Drow, Priestess',
+                features: ['Poison', 'Sunblind', 'Snuff', 'Summon Spiders', 'Web']
+            }
+    ]}],
+    [213, {
+        entries: [
+            {
+                name: 'Druid',
+                features: ['Barkskin', 'Conjure Flames', 'Imbue', 'Summon Bear', 'Thunderclap']
+            },
+            {
+                name: 'Dryad',
+                features: ['Charm', 'Meld']
+            },
+            {
+                name: 'Duergar',
+                features: ['Enlarge', 'Invisibility', 'Sunblind']
+            }
+    ]}],
+    [214, {
+        entries: [
+            {
+                name: 'Dung Beetle, Giant',
+                features: ['Knock']
+            },
+            {
+                name: 'Efreeti',
+                features: ['Impervious', 'Wall of Flame', 'Wish']
+            }
+    ]}],
+    // [215, {SPECIAL************************************************
+    //     entries: [
+    //         {
+    //             name: 'Dung Beetle, Giant',
+    //             features: ['Knock']
+    //         },
+    //         {
+    //             name: 'Efreeti',
+    //             features: ['Impervious', 'Wall of Flame', 'Wish']
+    //         }
+    // ]}],
+    [216, {
+        entries: [
+            {
+                name: 'Elephant',
+                features: ['Charge']
+            },
+            {
+                name: 'Elf',
+                features: ['Feyblood']
+            },
+            {
+                name: 'Ettercap',
+                features: ['Poison Web']
+            },
+            {
+                name: 'Fairy',
+                features: ['Poison']
+            },
+            {
+                name: 'Frog, Giant',
+                features: ['Tongue']
+            },
+            {
+                name: 'Gargoyle',
+                features: ['Impervious']
+            }
+    ]}],
+    [217, {
+        entries: [
+            {
+                name: 'Gelatinous Cube',
+                features: ['Engulf', 'Rubbery', 'Toxin']
+            },
+            {
+                name: 'Ghast',
+                features: ['Undead', 'Carrion Stench', 'Paralyze']
+            },
+            {
+                name: 'Ghost',
+                features: ['Greater Undead', 'Incorporeal', 'Life Drain', 'Possess']
+            },
+            {
+                name: 'Ghoul',
+                features: ['Undead', 'Paralyze']
+            }
+    ]}],
+    [218, {
+        entries: [
+            {
+                name: 'Giant, Cloud',
+                features: ['Alert']
+            },
+            {
+                name: 'Giant, Fire',
+                features: ['Fireblood']
+            }
+    ]}],
+    [219, {
+        entries: [
+            {
+                name: 'Giant, Frost',
+                features: ['Frostblood']
+            },
+            {
+                name: 'Giant, Goat'
+            },
+            {
+                name: 'Giant, Hill'
+            },
+            {
+                name: 'Giant, Stone',
+                features: ['Stone Hide']
+            },
+            {
+                name: 'Giant, Storm',
+                features: ['Stormblood', 'Lightning Bolt']
+            }
+    ]}],
+    [220, {
+        entries: [
+            {
+                name: 'Gibbering Mouther',
+                features: ['Gibbering', 'Latch']
+            },
+            {
+                name: 'Gladiator'
+            },
+            {
+                name: 'Gnoll',
+                features: ['Rage']
+            },
+            {
+                name: 'Gnome, Deep',
+                features: ['Stone Meld']
+            }
+    ]}],
+    [221, {
+        exclude: '221.*sorcery.',
+        entries: [
+            {
+                name: 'Goblin',
+                features: ['Keen Senses']
+            },
+            {
+                name: 'Goblin, Boss',
+                features: ['Keen Senses']
+            },
+            {
+                name: 'Goblin, Shaman',
+                features: ['Keen Senses', 'Bug Brain', 'Skitter', 'Stink Bomb']
+            }
+    ]}],
+    [222, {
+        exclude: '222.*rituals.',
+        entries: [
+            {
+                name: 'Golem, Clay',
+                features: ['Golem', 'Curse']
+            },
+            {
+                name: 'Golem, Flesh',
+                features: ['Golem', 'Berserk']
+            },
+            {
+                name: 'Golem, Iron',
+                features: ['Golem', 'Poison Breath']
+            },
+            {
+                name: 'Golem, Stone',
+                features: ['Golem', 'Slow']
+            }
+    ]}],
+    [223, {
+        entries: [
+            {
+                name: 'Gorgon',
+                features: ['Charge', 'Petrifying Breath']
+            },
+            {
+                name: 'Gorilla'
+            },
+            {
+                name: 'Gray Ooze',
+                features: ['Impervious', 'Corrosive']
+            },
+            {
+                name: 'Grick',
+                features: ['Camouflage', 'Grab']
+            }
+    ]}],
+    [224, {
+        entries: [
+            {
+                name: 'Griffon'
+            },
+            {
+                name: 'Gorilla',
+                features: ['Grab']
+            },
+            {
+                name: 'Guard'
+            }
+    ]}],
+    [225, {
+        exclude: '225.*woods.',
+        entries: [
+            {
+                name: 'Hag, Weald',
+                features: ['Drink Pain', 'Shapechange']
+            },
+            {
+                name: 'Hag, Night',
+                features: ['Blind', 'Shapechange']
+            },
+            {
+                name: 'Hag, Sea',
+                features: ['Shapechange', 'Terrify']
+            }
+    ]}],
+    [226, {
+        entries: [
+            {
+                name: 'Harpy',
+                features: ['Song']
+            },
+            {
+                name: 'Hell Hound',
+                features: ['Impervious', 'Fire Breath']
+            },
+            {
+                name: 'Hippogriff'
+            },
+            {
+                name: 'Hippopotamus',
+                features: ['Stumpy']
+            }
+    ]}],
+    [227, {
+        entries: [
+            {
+                name: 'Hobgoblin',
+                features: ['Phalanx']
+            },
+            {
+                name: 'Horse'
+            },
+            {
+                name: 'Hydra',
+                feature: ['Heads']
+            },
+            {
+                name: 'Invisible Stalker',
+                features: ['Bound', 'Invisible', 'Tracking']
+            }
+    ]}],
+    
+    
     [666, {
         exclude: '',
         entries: [
