@@ -6,26 +6,32 @@ export default class Foo {
     async getTextFromPDF(file) {
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
-        for (const [pageNumber, monsters] of RULEBOOK_MONSTERS) {
+        for (const [pageNumber, info] of RULEBOOK_MONSTERS) {
+        console.log(`Parsing Page ${pageNumber}`)
+
+            const excludePattern = info.exclude ? new RegExp(info.exclude) : ''
+            const monsters = info.entries
             const page = await doc.getPage(pageNumber + PAGE_OFFSET);
             const content = await page.getTextContent();
             const strings = content.items.map(function(item) {
                 return item.str;
             });
-            const text = strings.join(' ').replace(/\s\s+/g, ' ')
-            for (const monster of monsters) {
+            const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
+            monsters.forEach((monster, index) => {
+                console.log(`Parsing ${monster.name}`)
+
                 const pattern = [`${monster.name.toUpperCase()}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+`]
 
                 if (monster.features.length > 1){
                     pattern.push(`(${monster.features.join('.*?)\\s+(')}.*?)`)
-                        if (monster.stop) {
-                            pattern.push(`\\s+${monster.stop}`)
+                        if (index < monster.features.length - 1) {
+                            pattern.push(`\\s+${monsters[index + 1].name}`)
                         }
                         pattern.push('.*')
                 } else if (monster.features.length == 1) {
                     pattern.push(`(${monster.features[0]}.*)`)
-                        if (monster.stop) {
-                            pattern.push(`\\s+${monster.stop}`)
+                        if (index < monster.features.length - 1) {
+                            pattern.push(`\\s+${monsters[index + 1].name}`)
                         }
                         pattern.push('.*')
                 }
@@ -47,15 +53,10 @@ export default class Foo {
 
                     console.log(monsterText)
 
-                    await monsterImporter._importMonster(monsterText)
+                    // monsterImporter._importMonster(monsterText)
                 }
-            }
+            })
         }
-
-        
-        
-        
-
     }
 }
 
