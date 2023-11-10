@@ -38,3 +38,4 @@ packages/
 /foundryconfig.json
 #ignore PDF
 *.pdf
+node_modules/*
