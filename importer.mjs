@@ -121,10 +121,166 @@ const map = new Map([
                 features: ['Hear Thoughts', 'Latch', 'Mind Blast', 'Mind Control']
             }
     ]}],
-
-
-
-
+    [200, {
+        entries: [
+            {
+                name: 'Bugbear',
+                features: ['Stealthy']
+            },
+            {
+                name: 'Bulette',
+                features: ['Leap']
+            },
+            {
+                name: 'Camel',
+            },
+            {
+                name: 'Cave Brute',
+                features: ['Bewilder']
+            },
+            {
+                name: 'Cave Creeper',
+                features: ['Toxin']
+            }
+    ]}],
+    [201, {
+        entries: [
+            {
+                name: 'Centaur'
+            },
+            {
+                name: 'Centipede, Giant',
+                features: ['Poison']
+            },
+            {
+                name: 'Centipede, Swarm',
+                features: ['Poison']
+            },
+            {
+                name: 'Chimera',
+                features: ['Fire Breath']
+            },
+            {
+                name: 'Chuul',
+                features: ['Grab']
+            }
+    ]}],
+    [202, {
+        entries: [
+            {
+                name: 'Cloaker',
+                features: ['Phantoms', 'Screech']
+            },
+            {
+                name: 'Cockatrice',
+                features: ['Petrify']
+            },
+            {
+                name: 'Couatl',
+                features: ['Change Shape', 'Poison', 'Restore']
+            },
+            {
+                name: 'Crab, Giant',
+                features: ['Crush']
+            }
+    ]}],
+    [203, {
+        entries: [
+            {
+                name: 'Crocodile'
+            },
+            {
+                name: 'Cultist',
+                features: ['Fearless', 'Deathtouch']
+            },
+            {
+                name: 'Cyclops'
+            },
+            {
+                name: 'Darkmantle',
+                features: ['Darkness']
+            },
+            {
+                name: 'Deep One',
+                features: ['Sunblind']
+            }
+    ]}],
+    [204, {
+        entries: [
+            {
+                name: 'Demon, Balor',
+                features: ['Impervious', 'Grab', 'Hellfire']
+            },
+            {
+                name: 'Demon, Glabrezu',
+                features: ['Crush']
+            },
+            {
+                name: 'Demon, Dretch',
+                features: ['Gas']
+            }
+    ]}],
+    [205, {
+        entries: [
+            {
+                name: 'Demon, Marilith',
+                features: ['Parry']
+            },
+            {
+                name: 'Demon, Vrock',
+                features: ['Carrion Mist', 'Screech']
+            }
+    ]}],
+    [206, {
+        entries: [
+            {
+                name: 'Archdevil',
+                features: ['Impervious', 'Crown of Darkness', 'Soulbind']
+            },
+            {
+                name: 'Devil, Barbed',
+                features: ['Barb']
+            }
+    ]}],
+    [207, {
+        entries: [
+            {
+                name: 'Devil, Cubi',
+                features: ['Change Shape', 'Charm', 'Drain']
+            },
+            {
+                name: 'Devil, Erinyes',
+                features: ['Poison']
+            },
+            {
+                name: 'Devil, Horned',
+                features: ['Iron Hide']
+            }
+    ]}],
+    [208, {
+        entries: [
+            {
+                name: 'Brachiosaurus'
+            },
+            {
+                name: 'Plesiosaurus'
+            },
+            {
+                name: 'Pterodactyl',
+                features: ['Grab']
+            },
+            {
+                name: 'Triceratops',
+                features: ['Charge']
+            },
+            {
+                name: 'Tyrannosaurus'
+            },
+            {
+                name: 'Velociraptor',
+                features: ['Clever']
+            }
+    ]}],
 
 
 
