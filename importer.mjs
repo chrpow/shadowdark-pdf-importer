@@ -1,17 +1,141 @@
 import { getDocument } from "./node_modules/pdfjs-dist/webpack.mjs"
 
 const map = new Map([
-    [194, [
-        {
-            name: 'Aboleth',
-            features: ['Curse', 'Enslave', 'Telepathic'],
-            stop: 'Monster'
-        },
-        {
-            name: 'Acolyte',
-            features: ['Healing Touch']
-        }
-    ]]
+    [194, {
+        exclude: 'Monster Statistics',
+        entries: [
+            {
+                name: 'Aboleth',
+                features: ['Curse', 'Enslave', 'Telepathic']
+            },
+            {
+                name: 'Acolyte',
+                features: ['Healing Touch']
+            }
+    ]}],
+    [195, {
+        exclude: 'ANGELS.*',
+        entries: [
+            {
+                name: 'Angel, Seraph',
+                features: ['Bless']
+            },
+            {
+                name: 'Angel, Domini',
+                features: ['Horn']
+            },
+            {
+                name: 'Angel, Principi',
+                features: ['Moonlight Aura', 'Truesight']
+            },
+            {
+                name: 'Archangel',
+                features: ['Command', 'Crown of Fire']
+            }
+    ]}],
+    [196, {
+        entries: [
+            {
+                name: 'Ape, Snow',
+                features: ['Thick Fur']
+            },
+            {
+                name: 'Ape'
+            },
+            {
+                name: 'Ankheg'
+            },
+            {
+                name: 'Animated Armor'
+            },
+            {
+                name: 'Apprentice',
+                features: ['Beguile', 'Magic Bolt']
+            }
+    ]}],
+    [197, {
+        exclude: '',
+        entries: [
+            {
+                name: 'Archmage',
+                features: ['Death Bolt', 'Enervate', 'Fireblast', 'Float', 'Mithralskin', 'Void Step'],
+            },
+            {
+                name: 'Assassin',
+                features: ['Execute'],
+            },
+            {
+                name: 'Azer',
+                features: ['Impervious'],
+            },
+            {
+                name: 'Badger',
+                features: ['Rage']
+            },
+            {
+                name: 'Bandit',
+                features: ['Ambush']
+            }
+    ]}],
+    [198, {
+        entries: [
+            {
+                name: 'Basilisk',
+                features: ['Petrify']
+            },
+            {
+                name: 'Bat, Giant',
+            },
+            {
+                name: 'Bat, Swarm',
+            },
+            {
+                name: 'Bear, Brown',
+                features: ['Crush']
+            },
+            {
+                name: 'Bear, Polar',
+                features: ['Crush', 'Thick Fur']
+            },
+            {
+                name: 'Beastman',
+                features: ['Brutal']
+            }
+    ]}],
+    [199, {
+        entries: [
+            {
+                name: 'Berserker',
+                features: ['Rage']
+            },
+            {
+                name: 'Black Pudding',
+                features: ['Impervious', 'Corrosive']
+            },
+            {
+                name: 'Boar',
+                features: ['Gore']
+            },
+            {
+                name: 'Brain Eater',
+                features: ['Hear Thoughts', 'Latch', 'Mind Blast', 'Mind Control']
+            }
+    ]}],
+
+
+
+
+
+
+
+    [666, {
+        exclude: '',
+        entries: [
+            {
+                name: 'APE, SNOW',
+                features: ['Thick Fur']
+            }
+    ]}],
 ])
 
 // const monsterImporter = new shadowdark.apps.MonsterImporterSD()
