@@ -1,4 +1,0 @@
-monsterImporter = new MonsterImporterSD();
-
-
-

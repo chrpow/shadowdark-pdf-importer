@@ -1,7 +1,66 @@
 <form autocomplete="off" onsubmit="event.preventDefault();">
+    <nav data-group="primary">
+        <a data-tab="summary">Summary</a>
+        <a data-tab="license">License and Support</a>
+    </nav>
 
+    <hr>
+
+    <section class="pdftofoundry-content">
+
+        <div class="tab browser" data-group="primary" data-tab="summary">
+            <span><img src="/modules/shadowdark-pdf-importer/designed-for-shadowdark-logo.png" class="patreon"/></span>
+            <p>You may import unmodified PDFs from The Arcane Library only. For personal use only.</p>
+            <p>For legal and technical reasons, this module only supports importing monster stats.</p>
+
+            <hr>
+
+            <h4>Supported PDFs</h4>
+
+            
+            <ul>
+                <li><strong>Shadowdark RPG Core Rulebook</strong>: Tested on Version 4.8</li>
+            </ul>
+
+            <hr>
+        </div>
+
+
+        <div class="tab browser" data-group="primary" data-tab="license">
+            <p>Shadowdark PDF Importer is an independent product published under the</p>
+            <p>Shadowdark RPG Third-Party License and is not affiliated with</p>
+            <p>The Arcane Library, LLC.</p>
+            <p>Shadowdark RPG © 2023 The Arcane Library, LLC.</p>
+            
+            <hr>
+
+            <p>This module was licensed by The Arcane Library, LLC. under the explicit</p>
+            <p>condition it be used only on files obtained legally from The Arcane</p>
+            <p>Library. Modifying or exploiting this module to work with pirated</p>
+            <p>content is strictly prohibited.</p>
+
+            <hr>
+
+            <h4>Support</h4>
+            <p>Bugs and suggested improvements should be reported on <a href="https://github.com/chrpow/shadowdark-pdf-importer/issues">Github</a>.</p>
+            <p>Under the current licensing agreement, this module is not permitted to import rule elements like talents or items.</p>
+
+            <hr>
+
+            <h4>Acknowledgements</h4>
+            <ul>
+                <li>A special thank you to Kelsey Dionne and The Arcane Library for giving permission to create this module</p>
+                <li>The user interface for this module borrows heavily from fryguy1013's <a href="https://github.com/fryguy1013/pdftofoundry">pdftofoundry module</a> (for Pathfinder 2nd Edition)</p>
+            </ul>
+        </div>
+    </section>
+
+    <hr>
 
     <div class="form-group">
+        <!-- <label for="page">Page</label>
+        <input type="number" id="page" name="page" min="194" max="265" value="194" />
+        <hr> -->
         <label for="data">Source PDF</label>
         <input type="file" name="data">
     </div>
