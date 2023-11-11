@@ -3,30 +3,31 @@ import { RULEBOOK_MONSTERS, PAGE_OFFSET, MODULE } from './constants.js'
 
 export default class Foo {
     constructor() {}
-    async getTextFromPDF(file) {
+    async getTextFromPDF(file/*) {*/, pageString) {
         this.useAlias = this.#getSetting('useAlias')
 
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
 
-        const testPage = 195//196
+        const testPage = 200//199*//197//194//195//196
+        const pageNumber = parseInt(pageString, 10)
 
-        let pageNumber = testPage
         let info = RULEBOOK_MONSTERS.get(pageNumber)
+        console.log(info)
 
         // for (const [pageNumber, info] of RULEBOOK_MONSTERS) {
-        console.log(`Parsing Page ${pageNumber}`)
+        // console.log(`Parsing Page ${pageNumber}`)
 
-            const excludePattern = info.exclude ? new RegExp(info.exclude) : ''
+            const excludePattern = info?.exclude ? new RegExp(info.exclude) : ''
             const monsters = info.entries
             const page = await doc.getPage(pageNumber + PAGE_OFFSET);
             const content = await page.getTextContent();
             const strings = content.items.map(function(item) {
                 return item.str;
             });
-            console.log(monsters)
+            // console.log(monsters)
             const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
-            console.log(text)
+            // console.log(text)
             monsters.forEach((monster, index) => {
 
                 const pattern = [`${monster.name.toUpperCase()}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+`]
@@ -54,13 +55,13 @@ export default class Foo {
                     if (m.index === regex.lastIndex) {
                         regex.lastIndex++;
                     }
-                    console.log(`Name: ${monster.name}, Alias: ${monster?.alias}`)
-                    console.log(this.useAlias)
+                    // console.log(`Name: ${monster.name}, Alias: ${monster?.alias}`)
+                    // console.log(this.useAlias)
 
                     m[0] = (this.useAlias) ? (monster.alias || monster.name) : monster.name
-                    console.log(m[0])
+                    // console.log(m[0])
 
-                    const monsterText = m.join('\n')
+                    const monsterText = m.join('\n\n')
 
                     console.log(monsterText)
 
