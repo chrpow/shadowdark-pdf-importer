@@ -3,19 +3,19 @@ import { RULEBOOK_MONSTERS, PAGE_OFFSET, MODULE } from './constants.js'
 
 export default class Foo {
     constructor() {}
-    async getTextFromPDF(file/*) {*/, pageString) {
+    async getTextFromPDF(file) {//, pageString) {
         this.useAlias = this.#getSetting('useAlias')
 
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
 //To check:263
-        const pageNumber = parseInt(pageString, 10)
+        // const pageNumber = parseInt(pageString, 10)
 
-        let info = RULEBOOK_MONSTERS.get(pageNumber)
-        console.log(info)
+        // let info = RULEBOOK_MONSTERS.get(pageNumber)
+        // console.log(info)
 
-        // for (const [pageNumber, info] of RULEBOOK_MONSTERS) {
-        // console.log(`Parsing Page ${pageNumber}`)
+        for (const [pageNumber, info] of RULEBOOK_MONSTERS) {
+        console.log(`Parsing Page ${pageNumber}`)
 
             const excludePattern = info?.exclude ? new RegExp(info.exclude) : ''
             const monsters = info.entries
@@ -28,6 +28,7 @@ export default class Foo {
             const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
             // console.log(text)
             monsters.forEach((monster, index) => {
+                console.log(monster.name)
 
                 const pattern = []
                 
@@ -36,7 +37,7 @@ export default class Foo {
                 } else {
                     pattern.push([`${monster.name.toUpperCase()}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)`])
                     if (monster.features || index !== monsters.length - 1) {
-                        console.log(`${monster.name} at index ${index} of ${monsters.length - 1} either has features or is not the last monster in the array`)
+                        // console.log(`${monster.name} at index ${index} of ${monsters.length - 1} either has features or is not the last monster in the array`)
                         pattern.push('\\s+')
                     }
                     if (monster.features) {
@@ -71,24 +72,17 @@ export default class Foo {
                     // console.log(m[0])
 
                     if (monster.replace) {
-                        console.log(m)
-
                         for (const target in monster.replace) {
                             const replacement = monster.replace[target]
-                            console.log(`Replacing ${target} with ${replacement}`)
                             m = m.map((s) => s.replace(target, replacement))
-                            console.log(m)
                         }
                     }
 
                     const monsterText = m.join('\n\n')
-
-                    console.log(monsterText)
-
                     monsterImporter._importMonster(monsterText)
                 }
             })
-        // }
+        }
     }
 
     #getSetting (key, defaultValue = null) {
