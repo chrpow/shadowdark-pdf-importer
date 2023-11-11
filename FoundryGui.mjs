@@ -10,17 +10,25 @@ var __defProp2 = Object.defineProperty, __name2 = __name((target, value) =>
 import { c as compare } from "./vendor.mjs";
 import Foo from "./importer.mjs";
 
-const minimumVersion = "1.0.0", _PdfImporter = class {
+const minimumVersion = "1.5.1", _PdfImporter = class {
     static { __name(this, "_PdfImporter") } constructor() {
         Hooks.once("init", () => {
             this.hookImportButton(),
-                // game.settings.register("shadowdark-pdf-importer", "basePath", {
-                //     name: "Base Path",
-                //     hint: "Path to place images",
+                game.settings.register("shadowdark-pdf-importer", "useAlias", {
+                    name: "Use Common Names",
+                    hint: "Use common names for creatures rather than their headings in their statblock. For instance, \"Brown Bear\" instead of \"Bear, Brown\"",
+                    scope: "world",
+                    config: !0,
+                    default: true,
+                    type: Boolean
+                }),
+                // game.settings.register("shadowdark-pdf-importer", "sizeData", {
+                //     name: "Include Size Data",
+                //     hint: "Grow the token to match the creature's physical size. *NOTE* since creature size rules are not part of the rules as written, these are assumptions based on artwork and common sense. If unselected, all creatures will be the same size as player character tokens.",
                 //     scope: "world",
                 //     config: !0,
-                //     default: "./shadowdark-pdf-importer/",
-                //     type: String
+                //     default: true,
+                //     type: Boolean
                 // }),
                 game.pdfImporter = {
                     import: () => this.importFromPDFDialog()
@@ -40,7 +48,7 @@ const minimumVersion = "1.0.0", _PdfImporter = class {
 
     async importFromPDFDialog() {
         new Dialog({
-            title: "Import PDF (version 4.1.1)",
+            title: "Import PDF (version 0.0.1)",
             content: await renderTemplate("modules/shadowdark-pdf-importer/import-window.html", {}),
             buttons: {
                 import: {
@@ -50,7 +58,9 @@ const minimumVersion = "1.0.0", _PdfImporter = class {
                         if (html instanceof HTMLElement) return;
                         const form = html.find("form")[0];
                         if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
+                       
                         const file = form.data.files[0]
+                        console.log(file)
                         if (file) {
                             file.arrayBuffer().then(buff => {
                                 let x = new Uint8Array(buff);

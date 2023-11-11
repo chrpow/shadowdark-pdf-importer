@@ -1,5 +1,5 @@
 import { getDocument } from "./node_modules/pdfjs-dist/webpack.mjs"
-import { RULEBOOK_MONSTERS, PAGE_OFFSET } from './constants'
+import { RULEBOOK_MONSTERS, PAGE_OFFSET } from './constants.js'
 
 export default class Foo {
     constructor() {}
