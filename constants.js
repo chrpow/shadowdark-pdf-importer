@@ -117,14 +117,14 @@ export const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Berserker',
                 features: ['Rage']
+            },            
+            {
+                name: 'Boar',
+                features: ['Gore']
             },
             {
                 name: 'Black Pudding',
                 features: ['Impervious', 'Corrosive']
-            },
-            {
-                name: 'Boar',
-                features: ['Gore']
             },
             {
                 name: 'Brain Eater',
@@ -707,9 +707,14 @@ export const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Horse'
             },
+            // Hydra defaults to one head (LV 2, HP 11)
             {
                 name: 'Hydra',
-                features: ['Heads']
+                regex: '(A t.*?)\\s+(AC.*?LV \\*)\\s+(H.*?)\\s+I',
+                replace: {
+                    'HP *': 'HP 11',
+                    'LV *': 'LV 2'
+                }
             },
             {
                 name: 'Invisible Stalker',

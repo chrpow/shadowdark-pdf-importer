@@ -8,7 +8,7 @@ export default class Foo {
 
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
-//To check: 212*//199*//215//217/219/224/227/232/240/241/251/252/263
+//To check:263
         const pageNumber = parseInt(pageString, 10)
 
         let info = RULEBOOK_MONSTERS.get(pageNumber)
