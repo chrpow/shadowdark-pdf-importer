@@ -8,8 +8,7 @@ export default class Foo {
 
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
-
-        const testPage = 200//199*//197//194//195//196
+//To check: 212*//199*//215//217/219/224/227/232/240/241/251/252/263
         const pageNumber = parseInt(pageString, 10)
 
         let info = RULEBOOK_MONSTERS.get(pageNumber)
@@ -30,21 +29,31 @@ export default class Foo {
             // console.log(text)
             monsters.forEach((monster, index) => {
 
-                const pattern = [`${monster.name.toUpperCase()}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+`]
-                if (monster.features) {
-                    if (monster.features.length > 1){
-                        pattern.push(`(${monster.features.join('.*?)\\s+(')}.*?)`)
-                            if (index < monsters.length - 1) {
-                                pattern.push(`\\s+${(monsters[index + 1].name).toUpperCase()}`)
-                            }
-                            // pattern.push('.*')
-                    } else if (monster.features.length == 1) {
-                        pattern.push(`(${monster.features[0]}.*)`)
-                            if (index < monsters.length - 1) {
-                                pattern.push(`\\s+${(monsters[index + 1].name).toUpperCase()}`)
-                            }
-                            // pattern.push('.*')
-                }}
+                const pattern = []
+                
+                if (monster.regex){
+                    pattern.push(monster.regex)
+                } else {
+                    pattern.push([`${monster.name.toUpperCase()}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)`])
+                    if (monster.features || index !== monsters.length - 1) {
+                        console.log(`${monster.name} at index ${index} of ${monsters.length - 1} either has features or is not the last monster in the array`)
+                        pattern.push('\\s+')
+                    }
+                    if (monster.features) {
+                        if (monster.features.length > 1){
+                            pattern.push(`(${monster.features.join('.*?)\\s+(')}.*`)
+                                if (index < monsters.length - 1) {
+                                    pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase()}`)
+                                } else pattern.push(`)`)
+                                // pattern.push('.*')
+                        } else if (monster.features.length == 1) {
+                            pattern.push(`(${monster.features[0]}.*`)
+                                if (index < monsters.length - 1) {
+                                    pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase()}`)
+                                } else pattern.push(`)`)
+                                // pattern.push('.*')
+                    }}
+                } 
                 console.log(pattern.join(''))
 
                 const regex = new RegExp(pattern.join(''), 'gm')
