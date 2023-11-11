@@ -70,6 +70,17 @@ export default class Foo {
                     m[0] = (this.useAlias) ? (monster.alias || monster.name) : monster.name
                     // console.log(m[0])
 
+                    if (monster.replace) {
+                        console.log(m)
+
+                        for (const target in monster.replace) {
+                            const replacement = monster.replace[target]
+                            console.log(`Replacing ${target} with ${replacement}`)
+                            m = m.map((s) => s.replace(target, replacement))
+                            console.log(m)
+                        }
+                    }
+
                     const monsterText = m.join('\n\n')
 
                     console.log(monsterText)

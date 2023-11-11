@@ -400,17 +400,89 @@ export const RULEBOOK_MONSTERS = new Map([
                 features: ['Impervious', 'Wall of Flame', 'Wish']
             }
     ]}],
-    // [215, {SPECIAL************************************************
-    //     entries: [
-    //         {
-    //             name: 'Dung Beetle, Giant',
-    //             features: ['Knock']
-    //         },
-    //         {
-    //             name: 'Efreeti',
-    //             features: ['Impervious', 'Wall of Flame', 'Wish']
-    //         }
-    // ]}],
+    [215, {
+        entries: [
+            {
+                name: 'Elemental, Air (Lesser)',
+                alias: 'Lesser Air Elemental',
+                regex: '(A .*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                replace: {
+                    '29/42': '29',
+                    '2d6/3d6': '2d6',
+                    '6/9': '6'
+                }
+            },
+            {
+                name: 'Elemental, Earth (Lesser)',
+                alias: 'Lesser Earth Elemental',
+                regex: '(A t.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(A.*?)\\sE',
+                replace: {
+                    '31/44': '31',
+                    '2d6/3d6': '2d6',
+                    '6/9': '6'
+                }
+            },
+            {
+                name: 'Elemental, Fire (Lesser)',
+                alias: 'Lesser Fire Elemental',
+                regex: '(A r.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(I.*?)\\sE',
+                replace: {
+                    '30/43': '30',
+                    '2d6/3d6': '2d6',
+                    '6/9': '6'
+                }
+            },
+            {
+                name: 'Elemental, Water (Lesser)',
+                alias: 'Lesser Water Elemental',
+                regex: '(A c.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                replace: {
+                    '29/42': '29',
+                    '2d6/3d6': '2d6',
+                    '6/9': '6'
+                }
+            },
+            {
+                name: 'Elemental, Air (Greater)',
+                alias: 'Greater Air Elemental',
+                regex: '(A .*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                replace: {
+                    '29/42': '42',
+                    '2d6/3d6': '3d6',
+                    '6/9': '9'
+                }
+            },
+            {
+                name: 'Elemental, Earth (Greater)',
+                alias: 'Greater Earth Elemental',
+                regex: '(A t.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(A.*?)\\sE',
+                replace: {
+                    '31/44': '44',
+                    '2d6/3d6': '3d6',
+                    '6/9': '9'
+                }
+            },
+            {
+                name: 'Elemental, Fire (Greater)',
+                alias: 'Greater Fire Elemental',
+                regex: '(A r.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(I.*?)\\sE',
+                replace: {
+                    '30/43': '43',
+                    '2d6/3d6': '3d6',
+                    '6/9': '9'
+                }
+            },
+            {
+                name: 'Elemental, Water (Greater)',
+                alias: 'Greater Water Elemental',
+                regex: '(A c.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                replace: {
+                    '29/42': '42',
+                    '2d6/3d6': '3d6',
+                    '6/9': '9'
+                }
+            },
+    ]}],
     [216, {
         entries: [
             {
@@ -1069,14 +1141,14 @@ export const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'The Tarrasque',
-                regex: '(A.*?)\s+(AC.*V.*?\d+)\s+(L.*?)\s+(De.*?)\s+(P.*?)\s+(R.*?)\s+(R.*?)\s+(R.*?)\s+(S.*?)\s+(S.*?)\s+TH'
+                regex: '(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(De.*?)\\s+(P.*?)\\s+(R.*?)\\s+(R.*?)\\s+(R.*?)\\s+(S.*?)\\s+(S.*?)\\s+TH'
             }
     ]}],
     [258, {
         entries: [
             {
                 name: 'The Wandering Merchant',
-                regex: '(A.*?)\s+(AC.*V.*?\d+)\s+(L.*?)\s+(A.*?)\s+(B.*?)\s+(D.*?)\s+(L.*?)\s+(R.*?)\s+(S.*?)\s+TH'
+                regex: '(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(A.*?)\\s+(B.*?)\\s+(D.*?)\\s+(L.*?)\\s+(R.*?)\\s+(S.*?)\\s+TH'
             }
     ]}],
     [259, {
