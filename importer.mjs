@@ -1,12 +1,20 @@
 import { getDocument } from "./node_modules/pdfjs-dist/webpack.mjs"
-import { RULEBOOK_MONSTERS, PAGE_OFFSET } from './constants.js'
+import { RULEBOOK_MONSTERS, PAGE_OFFSET, MODULE } from './constants.js'
 
 export default class Foo {
     constructor() {}
     async getTextFromPDF(file) {
+        this.useAlias = this.#getSetting('useAlias')
+
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
-        for (const [pageNumber, info] of RULEBOOK_MONSTERS) {
+
+        const testPage = 195//196
+
+        let pageNumber = testPage
+        let info = RULEBOOK_MONSTERS.get(pageNumber)
+
+        // for (const [pageNumber, info] of RULEBOOK_MONSTERS) {
         console.log(`Parsing Page ${pageNumber}`)
 
             const excludePattern = info.exclude ? new RegExp(info.exclude) : ''
@@ -16,26 +24,26 @@ export default class Foo {
             const strings = content.items.map(function(item) {
                 return item.str;
             });
+            console.log(monsters)
             const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
+            console.log(text)
             monsters.forEach((monster, index) => {
-                console.log(`Parsing ${monster.name}`)
 
                 const pattern = [`${monster.name.toUpperCase()}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+`]
-
-                if (monster.features.length > 1){
-                    pattern.push(`(${monster.features.join('.*?)\\s+(')}.*?)`)
-                        if (index < monster.features.length - 1) {
-                            pattern.push(`\\s+${monsters[index + 1].name}`)
-                        }
-                        pattern.push('.*')
-                } else if (monster.features.length == 1) {
-                    pattern.push(`(${monster.features[0]}.*)`)
-                        if (index < monster.features.length - 1) {
-                            pattern.push(`\\s+${monsters[index + 1].name}`)
-                        }
-                        pattern.push('.*')
-                }
-                // pattern.push(`\\s+${monster.stop}.*` || '.*')
+                if (monster.features) {
+                    if (monster.features.length > 1){
+                        pattern.push(`(${monster.features.join('.*?)\\s+(')}.*?)`)
+                            if (index < monsters.length - 1) {
+                                pattern.push(`\\s+${(monsters[index + 1].name).toUpperCase()}`)
+                            }
+                            // pattern.push('.*')
+                    } else if (monster.features.length == 1) {
+                        pattern.push(`(${monster.features[0]}.*)`)
+                            if (index < monsters.length - 1) {
+                                pattern.push(`\\s+${(monsters[index + 1].name).toUpperCase()}`)
+                            }
+                            // pattern.push('.*')
+                }}
                 console.log(pattern.join(''))
 
                 const regex = new RegExp(pattern.join(''), 'gm')
@@ -46,17 +54,30 @@ export default class Foo {
                     if (m.index === regex.lastIndex) {
                         regex.lastIndex++;
                     }
+                    console.log(`Name: ${monster.name}, Alias: ${monster?.alias}`)
+                    console.log(this.useAlias)
 
-                    m[0] = monster.name
+                    m[0] = (this.useAlias) ? (monster.alias || monster.name) : monster.name
+                    console.log(m[0])
 
                     const monsterText = m.join('\n')
 
                     console.log(monsterText)
 
-                    // monsterImporter._importMonster(monsterText)
+                    monsterImporter._importMonster(monsterText)
                 }
             })
+        // }
+    }
+
+    #getSetting (key, defaultValue = null) {
+        let value = defaultValue ?? null
+        try {
+            value = game.settings.get(MODULE.ID, key)
+        } catch {
+            coreModule.api.Logger.debug(`Setting '${key}' not found`)
         }
+        return value
     }
 }
 

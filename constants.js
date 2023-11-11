@@ -1,3 +1,6 @@
+export const MODULE = {
+    ID: 'shadowdark-pdf-importer'
+}
 export const PAGE_OFFSET = 4
 export const RULEBOOK_VERSION = '4.8'
 export const RULEBOOK_MONSTERS = new Map([
