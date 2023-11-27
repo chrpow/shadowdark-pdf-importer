@@ -302,7 +302,8 @@ const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Devil, Imp',
                 features: ['Impervious', 'Contract', 'Poison'],
-                alias: 'Imp'
+                alias: 'Imp',
+                size: 0.5
             }
     ]}],
     [208, {
@@ -330,7 +331,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Velociraptor',
-                features: ['Clever']
+                features: ['Clever'],
+                size: 0.5
             }
     ]}],
     [209, {
@@ -539,7 +541,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Fairy',
-                features: ['Poison']
+                features: ['Poison'],
+                size: 0.5
             },
             {
                 name: 'Frog, Giant',
@@ -783,7 +786,8 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Jellyfish',
-                features: ['Toxin']
+                features: ['Toxin'],
+                size: 0.5
             },
             {
                 name: 'Knight',
@@ -809,7 +813,8 @@ const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Leech, Giant',
                 features: ['Attach'],
-                alias: 'Giant Leech'
+                alias: 'Giant Leech',
+                size: 0.5
             }
     ]}],
     [230, {
@@ -1041,12 +1046,14 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Rat',
-                features: ['Disease']
+                features: ['Disease'],
+                size: 0.5
             },
             {
                 name: 'Rat, Giant',
                 features: ['Disease'],
-                alias: 'Giant Rat'
+                alias: 'Giant Rat',
+                size: 0.5
             },
             {
                 name: 'Rat, Dire',
@@ -1128,7 +1135,8 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Scorpion',
-                features: ['Poison']
+                features: ['Poison'],
+                size: 0.5
             },
             {
                 name: 'Scorpion, Giant',
@@ -1182,7 +1190,8 @@ const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Snake, Cobra',
                 features: ['Poison'],
-                alias: 'Cobra'
+                alias: 'Cobra',
+                size: 0.5
             },
             {
                 name: 'Snake, Swarm',
@@ -1205,7 +1214,8 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Spider',
-                features: ['Poison']
+                features: ['Poison'],
+                size: 0.5
             },
             {
                 name: 'Spider, Giant',
@@ -1220,7 +1230,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Stingbat',
-                features: ['Blood Drain']
+                features: ['Blood Drain'],
+                size: 0.5
             },
             {
                 name: 'Strangler',
@@ -1325,7 +1336,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Wasp, Giant',
                 features: ['Venom'],
                 alias: 'Giant Wasp'
-            },            {
+            },            
+            {
                 name: 'Werewolf',
                 features: ['Impervious', 'Lycanthropy']
             },
@@ -1342,7 +1354,8 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Will-o\'-Wisp',
-                features: ['Life Drain']
+                features: ['Life Drain'],
+                size: 0.5
             },
             {
                 name: 'Wolf',

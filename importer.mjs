@@ -74,7 +74,7 @@ export default class Foo {
                     }
 
                     const monsterText = m.join('\n\n')
-                    console.log(monsterText)
+                    // console.log(monsterText)
 
                     const options = {}
                     if (this.useSizeData) options.size = monster.size
