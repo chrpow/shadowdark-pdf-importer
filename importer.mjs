@@ -5,6 +5,7 @@ export default class Foo {
     constructor() {}
     async getTextFromPDF(file) {//, pageString) {
         this.useAlias = this.#getSetting('useAlias')
+        this.useSizeData = this.#getSetting('useSizeData')
 
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
@@ -27,7 +28,7 @@ export default class Foo {
             // console.log(monsters)
             const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
             // console.log(text)
-            monsters.forEach((monster, index) => {
+            monsters.forEach(async (monster, index) => {
                 console.log(monster.name)
 
                 const pattern = []
@@ -68,7 +69,9 @@ export default class Foo {
                     // console.log(`Name: ${monster.name}, Alias: ${monster?.alias}`)
                     // console.log(this.useAlias)
 
-                    m[0] = (this.useAlias) ? (monster.alias || monster.name) : monster.name
+                    m[0] =
+                    //  (this.useAlias) ? (monster.alias || monster.name) : 
+                     monster.name
                     // console.log(m[0])
 
                     if (monster.replace) {
@@ -79,7 +82,34 @@ export default class Foo {
                     }
 
                     const monsterText = m.join('\n\n')
-                    monsterImporter._importMonster(monsterText)
+                    // const monsterObj = this.#parseMonster(monsterText)
+
+                    const options = {}
+                    if (this.useSizeData) options.size = monster.size
+                    if (this.useAlias) options.alias = monster.alias
+                    
+                    // this.#createMonster(monsterObj, options)
+                    let newActor = await monsterImporter._importMonster(monsterText)
+
+                    // Update prototype token as needed
+                    await Actor.updateDocuments([{
+                        _id: newActor.id,
+                        "prototypeToken.texture": {...newActor.prototypeToken.texture, src: newActor.img}
+                    }])
+
+                    if (options.size != undefined) {
+                        await Actor.updateDocuments([{
+                            _id: newActor.id,
+                            "prototypeToken.height": options.size,
+                            "prototypeToken.width": options.size
+                        }])
+                    }
+                    if (options.alias != undefined) {
+                        await Actor.updateDocuments([{
+                            _id: newActor.id,
+                            "prototypeToken.name": options.alias
+                        }])
+                    }
                 }
             })
         }
@@ -106,4 +136,3 @@ export default class Foo {
   
 //     URL.revokeObjectURL(a.href);
 // }
-

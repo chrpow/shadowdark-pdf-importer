@@ -22,14 +22,14 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
                     default: true,
                     type: Boolean
                 }),
-                // game.settings.register("shadowdark-pdf-importer", "sizeData", {
-                //     name: "Include Size Data",
-                //     hint: "Grow the token to match the creature's physical size. *NOTE* since creature size rules are not part of the rules as written, these are assumptions based on artwork and common sense. If unselected, all creatures will be the same size as player character tokens.",
-                //     scope: "world",
-                //     config: !0,
-                //     default: true,
-                //     type: Boolean
-                // }),
+                game.settings.register("shadowdark-pdf-importer", "useSizeData", {
+                    name: "Include Size Data",
+                    hint: "Grow the token to match the creature's physical size. *NOTE* since creature size rules are not part of the rules as written, these are assumptions based on artwork and common sense. If unselected, all creatures will be the same size as player character tokens.",
+                    scope: "world",
+                    config: !0,
+                    default: true,
+                    type: Boolean
+                }),
                 game.pdfImporter = {
                     import: () => this.importFromPDFDialog()
                 }
