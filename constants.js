@@ -14,7 +14,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Acolyte',
                 features: ['Healing Touch']
             }
-    ]}],
+        ]
+    }],
     [195, {
         exclude: 'ANGELS.*',
         entries: [
@@ -37,7 +38,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Archangel',
                 features: ['Command', 'Crown of Fire']
             }
-    ]}],
+        ]
+    }],
     [196, {
         entries: [
             {
@@ -59,7 +61,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Apprentice',
                 features: ['Beguile', 'Magic Bolt']
             }
-    ]}],
+        ]
+    }],
     [197, {
         entries: [
             {
@@ -82,7 +85,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Bandit',
                 features: ['Ambush']
             }
-    ]}],
+        ]
+    }],
     [198, {
         entries: [
             {
@@ -117,13 +121,14 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Beastman',
                 features: ['Brutal']
             }
-    ]}],
+        ]
+    }],
     [199, {
         entries: [
             {
                 name: 'Berserker',
                 features: ['Rage']
-            },            
+            },
             {
                 name: 'Boar',
                 features: ['Gore']
@@ -137,7 +142,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Brain Eater',
                 features: ['Hear Thoughts', 'Latch', 'Mind Blast', 'Mind Control']
             }
-    ]}],
+        ]
+    }],
     [200, {
         entries: [
             {
@@ -163,7 +169,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Toxin'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [201, {
         entries: [
             {
@@ -190,7 +197,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Grab'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [202, {
         entries: [
             {
@@ -210,7 +218,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Crab, Giant',
                 features: ['Crush']
             }
-    ]}],
+        ]
+    }],
     [203, {
         entries: [
             {
@@ -233,7 +242,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Deep One',
                 features: ['Sunblind']
             }
-    ]}],
+        ]
+    }],
     [204, {
         entries: [
             {
@@ -253,7 +263,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Gas'],
                 alias: 'Dretch'
             }
-    ]}],
+        ]
+    }],
     [205, {
         entries: [
             {
@@ -268,7 +279,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Vrock',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [206, {
         entries: [
             {
@@ -280,7 +292,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Barb'],
                 alias: 'Barbed Devil'
             }
-    ]}],
+        ]
+    }],
     [207, {
         entries: [
             {
@@ -305,7 +318,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Imp',
                 size: 0.5
             }
-    ]}],
+        ]
+    }],
     [208, {
         entries: [
             {
@@ -334,7 +348,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Clever'],
                 size: 0.5
             }
-    ]}],
+        ]
+    }],
     [209, {
         entries: [
             {
@@ -346,7 +361,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Doppelganger',
                 features: ['Change Shape', 'Telepathy']
             }
-    ]}],
+        ]
+    }],
     [210, {
         entries: [
             {
@@ -360,8 +376,9 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Fireblood', 'Fire Breath'],
                 alias: 'Fire Dragon',
                 size: 3
-            }            
-    ]}],
+            }
+        ]
+    }],
     [211, {
         entries: [
             {
@@ -388,7 +405,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Swamp Dragon',
                 size: 3
             }
-    ]}],
+        ]
+    }],
     [212, {
         exclude: '212.*goddess\.',
         entries: [
@@ -408,7 +426,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Drider',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [213, {
         entries: [
             {
@@ -423,7 +442,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Duergar',
                 features: ['Enlarge', 'Invisibility', 'Sunblind']
             }
-    ]}],
+        ]
+    }],
     [214, {
         entries: [
             {
@@ -436,7 +456,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Impervious', 'Wall of Flame', 'Wish'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [215, {
         entries: [
             {
@@ -523,7 +544,8 @@ const RULEBOOK_MONSTERS = new Map([
                 },
                 size: 2
             },
-    ]}],
+        ]
+    }],
     [216, {
         entries: [
             {
@@ -553,7 +575,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Gargoyle',
                 features: ['Impervious']
             }
-    ]}],
+        ]
+    }],
     [217, {
         entries: [
             {
@@ -573,7 +596,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Ghost',
                 features: ['Greater Undead', 'Incorporeal', 'Life Drain', 'Possess']
             }
-    ]}],
+        ]
+    }],
     [218, {
         entries: [
             {
@@ -588,7 +612,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Fire Giant',
                 size: 3
             }
-    ]}],
+        ]
+    }],
     [219, {
         entries: [
             {
@@ -619,7 +644,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Hill Giant',
                 size: 3
             }
-    ]}],
+        ]
+    }],
     [220, {
         entries: [
             {
@@ -638,7 +664,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Stone Meld'],
                 alias: 'Deep Gnome'
             }
-    ]}],
+        ]
+    }],
     [221, {
         exclude: '221.*sorcery.',
         entries: [
@@ -656,7 +683,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Keen Senses', 'Bug Brain', 'Skitter', 'Stink Bomb'],
                 alias: 'Goblin Shaman'
             }
-    ]}],
+        ]
+    }],
     [222, {
         exclude: '222.*rituals.',
         entries: [
@@ -683,7 +711,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Stone Golem',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [223, {
         entries: [
             {
@@ -702,7 +731,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Grick',
                 features: ['Camouflage', 'Grab']
             }
-    ]}],
+        ]
+    }],
     [224, {
         entries: [
             {
@@ -717,7 +747,8 @@ const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Guard'
             }
-    ]}],
+        ]
+    }],
     [225, {
         exclude: '225.*woods.',
         entries: [
@@ -736,7 +767,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Shapechange', 'Terrify'],
                 alias: 'Sea Hag'
             }
-    ]}],
+        ]
+    }],
     [226, {
         entries: [
             {
@@ -756,7 +788,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Stumpy'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [227, {
         entries: [
             {
@@ -781,7 +814,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Invisible Stalker',
                 features: ['Bound', 'Invisible', 'Tracking']
             }
-    ]}],
+        ]
+    }],
     [228, {
         entries: [
             {
@@ -802,7 +836,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Dodge', 'Scorpion Sting', 'Spider Swarm'],
                 alias: 'Kobold Sorcerer'
             }
-    ]}],
+        ]
+    }],
     [229, {
         entries: [
             {
@@ -816,7 +851,8 @@ const RULEBOOK_MONSTERS = new Map([
                 alias: 'Giant Leech',
                 size: 0.5
             }
-    ]}],
+        ]
+    }],
     [230, {
         entries: [
             {
@@ -827,7 +863,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Lich',
                 features: ['Supreme Undead', 'Phylactery', 'Paralysis', 'Flight', 'Null', 'Shadow Leap', 'Sigil of Doom', 'Wither']
             }
-    ]}],
+        ]
+    }],
     [231, {
         entries: [
             {
@@ -846,7 +883,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Thick Fur', 'Charge'],
                 size: 3
             }
-    ]}],
+        ]
+    }],
     [232, {
         entries: [
             {
@@ -874,7 +912,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Mimic',
                 features: ['Stick']
             }
-    ]}],
+        ]
+    }],
     [233, {
         entries: [
             {
@@ -886,14 +925,16 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Moose',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [234, {
         entries: [
             {
                 name: 'Mordanticus the Flayed',
                 regex: '(A.*?)\\s+(A.*V.*?\\d+)\\s+(L.*?)\\s+(C.*)\\s+(N.*)\\s+(P.*?)\\s+(A.*?)\\s+(B.*?)\\s+(B.*?)\\s+(B.*?)\\s+(P.*?)\\s+(Tr.*)\\s+M'
             }
-    ]}],
+        ]
+    }],
     [236, {
         entries: [
             {
@@ -904,7 +945,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Mushroomfolk',
                 features: ['Sunblind', 'Telepathic']
             }
-    ]}],
+        ]
+    }],
     [237, {
         entries: [
             {
@@ -922,14 +964,16 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Impervious'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [238, {
         entries: [
             {
                 name: 'Obe-Ixx of Azarumme',
                 regex: '(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(B.*?)\\s+(Ch.*?)\\s+(Di.*?)\\s+(M.*?)\\s+(U.*?)\\s+O'
             }
-    ]}],
+        ]
+    }],
     [239, {
         entries: [
             {
@@ -952,7 +996,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Shapeshift', 'Fade', 'Hellfrost', 'Mist'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [240, {
         entries: [
             {
@@ -969,7 +1014,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Disease'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [241, {
         entries: [
             {
@@ -990,8 +1036,9 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Impervious', 'Ice Aura'],
                 size: 2
             }
-            
-    ]}],
+
+        ]
+    }],
     [242, {
         entries: [
             {
@@ -1009,7 +1056,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Pegasus',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [243, {
         entries: [
             {
@@ -1029,7 +1077,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Priest',
                 features: ['Anoint', 'Healing Touch', 'Holy Flame', 'Rebuke']
             }
-    ]}],
+        ]
+    }],
     [244, {
         entries: [
             {
@@ -1041,7 +1090,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Rakshasa',
                 features: ['Impervious', 'Mesmerism', 'Weakness']
             }
-    ]}],
+        ]
+    }],
     [245, {
         entries: [
             {
@@ -1065,7 +1115,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Disease'],
                 alias: 'Rat Swarm'
             }
-    ]}],
+        ]
+    }],
     [246, {
         entries: [
             {
@@ -1073,7 +1124,8 @@ const RULEBOOK_MONSTERS = new Map([
                 regex: '(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(Ro.*?)\\s+(A.*?)\\s+(A.*?)\\s+(A.*?)\\s+(G.*?)\\s+(P.*?)\\s+(T.*?)\\s+RA',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [247, {
         entries: [
             {
@@ -1085,7 +1137,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Impervious', 'Melt', 'Swallow'],
                 size: 3
             }
-    ]}],
+        ]
+    }],
     [248, {
         entries: [
             {
@@ -1103,7 +1156,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Impervious', 'Grab', 'Pull', 'Tendrils'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [249, {
         entries: [
             {
@@ -1130,7 +1184,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Scarecrow',
                 features: ['Scream']
             }
-    ]}],
+        ]
+    }],
     [250, {
         entries: [
             {
@@ -1148,7 +1203,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Shadow',
                 features: ['Drain']
             }
-    ]}],
+        ]
+    }],
     [251, {
         entries: [
             {
@@ -1178,7 +1234,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Smilodon',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [252, {
         entries: [
             {
@@ -1201,7 +1258,8 @@ const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Soldier'
             }
-    ]}],
+        ]
+    }],
     [253, {
         entries: [
             {
@@ -1209,7 +1267,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Roar', 'Gate', 'Omens', 'Riddle', 'Time Bend', 'Unmake'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [254, {
         entries: [
             {
@@ -1237,7 +1296,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Strangler',
                 features: ['Stealthy', 'Strangle']
             }
-    ]}],
+        ]
+    }],
     [255, {
         entries: [
             {
@@ -1245,7 +1305,8 @@ const RULEBOOK_MONSTERS = new Map([
                 regex: '(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(E.*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d+\\..*?)\\s+T',
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [256, {
         entries: [
             {
@@ -1253,14 +1314,16 @@ const RULEBOOK_MONSTERS = new Map([
                 regex: '(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(De.*?)\\s+(P.*?)\\s+(R.*?)\\s+(R.*?)\\s+(R.*?)\\s+(S.*?)\\s+(S.*?)\\s+TH',
                 size: 4
             }
-    ]}],
+        ]
+    }],
     [258, {
         entries: [
             {
                 name: 'The Wandering Merchant',
                 regex: '(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(A.*?)\\s+(B.*?)\\s+(D.*?)\\s+(L.*?)\\s+(R.*?)\\s+(S.*?)\\s+TH'
             }
-    ]}],
+        ]
+    }],
     [259, {
         entries: [
             {
@@ -1280,7 +1343,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Regenerate'],
                 size: 2
             }
-    ]}],
+        ]
+    }],
     [260, {
         entries: [
             {
@@ -1298,7 +1362,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Vampire',
                 features: ['Supreme Undead', 'Blood Drain', 'Charm', 'Shapechange', 'Vampire']
             }
-    ]}],
+        ]
+    }],
     [261, {
         entries: [
             {
@@ -1308,7 +1373,8 @@ const RULEBOOK_MONSTERS = new Map([
             {
                 name: 'Violet Fungus'
             }
-    ]}],
+        ]
+    }],
     [262, {
         exclude: '262.*warriors.',
         entries: [
@@ -1325,7 +1391,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Hiss', 'Summon Cobra', 'Venom', 'Whispers'],
                 alias: 'Viperian Wizard'
             }
-    ]}],
+        ]
+    }],
     [263, {
         entries: [
             {
@@ -1336,7 +1403,7 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Wasp, Giant',
                 features: ['Venom'],
                 alias: 'Giant Wasp'
-            },            
+            },
             {
                 name: 'Werewolf',
                 features: ['Impervious', 'Lycanthropy']
@@ -1349,7 +1416,8 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Wight',
                 features: ['Greater Undead', 'Life Drain']
             }
-    ]}],
+        ]
+    }],
     [264, {
         entries: [
             {
@@ -1372,7 +1440,8 @@ const RULEBOOK_MONSTERS = new Map([
                 features: ['Impervious', 'Frost Breath'],
                 alias: 'Winter Wolf'
             }
-    ]}],
+        ]
+    }],
     [265, {
         entries: [
             {
@@ -1392,7 +1461,160 @@ const RULEBOOK_MONSTERS = new Map([
                 name: 'Zombie',
                 features: ['Undead', 'Relentless']
             }
-    ]}],
+        ]
+    }],
+])
+const CURSED_SCROLL_1 = new Map([
+    [46, {
+        entries: [
+            {
+                name: 'Bittermold',
+                features: ['Rubbery']
+            },
+            {
+                name: 'Bogthorn',
+                features: ['Poison']
+            },
+            {
+                name: 'Dralech',
+                features: ['Shatter'],
+                size: 2
+            },
+            {
+                name: 'Gordock Breeg',
+                features: ['Algae-Eater']
+            },
+            {
+                name: 'Hexling',
+                features: ['Energy Drain']
+            },
+            {
+                name: 'Howler',
+                features: ['Mob']
+            }
+        ]
+    }],
+    [47, {
+        entries: [
+            {
+                name: 'Ichor Ooze',
+                features: ['Rubbery', 'Corrosive']
+            },
+            {
+                name: 'Marrow Fiend',
+                features: ['Devour', 'Sap'],
+                size: 2
+            },
+            {
+                name: 'Mugdulblub',
+                features: ['Rubbery', 'Mutagenic', 'Dissolve'],
+                size: 4
+            },
+            {
+                name: 'Mutant Catfish',
+                features: ['Poison']
+            }
+        ]
+    }],
+    [48, {
+        exclude: ' THE WILLOWMAN',
+        entries: [
+            {
+                name: 'Tar Bat',
+                features: ['Pyro'],
+                size: 0.5
+            },
+            {
+                name: 'Plogrina B.',
+                alias: 'Plogrina Bittermold',
+                features: ['Rubbery', 'Slime Form']
+            },
+            {
+                name: 'Skrell',
+                features: ['Clever'],
+                regex: 'LL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(C.*?)\\s+A\\s'
+            },
+            {
+                name: 'The Willowman',
+                features: ['Fearless', 'Terrify', 'Waking Nightmare'],
+                regex: '\\s+(A pa.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(F.*?)\\s+(T.*?)\\s+(W.*s\.)',
+                size: 2
+            }
+        ]
+    }]
+])
+const CURSED_SCROLL_2 = new Map([
+    [40, {
+        entries: [
+            {
+                name: 'Dust Devil',
+                features: ['Impervious', 'Fling']
+            },
+            {
+                name: 'Dunefiend',
+                features: ['Howl']
+            },
+            {
+                name: 'Canyon Ape',
+                features: ['Ambush', 'Stalk']
+            },
+            {
+                name: 'Donkey',
+                size: 2
+            },
+            {
+                name: 'Camel, Silver',
+                alias: 'Silver Camel',
+                size: 2
+            },
+        ]
+    }],
+    [41, {
+        entries: [
+            {
+                name: 'Horse, War',
+                alias: 'War Horse',
+                size: 2
+            },
+            {
+                name: 'Ras-Godai',
+                features: ['Assassinate']
+            },
+            {
+                name: 'Rookie'
+            },
+            {
+                name: 'Mirage',
+                features: ['Delude', 'Leech']
+            },
+            {
+                name: 'Hero'
+            }
+        ]
+    }],
+    [43, {
+        entries: [
+            {
+                name: 'Scrag, War',
+                alias: 'War Scrag',
+                size: 2
+            },
+            {
+                name: 'Siruul',
+                features: ['Desert Born', 'Mount']
+            },
+            {
+                name: 'Scrag',
+                size: 2
+            },
+            {
+                name: 'The Scourge',
+                features: ['Stormblood', 'Corruption', 'Lightning Breath', 'Mirage'],
+                regex: '\\s+(The\\s.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(S.*?)\\s+(C.*?)\\s+(L.*?)\\s+(M.*s\.)',
+                size: 3
+            }
+        ]
+    }]
 ])
 export const BOOKS = new Map([
     ['Shadowdark RPG Core Rulebook', {
@@ -1400,5 +1622,17 @@ export const BOOKS = new Map([
         checkText: 'ShadowDark RPG Core Rulebook',
         offset: 4,
         map: RULEBOOK_MONSTERS
+    }],
+    ['Cursed Scroll 1: Diablerie', {
+        checkPage: 1,
+        checkText: 'Cursed Scroll Shadowdark Zine Vol. 1: Diablerie!',
+        offset: 0,
+        map: CURSED_SCROLL_1
+    }],
+    ['Cursed Scroll 2: Red Sands', {
+        checkPage: 1,
+        checkText: 'Cursed Scroll Shadowdark Zine 2: Red Sands',
+        offset: 0,
+        map: CURSED_SCROLL_2
     }]
 ])

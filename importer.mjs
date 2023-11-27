@@ -24,7 +24,7 @@ export default class Foo {
             });
             // console.log(monsters)
             const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
-            // console.log(text)
+            console.log(text)
             monsters.forEach(async (monster, index) => {
                 console.log(monster.name)
 
@@ -44,16 +44,14 @@ export default class Foo {
                                 if (index < monsters.length - 1) {
                                     pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase()}`)
                                 } else pattern.push(`)`)
-                                // pattern.push('.*')
                         } else if (monster.features.length == 1) {
                             pattern.push(`(${monster.features[0]}.*`)
                                 if (index < monsters.length - 1) {
                                     pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase()}`)
                                 } else pattern.push(`)`)
-                                // pattern.push('.*')
                     }}
                 } 
-                // console.log(pattern.join(''))
+                console.log(pattern.join(''))
 
                 const regex = new RegExp(pattern.join(''), 'gm')
                 let m;
@@ -74,13 +72,12 @@ export default class Foo {
                     }
 
                     const monsterText = m.join('\n\n')
-                    // console.log(monsterText)
+                    console.log(monsterText)
 
                     const options = {}
                     if (this.useSizeData) options.size = monster.size
                     if (this.useAlias) options.alias = monster.alias
                     
-                    // this.#createMonster(monsterObj, options)
                     let newActor = await monsterImporter._importMonster(monsterText)
 
                     // Update prototype token as needed
@@ -110,12 +107,18 @@ export default class Foo {
     async #identifyRulebook (doc) {
         console.log(`Identifying Rulebook...`)
         for (const [book, info] of BOOKS) {
-            const page = await doc.getPage(info.checkPage);
+            let page
+            try {
+                page = await doc.getPage(info.checkPage);
+            } catch {
+                continue
+            }
             const content = await page.getTextContent();
             const strings = content.items.map(function(item) {
                 return item.str
             }) 
             const text = strings.join(' ').replace(/\s\s+/g, ' ')
+            console.log(text)
             const regex = new RegExp(`(${info.checkText}.*?)`, 'gm')
             let m;
             if (m = regex.exec(text) !== null) {
