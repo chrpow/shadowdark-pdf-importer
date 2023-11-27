@@ -1689,6 +1689,77 @@ const CURSED_SCROLL_3 = new Map([
         ]
     }]
 ])
+const MONSTER_MONDAY_1 = new Map([
+    [2, {
+        entries: [
+            {
+                name: 'Brain Eater, Elder',
+                alias: 'Elder Brain Eater',
+                features: ['Telepathic', 'Latch', 'Mind Blast', 'Mind Control'],
+                regex: 'BRAIN EATER, ELDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(T.*?)\\s+(L.*?)\\s+(M.*?)\\s+(M.*?)\\s+A'
+            },
+            {
+                name: 'Alpha Brain',
+                features: ['Telepathic'],
+                size: 2,
+                regex: 'ALPHA BRAIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(T.*?)\\s+B'
+            },
+            {
+                name: 'Brain Dog',
+                features: ['Stun'],
+                regex: 'BRAIN DOG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)\\sB'
+            },
+        ]
+    }]
+])
+const MONSTER_MONDAY_2 = new Map([
+    [2, {
+        entries: [
+            {
+                name: 'Crabstrosity',
+                features: ['Crush', 'Toxin'],
+                size: 3,
+                regex: 'CRABSTROSITY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(C.*?)\\s+(T.*?)\\sS'
+            },
+            {
+                name: 'Sting Barnacle',
+                feastures: ['Toxin'],
+                size: 0.5,
+                regex: 'STING BARNACLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(T.*?)\\sCr'
+            }
+        ]
+    }]
+])
+const MONSTER_MONDAY_3 = new Map([
+    [2, {
+        entries: [
+            {
+                name: 'Heal Cube',
+                features: ['Engulf', 'Heal', 'Rubbery'],
+                size: 2,
+                regex: 'HEAL CUBE(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(E.*?)(H.*?)(R.*?)\\sM'
+            }
+        ]
+    }]
+])
+const MONSTER_MONDAY_4 = new Map([
+    [2, {
+        entries: [
+            {
+                
+            }
+        ]
+    }]
+])
+const CONCEALED_ABBEY = new Map([
+    [3, {
+        entries: [
+            {
+                
+            }
+        ]
+    }]
+])
 export const BOOKS = new Map([
     ['Shadowdark RPG Core Rulebook', {
         checkPage: 332,
@@ -1713,5 +1784,35 @@ export const BOOKS = new Map([
         checkText: 'Cursed Scroll Shadowdark Zine 3: Midnight Sun',
         offset: 0,
         map: CURSED_SCROLL_3
+    }],
+    ['Monster Monday 1: Brain Eaters', {
+        checkPage: 2,
+        checkText: 'Brain Eaters',
+        offset: 0,
+        map: MONSTER_MONDAY_1
+    }],
+    ['Monster Monday 2: Crabstrosity', {
+        checkPage: 2,
+        checkText: 'Crabstrosity',
+        offset: 0,
+        map: MONSTER_MONDAY_2
+    }],
+    ['Monster Monday 3: Ooze Cubes', {
+        checkPage: 2,
+        checkText: 'Ooze Cubes',
+        offset: 0,
+        map: MONSTER_MONDAY_3
+    }],
+    ['Monster Monday 4: Mazzim the Mesmerist', {
+        checkPage: 2,
+        checkText: 'Mazzim the Mesmerist',
+        offset: 0,
+        map: MONSTER_MONDAY_4
+    }],
+    ['The Concealed Abbey of the Dragonfly Horde', {
+        checkPage: 1,
+        checkText: 'The Concealed Abbey of the Dragonfly Horde',
+        offset: 0,
+        map: CONCEALED_ABBEY
     }]
 ])
