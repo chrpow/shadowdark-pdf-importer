@@ -1,9 +1,7 @@
 export const MODULE = {
     ID: 'shadowdark-pdf-importer'
 }
-export const PAGE_OFFSET = 4
-export const RULEBOOK_VERSION = '4.8'
-export const RULEBOOK_MONSTERS = new Map([
+const RULEBOOK_MONSTERS = new Map([
     [194, {
         exclude: 'Monster Statistics',
         entries: [
@@ -104,7 +102,10 @@ export const RULEBOOK_MONSTERS = new Map([
                 name: 'Bear, Brown',
                 features: ['Crush'],
                 alias: 'Brown Bear',
-                size: 2
+                size: 2,
+                replace: {
+                    'b)': 'b),' // The comma is missing in the book text
+                }
             },
             {
                 name: 'Bear, Polar',
@@ -1379,4 +1380,12 @@ export const RULEBOOK_MONSTERS = new Map([
                 features: ['Undead', 'Relentless']
             }
     ]}],
+])
+export const BOOKS = new Map([
+    ['Shadowdark RPG Core Rulebook', {
+        checkPage: 332,
+        checkText: 'ShadowDark RPG Core Rulebook',
+        offset: 4,
+        map: RULEBOOK_MONSTERS
+    }]
 ])

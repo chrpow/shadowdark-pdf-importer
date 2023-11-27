@@ -1,5 +1,5 @@
 import { getDocument } from "./node_modules/pdfjs-dist/webpack.mjs"
-import { RULEBOOK_MONSTERS, PAGE_OFFSET, MODULE } from './constants.js'
+import { BOOKS, MODULE } from './constants.js'
 
 export default class Foo {
     constructor() {}
@@ -9,18 +9,15 @@ export default class Foo {
 
         const monsterImporter = new shadowdark.apps.MonsterImporterSD()
         const doc = await getDocument(file).promise;
-//To check:263
-        // const pageNumber = parseInt(pageString, 10)
 
-        // let info = RULEBOOK_MONSTERS.get(pageNumber)
-        // console.log(info)
+        const bookInfo = await this.#identifyRulebook(doc)
 
-        for (const [pageNumber, info] of RULEBOOK_MONSTERS) {
+        for (const [pageNumber, info] of bookInfo.map) {
         console.log(`Parsing Page ${pageNumber}`)
 
             const excludePattern = info?.exclude ? new RegExp(info.exclude) : ''
             const monsters = info.entries
-            const page = await doc.getPage(pageNumber + PAGE_OFFSET);
+            const page = await doc.getPage(pageNumber + bookInfo.offset);
             const content = await page.getTextContent();
             const strings = content.items.map(function(item) {
                 return item.str;
@@ -56,7 +53,7 @@ export default class Foo {
                                 // pattern.push('.*')
                     }}
                 } 
-                console.log(pattern.join(''))
+                // console.log(pattern.join(''))
 
                 const regex = new RegExp(pattern.join(''), 'gm')
                 let m;
@@ -66,13 +63,8 @@ export default class Foo {
                     if (m.index === regex.lastIndex) {
                         regex.lastIndex++;
                     }
-                    // console.log(`Name: ${monster.name}, Alias: ${monster?.alias}`)
-                    // console.log(this.useAlias)
 
-                    m[0] =
-                    //  (this.useAlias) ? (monster.alias || monster.name) : 
-                     monster.name
-                    // console.log(m[0])
+                    m[0] = monster.name
 
                     if (monster.replace) {
                         for (const target in monster.replace) {
@@ -82,7 +74,7 @@ export default class Foo {
                     }
 
                     const monsterText = m.join('\n\n')
-                    // const monsterObj = this.#parseMonster(monsterText)
+                    console.log(monsterText)
 
                     const options = {}
                     if (this.useSizeData) options.size = monster.size
@@ -114,6 +106,26 @@ export default class Foo {
             })
         }
     }
+
+    async #identifyRulebook (doc) {
+        console.log(`Identifying Rulebook...`)
+        for (const [book, info] of BOOKS) {
+            const page = await doc.getPage(info.checkPage);
+            const content = await page.getTextContent();
+            const strings = content.items.map(function(item) {
+                return item.str
+            }) 
+            const text = strings.join(' ').replace(/\s\s+/g, ' ')
+            const regex = new RegExp(`(${info.checkText}.*?)`, 'gm')
+            let m;
+            if (m = regex.exec(text) !== null) {
+                ui.notifications.info(`Identified PDF as <strong>${book}</strong>`)
+                return info
+            }
+        }
+        return ui.notifications.error(`PDF is not a supported Shadowdark Rulebook.`);
+    }
+
 
     #getSetting (key, defaultValue = null) {
         let value = defaultValue ?? null
