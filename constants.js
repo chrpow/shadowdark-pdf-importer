@@ -1616,6 +1616,79 @@ const CURSED_SCROLL_2 = new Map([
         ]
     }]
 ])
+const CURSED_SCROLL_3 = new Map([
+    [44, {
+        entries: [
+            {
+                name: 'Drake, Greater',
+                alias: 'Greater Drake',
+                features: ['Fireblood', 'Fire Gout'],
+                size: 3
+            },
+            {
+                name: 'Drake, Lesser',
+                alias: 'Lesser Drake',
+                features: ['Fireblood', 'Fire Spit'],
+                size: 2
+            }
+        ]
+    }],
+    [45, {
+        entries: [
+            {
+                name: 'Draugr',
+                features: ['Greater Undead', 'Death Chill', 'Stone Swim']
+            },
+            {
+                name: 'Dverg',
+                features: ['Shapeshift']
+            },
+            {
+                name: 'Nord',
+                features: ['Shield Wall']
+            }
+        ]
+    }],
+    [46, {
+        entries: [
+            {
+                name: 'Troll, Deep',
+                alias: 'Deep Troll',
+                features: ['Regenate'],
+                size: 2
+            },
+            {
+                name: 'Sea Serpent',
+                size: 4
+            },
+            {
+                name: 'Sea Nymph',
+                features: ['Sing']
+            },
+            {
+                name: 'Orca',
+                features: ['Pod Hunter'],
+                size: 3
+            },
+            {
+                name: 'Oracle',
+                features: ['Berserk', 'Fate', 'Mjolnir', 'Strike Blind']
+            }
+        ]
+    }],
+    [47, {
+        entries: [
+            {
+                name: 'Werebear',
+                features: ['Impervious', 'Crush', 'Lycanthropy']
+            },
+            {
+                name: 'Valkyrie',
+                features: ['Impervious', 'Divine Courage']
+            }
+        ]
+    }]
+])
 export const BOOKS = new Map([
     ['Shadowdark RPG Core Rulebook', {
         checkPage: 332,
@@ -1634,5 +1707,11 @@ export const BOOKS = new Map([
         checkText: 'Cursed Scroll Shadowdark Zine 2: Red Sands',
         offset: 0,
         map: CURSED_SCROLL_2
+    }],
+    ['Cursed Scroll 3: Midnight Sun', {
+        checkPage: 1,
+        checkText: 'Cursed Scroll Shadowdark Zine 3: Midnight Sun',
+        offset: 0,
+        map: CURSED_SCROLL_3
     }]
 ])

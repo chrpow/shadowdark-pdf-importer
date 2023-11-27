@@ -126,7 +126,7 @@ export default class Foo {
                 return info
             }
         }
-        return ui.notifications.error(`PDF is not a supported Shadowdark Rulebook.`);
+        return ui.notifications.error(`PDF is not a supported Shadowdark Rulebook. If this seems wrong, please open an issue at https://github.com/chrpow/shadowdark-pdf-importer/issues`)
     }
 
 
