@@ -1710,86 +1710,90 @@ const RULEBOOK_MONSTERS = new Map([
     ]
 ]);
 const CURSED_SCROLL_1 = new Map([
-    [46, {
-        entries: [
-            {
-                name: 'Bittermold',
-                features: ['Rubbery']
-            },
-            {
-                name: 'Bogthorn',
-                features: ['Poison']
-            },
-            {
-                name: 'Dralech',
-                features: ['Shatter'],
-                size: 2
-            },
-            {
-                name: 'Gordock Breeg',
-                features: ['Algae-Eater']
-            },
-            {
-                name: 'Hexling',
-                features: ['Energy Drain']
-            },
-            {
-                name: 'Howler',
-                features: ['Mob']
-            }
-        ]
-    }],
+    [
+        46,
+        {
+            entries: [
+                {
+                    name: "Bittermold",
+                    regex: "BITTERMOLD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BOGTHORN"
+                },
+                {
+                    name: "Bogthorn",
+                    regex: "BOGTHORN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DRALECH"
+                },
+                {
+                    name: "Dralech",
+                    regex: "DRALECH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GORDOCK\\sBREEG",
+                    size: 2
+                },
+                {
+                    name: "Gordock Breeg",
+                    regex: "GORDOCK\\sBREEG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HEXLING"
+                },
+                {
+                    name: "Hexling",
+                    regex: "HEXLING\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HOWLER"
+                },
+                {
+                    name: "Howler",
+                    regex: "HOWLER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+                }
+            ]
+        }
+    ],
     [
         47,
         {
             entries: [
                 {
                     name: "Ichor Ooze",
-                    features: ["Rubbery", "Corrosive"]
+                    regex: "ICHOR\\sOOZE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+MARROW\\sFIEND"
                 },
                 {
                     name: "Marrow Fiend",
-                    features: ["Devour", "Sap"],
+                    regex: "MARROW\\sFIEND\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+MUGDULBLUB",
                     size: 2
                 },
                 {
                     name: "Mugdulblub",
-                    features: ["Rubbery", "Mutagenic", "Dissolve"],
+                    regex: "MUGDULBLUB\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(D.*?)\\s+MUTANT\\sCATFISH",
                     size: 4
                 },
                 {
                     name: "Mutant Catfish",
-                    features: ["Poison"]
+                    regex: "MUTANT\\sCATFISH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+                }
+            ]
+        }
+    ],
+    [
+        48,
+        {
+            exclude: "THE WILLOWMAN",
+            entries: [
+                {
+                    name: "Tar Bat",
+                    regex: "TAR\\sBAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+PLOGRINA\\sB.",
+                    size: 0.5
+                },
+                {
+                    name: "Plogrina B.",
+                    regex: "PLOGRINA\\sB.\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+SKRELL",
+                    alias: "Plogrina Bittermold"
+                },
+                {
+                    name: "Skrell",
+                    regex: "SKRELL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+THE\\sWILLOWMAN"
+                },
+                {
+                    name: "The Willowman",
+                    regex: "\\s+(A\\spa.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(F.*?)\\s+(T.*?)\\s+(W.*s\\.)",
+                    size: 2
                 }
             ]
         }
     ]
-    [48, {
-        exclude: ' THE WILLOWMAN',
-        entries: [
-            {
-                name: 'Tar Bat',
-                features: ['Pyro'],
-                size: 0.5
-            },
-            {
-                name: 'Plogrina B.',
-                alias: 'Plogrina Bittermold',
-                features: ['Rubbery', 'Slime Form']
-            },
-            {
-                name: 'Skrell',
-                features: ['Clever'],
-                regex: 'LL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(C.*?)\\s+A\\s'
-            },
-            {
-                name: 'The Willowman',
-                features: ['Fearless', 'Terrify', 'Waking Nightmare'],
-                regex: '\\s+(A pa.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(F.*?)\\s+(T.*?)\\s+(W.*s\\.)',
-                size: 2
-            }
-        ]
-    }]
 ]);
 const CURSED_SCROLL_2 = new Map([
     [
@@ -1798,22 +1802,24 @@ const CURSED_SCROLL_2 = new Map([
             entries: [
                 {
                     name: "Dust Devil",
-                    features: ["Impervious", "Fling"]
+                    regex: "DUST\\sDEVIL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*?)\\s+DUNEFIEND"
                 },
                 {
                     name: "Dunefiend",
-                    features: ["Howl"]
+                    regex: "DUNEFIEND\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+CANYON\\sAPE"
                 },
                 {
                     name: "Canyon Ape",
-                    features: ["Ambush", "Stalk"]
+                    regex: "CANYON\\sAPE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+DONKEY"
                 },
                 {
                     name: "Donkey",
+                    regex: "DONKEY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
                     size: 2
                 },
                 {
                     name: "Camel, Silver",
+                    regex: "CAMEL,\\sSILVER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
                     alias: "Silver Camel",
                     size: 2
                 }
@@ -1826,22 +1832,25 @@ const CURSED_SCROLL_2 = new Map([
             entries: [
                 {
                     name: "Horse, War",
+                    regex: "HORSE,\\sWAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
                     alias: "War Horse",
                     size: 2
                 },
                 {
                     name: "Ras-Godai",
-                    features: ["Assassinate"]
+                    regex: "RAS-GODAI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ROOKIE"
                 },
                 {
-                    name: "Rookie"
+                    name: "Rookie",
+                    regex: "ROOKIE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
                 },
                 {
                     name: "Mirage",
-                    features: ["Delude", "Leech"]
+                    regex: "MIRAGE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+HERO"
                 },
                 {
-                    name: "Hero"
+                    name: "Hero",
+                    regex: "HERO\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
                 }
             ]
         }
@@ -1849,28 +1858,25 @@ const CURSED_SCROLL_2 = new Map([
     [
         43,
         {
+            exclude: "THE SCOURGE",
             entries: [
                 {
                     name: "Scrag, War",
+                    regex: "SCRAG,\\sWAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
                     alias: "War Scrag",
                     size: 2
                 },
                 {
                     name: "Siruul",
-                    features: ["Desert Born", "Mount"]
+                    regex: "SIRUUL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+SCRAG"
                 },
                 {
                     name: "Scrag",
+                    regex: "SCRAG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
                     size: 2
                 },
                 {
                     name: "The Scourge",
-                    features: [
-                        "Stormblood",
-                        "Corruption",
-                        "Lightning Breath",
-                        "Mirage"
-                    ],
                     regex: "\\s+(The\\s.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(S.*?)\\s+(C.*?)\\s+(L.*?)\\s+(M.*s\\.)",
                     size: 3
                 }
@@ -1885,14 +1891,14 @@ const CURSED_SCROLL_3 = new Map([
             entries: [
                 {
                     name: "Drake, Greater",
+                    regex: "DRAKE,\\sGREATER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire G.*?)\\s+DRAKE,\\sLESSER",
                     alias: "Greater Drake",
-                    features: ["Fireblood", "Fire Gout"],
                     size: 3
                 },
                 {
                     name: "Drake, Lesser",
+                    regex: "DRAKE,\\sLESSER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire S.*)",
                     alias: "Lesser Drake",
-                    features: ["Fireblood", "Fire Spit"],
                     size: 2
                 }
             ]
@@ -1904,15 +1910,15 @@ const CURSED_SCROLL_3 = new Map([
             entries: [
                 {
                     name: "Draugr",
-                    features: ["Greater Undead", "Death Chill", "Stone Swim"]
+                    regex: "DRAUGR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+(S.*?)\\s+DVERG"
                 },
                 {
                     name: "Dverg",
-                    features: ["Shapeshift"]
+                    regex: "DVERG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+NORD"
                 },
                 {
                     name: "Nord",
-                    features: ["Shield Wall"]
+                    regex: "NORD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
                 }
             ]
         }
@@ -1923,26 +1929,27 @@ const CURSED_SCROLL_3 = new Map([
             entries: [
                 {
                     name: "Troll, Deep",
+                    regex: "TROLL,\\sDEEP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(Regena.*?)\\s+SEA\\sSERPENT",
                     alias: "Deep Troll",
-                    features: ["Regenate"],
                     size: 2
                 },
                 {
                     name: "Sea Serpent",
+                    regex: "SEA\\sSERPENT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
                     size: 4
                 },
                 {
                     name: "Sea Nymph",
-                    features: ["Sing"]
+                    regex: "SEA\\sNYMPH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ORCA"
                 },
                 {
                     name: "Orca",
-                    features: ["Pod Hunter"],
+                    regex: "ORCA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ORACLE",
                     size: 3
                 },
                 {
                     name: "Oracle",
-                    features: ["Berserk", "Fate", "Mjolnir", "Strike Blind"]
+                    regex: "ORACLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fa.*?)\\s+(M.*?)\\s+(St.*)"
                 }
             ]
         }
@@ -1953,11 +1960,118 @@ const CURSED_SCROLL_3 = new Map([
             entries: [
                 {
                     name: "Werebear",
-                    features: ["Impervious", "Crush", "Lycanthropy"]
+                    regex: "WEREBEAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(L.*?)\\s+VALKYRIE"
                 },
                 {
                     name: "Valkyrie",
-                    features: ["Impervious", "Divine Courage"]
+                    regex: "VALKYRIE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*)"
+                }
+            ]
+        }
+    ]
+]);
+
+const MONSTER_MONDAY_1 = new Map([
+    [
+        2,
+        {
+            entries: [
+                {
+                    name: "Brain Eater, Elder",
+                    regex: "BRAIN\\sEATER, ELDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+(M.*?)\\s+(M.*?)\\s+ALPHA\\sBRAIN",
+                    alias: "Elder Brain Eater"
+                },
+                {
+                    name: "Alpha Brain",
+                    regex: "ALPHA\\sBRAIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BRAIN\\sDOG",
+                    size: 2
+                },
+                {
+                    name: "Brain Dog",
+                    regex: "BRAIN\\sDOG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+                }
+            ]
+        }
+    ]
+]);
+const MONSTER_MONDAY_2 = new Map([
+    [
+        2,
+        {
+            entries: [
+                {
+                    name: "Crabstrosity",
+                    regex: "CRABSTROSITY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+STING\\sBARNACLE",
+                    size: 3
+                },
+                {
+                    name: "Sting Barnacle",
+                    regex: "STING\\sBARNACLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
+                    size: 0.5
+                }
+            ]
+        }
+    ]
+]);
+const MONSTER_MONDAY_3 = new Map([
+    [
+        2,
+        {
+            entries: [
+                {
+                    name: "Heal Cube",
+                    regex: "HEAL\\sCUBE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(H.*?)\\s+(R.*?)\\s+MAGNETIC\\sCUBE",
+                    size: 2
+                },
+                {
+                    name: "Magnetic Cube",
+                    regex: "MAGNETIC\\sCUBE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(R.*?)\\s+NECROTIC\\sCUBE",
+                    size: 2
+                },
+                {
+                    name: "Necrotic Cube",
+                    regex: "(A\\sgre.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(N.*?)\\s+(R.*?)\\s+(S.*)",
+                    size: 2
+                }
+            ]
+        }
+    ]
+]);
+const MONSTER_MONDAY_4 = new Map([
+    [
+        2,
+        {
+            entries: [
+                {
+                    name: "Mazzim the Mesmerist",
+                    regex: "(A\\s.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(E.*?)\\s+(I.*?)\\s+(M.*)MA"
+                }
+            ]
+        }
+    ]
+]);
+const CONCEALED_ABBEY = new Map([
+    [
+        3,
+        {
+            entries: [
+                {
+                    name: "Croakfolk",
+                    regex: "CROAKFOLK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+H"
+                },
+                {
+                    name: "Dragonfly Cultist",
+                    regex: "DRAGONFLY\\sCULTIST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DRAGONFLY,\\sGIANT"
+                },
+                {
+                    name: "Dragonfly, Giant",
+                    regex: "DRAGONFLY,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
+                    alias: "Giant Dragonfly",
+                    size: 2
+                },
+                {
+                    name: "Dragonfly Avatar",
+                    regex: "DRAGONFLY\\sAVATAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*)"
                 }
             ]
         }
@@ -1998,6 +2112,51 @@ export const BOOKS = new Map([
             checkText: "Cursed Scroll Shadowdark Zine 3: Midnight Sun",
             offset: 0,
             map: CURSED_SCROLL_3
+        }
+    ],
+    [
+        "Monster Monday 1: Brain Eaters",
+        {
+            checkPage: 2,
+            checkText: "Brain Eaters",
+            offset: 0,
+            map: MONSTER_MONDAY_1
+        }
+    ],
+    [
+        "Monster Monday 2: Crabstrosity",
+        {
+            checkPage: 2,
+            checkText: "Crabstrosity",
+            offset: 0,
+            map: MONSTER_MONDAY_2
+        }
+    ],
+    [
+        "Monster Monday 3: Ooze Cubes",
+        {
+            checkPage: 2,
+            checkText: "Ooze Cubes",
+            offset: 0,
+            map: MONSTER_MONDAY_3
+        }
+    ],
+    [
+        "Monster Monday 4: Mazzim the Mesmerist",
+        {
+            checkPage: 2,
+            checkText: "Mazzim the Mesmerist",
+            offset: 0,
+            map: MONSTER_MONDAY_4
+        }
+    ],
+    [
+        "The Concealed Abbey of the Dragonfly Horde",
+        {
+            checkPage: 1,
+            checkText: "The Concealed Abbey of the Dragonfly Horde",
+            offset: 0,
+            map: CONCEALED_ABBEY
         }
     ]
 ]);
