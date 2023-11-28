@@ -1988,7 +1988,7 @@ const MONSTER_MONDAY_1 = new Map([
                 },
                 {
                     name: "Brain Dog",
-                    regex: "BRAIN\\sDOG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+                    regex: "BRAIN\\sDOG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)Brain E"
                 }
             ]
         }
@@ -2006,7 +2006,7 @@ const MONSTER_MONDAY_2 = new Map([
                 },
                 {
                     name: "Sting Barnacle",
-                    regex: "STING\\sBARNACLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
+                    regex: "STING\\sBARNACLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*ds\\.)",
                     size: 0.5
                 }
             ]
@@ -2017,21 +2017,31 @@ const MONSTER_MONDAY_3 = new Map([
     [
         2,
         {
+            // All monster speeds in this document are missing commas.
             entries: [
                 {
                     name: "Heal Cube",
                     regex: "HEAL\\sCUBE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(H.*?)\\s+(R.*?)\\s+MAGNETIC\\sCUBE",
-                    size: 2
+                    size: 2,
+                    replace: {
+                        "near S": "near, S"
+                    }
                 },
                 {
                     name: "Magnetic Cube",
-                    regex: "MAGNETIC\\sCUBE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(R.*?)\\s+NECROTIC\\sCUBE",
-                    size: 2
+                    regex: "MAGNETIC\\sCUBE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(R.*?)\\s+G",
+                    size: 2,
+                    replace: {
+                        "near S": "near, S"
+                    }
                 },
                 {
                     name: "Necrotic Cube",
-                    regex: "(A\\sgre.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(N.*?)\\s+(R.*?)\\s+(S.*)",
-                    size: 2
+                    regex: "(A\\sgre.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(N.*?)\\s+(R.*?)\\s+(S.*)N",
+                    size: 2,
+                    replace: {
+                        "near S": "near, S"
+                    }
                 }
             ]
         }
@@ -2071,7 +2081,8 @@ const CONCEALED_ABBEY = new Map([
                 },
                 {
                     name: "Dragonfly Avatar",
-                    regex: "DRAGONFLY\\sAVATAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*)"
+                    regex: "DRAGONFLY\\sAVATAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*)",
+                    size: 2
                 }
             ]
         }
