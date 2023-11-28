@@ -27,7 +27,7 @@ export default class Foo {
             });
             // console.log(monsters)
             const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
-            // console.log(text)
+            console.log(text)
             
             monsters.map(async (monster, index) => {
                 // console.log(monster)
@@ -138,7 +138,7 @@ export default class Foo {
 
     async #toObject (monster, regex) {
         let str = 
-        `{\nname: \'${monster.name}\',\nregex: \'${regex.replace('\\', '\\\\')}\',\n${monster.alias ? `alias: \'${monster.alias}\',\n` : ''}${monster.size ? `size: ${monster.size},\n` : ''}}`
+        `{\nname: \'${monster.name}\',\nregex: \'${regex.replace('\\', '\\\\')}\',\n${monster.alias ? `alias: \'${monster.alias}\',\n` : ''}${monster.size ? `size: ${monster.size},\n` : ''}},`
         console.log(str)
     }
 
