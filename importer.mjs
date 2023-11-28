@@ -1,9 +1,11 @@
 import { getDocument } from "./node_modules/pdfjs-dist/webpack.mjs"
 import { BOOKS, MODULE } from './constants.js'
+// import * as fs from 'fs'
 
 export default class Foo {
     constructor() {}
     async getTextFromPDF(file) {//, pageString) {
+        const arr = []
         this.useAlias = this.#getSetting('useAlias')
         this.useSizeData = this.#getSetting('useSizeData')
 
@@ -13,10 +15,11 @@ export default class Foo {
         const bookInfo = await this.#identifyRulebook(doc)
 
         for (const [pageNumber, info] of bookInfo.map) {
-        console.log(`Parsing Page ${pageNumber}`)
+        // console.log(`Parsing Page ${pageNumber}`)
 
             const excludePattern = info?.exclude ? new RegExp(info.exclude) : ''
-            const monsters = info.entries
+            const monsters = [...info.entries]
+            // console.log(monsters)
             const page = await doc.getPage(pageNumber + bookInfo.offset);
             const content = await page.getTextContent();
             const strings = content.items.map(function(item) {
@@ -24,88 +27,123 @@ export default class Foo {
             });
             // console.log(monsters)
             const text = strings.join(' ').replace(/\s\s+/g, ' ').replace(excludePattern, '')
-            console.log(text)
-            monsters.forEach(async (monster, index) => {
-                console.log(monster.name)
+            // console.log(text)
+            
+            monsters.map(async (monster, index) => {
+                // console.log(monster)
+                // console.log('--------------------------------------------------------')
+                if (monster.regex) return
+                if (!monster.features) {
+                    let r = `${monster.name.toUpperCase().replace(' ', '\\s')}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)`
+                    this.#toObject(monster, r)
+                    return
+                }
+                let i = 0
+                let f = 0
+                let features = [...monster?.features]
+                let naive
+                let naive_solution
+                let prev_exp
+                let prev_feat
 
-                const pattern = []
-                
-                if (monster.regex){
-                    pattern.push(monster.regex)
-                } else {
-                    pattern.push([`${monster.name.toUpperCase()}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)`])
-                    if (monster.features || index !== monsters.length - 1) {
-                        // console.log(`${monster.name} at index ${index} of ${monsters.length - 1} either has features or is not the last monster in the array`)
+                while (true) {
+                    // console.log(`i=${i}\nf=${f}`)
+                    const pattern = []
+                    pattern.push([`${monster.name.toUpperCase().replace(' ', '\\s')}\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)`])
+                    if (features || index !== monsters.length - 1) {
                         pattern.push('\\s+')
-                    }
-                    if (monster.features) {
-                        if (monster.features.length > 1){
-                            pattern.push(`(${monster.features.join('.*?)\\s+(')}.*`)
+                    } 
+                    if (features) {
+                        if (features?.length > 1){
+                            pattern.push(`(${features.join('.*?)\\s+(')}.*`)
                                 if (index < monsters.length - 1) {
-                                    pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase()}`)
+                                    pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase().replace(' ', '\\s')}`)
                                 } else pattern.push(`)`)
-                        } else if (monster.features.length == 1) {
-                            pattern.push(`(${monster.features[0]}.*`)
+                        } else if (features?.length == 1) {
+                            pattern.push(`(${features[0]}.*`)
                                 if (index < monsters.length - 1) {
-                                    pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase()}`)
+                                    pattern.push(`?)\\s+${(monsters[index + 1].name).toUpperCase().replace(' ', '\\s')}`)
                                 } else pattern.push(`)`)
                     }}
-                } 
-                console.log(pattern.join(''))
 
-                const regex = new RegExp(pattern.join(''), 'gm')
-                let m;
+                    
+                    let reg_str = pattern.join('')
+                    // console.log(reg_str)
+                    if (i == 0) naive = reg_str
+                    // console.log(naive)}
 
-                while ((m = regex.exec(text)) !== null) {
-                    // This is necessary to avoid infinite loops with zero-width matches
-                    if (m.index === regex.lastIndex) {
-                        regex.lastIndex++;
+                    const regex = new RegExp(reg_str, 'gm')
+                    let m;
+                    let monsterText
+                    while ((m = regex.exec(text)) !== null) {
+                        // This is necessary to avoid infinite loops with zero-width matches
+                        if (m.index === regex.lastIndex) {
+                            regex.lastIndex++;
+                        }
+
+                        m[0] = monster.name
+                    
+                    // console.log(m)
+                    monsterText = m.join('\n\n')
                     }
 
-                    m[0] = monster.name
-
-                    if (monster.replace) {
-                        for (const target in monster.replace) {
-                            const replacement = monster.replace[target]
-                            m = m.map((s) => s.replace(target, replacement))
+                    if (i == 0) naive_solution = monsterText
+                    // console.log(`naive_solution=${naive_solution}`)}
+                    
+                    if (!(monsterText === naive_solution)) {
+                        // console.log('MISMATCH')
+                        // console.log(monsterText)
+                        // console.log(naive_solution)
+                        features[f] = prev_feat
+                        f++
+                        if (f >= features?.length) {
+                            // console.log(reg_str)
+                            // console.log('END')
+                            // console.log(monsterText)
+                            // console.log(prev_exp)
+                            this.#toObject(monster, prev_exp)
+                            arr.push(prev_exp)
+                            // console.log(features)
+                            return
                         }
                     }
-
-                    const monsterText = m.join('\n\n')
-                    console.log(monsterText)
-
-                    const options = {}
-                    if (this.useSizeData) options.size = monster.size
-                    if (this.useAlias) options.alias = monster.alias
-                    
-                    let newActor = await monsterImporter._importMonster(monsterText)
-
-                    // Update prototype token as needed
-                    await Actor.updateDocuments([{
-                        _id: newActor.id,
-                        "prototypeToken.texture": {...newActor.prototypeToken.texture, src: newActor.img}
-                    }])
-
-                    if (options.size != undefined) {
-                        await Actor.updateDocuments([{
-                            _id: newActor.id,
-                            "prototypeToken.height": options.size,
-                            "prototypeToken.width": options.size
-                        }])
+                    else {
+                        if (features[f]?.length == 0) {
+                            // console.log(reg_str)
+                            // console.log('END2')
+                            // console.log(monsterText)
+                            f++
+                            i++
+                            continue
+                        }
+                        else {
+                            prev_exp = reg_str
+                            prev_feat = features[f]
+                            if (f >= features?.length) {
+                                // console.log(prev_exp)
+                                this.#toObject(monster, prev_exp)
+                                arr.push(prev_exp)
+                                return}
+                            else features[f] = features[f].slice(0, - 1)}
+                        // console.log(features)
                     }
-                    if (options.alias != undefined) {
-                        await Actor.updateDocuments([{
-                            _id: newActor.id,
-                            "prototypeToken.name": options.alias
-                        }])
-                    }
+                        if (i > 100) return
+                    i++
                 }
+
+
             })
         }
     }
 
+    async #toObject (monster, regex) {
+        let str = 
+        `{\nname: \'${monster.name}\',\nregex: \'${regex.replace('\\', '\\\\')}\',\n${monster.alias ? `alias: \'${monster.alias}\',\n` : ''}${monster.size ? `size: ${monster.size},\n` : ''}}`
+        console.log(str)
+    }
+
     async #identifyRulebook (doc) {
-        console.log(`Identifying Rulebook...`)
+        // console.log(`Identifying Rulebook...`)
         for (const [book, info] of BOOKS) {
             let page
             try {
@@ -118,7 +156,7 @@ export default class Foo {
                 return item.str
             }) 
             const text = strings.join(' ').replace(/\s\s+/g, ' ')
-            console.log(text)
+            // console.log(text)
             const regex = new RegExp(`(${info.checkText}.*?)`, 'gm')
             let m;
             if (m = regex.exec(text) !== null) {
@@ -141,13 +179,13 @@ export default class Foo {
     }
 }
 
-// function saveDataToFile(content, contentType, fileName) {
-//     const a = document.createElement('a');
-//     const file = new Blob([content], { type: contentType });
+function saveDataToFile(content, contentType, fileName) {
+    const a = document.createElement('a');
+    const file = new Blob([content], { type: contentType });
   
-//     a.href = URL.createObjectURL(file);
-//     a.download = fileName;
-//     a.click();
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
   
-//     URL.revokeObjectURL(a.href);
-// }
+    URL.revokeObjectURL(a.href);
+}

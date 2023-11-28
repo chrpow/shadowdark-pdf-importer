@@ -7,12 +7,12 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Aboleth',
-                features: ['Curse', 'Enslave', 'Telepathic'],
+                regex: 'ABOLETH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(T.*?)\\s+ACOLYTE',
                 size: 2
             },
             {
                 name: 'Acolyte',
-                features: ['Healing Touch']
+                regex: 'ACOLYTE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
             }
         ]
     }],
@@ -21,90 +21,95 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Angel, Seraph',
-                features: ['Bless'],
-                alias: 'Seraph'
+                regex: 'ANGEL,\\sSERAPH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ANGEL,\\sDOMINI',
+                alias: 'Seraph',
             },
             {
                 name: 'Angel, Domini',
-                features: ['Horn'],
-                alias: 'Domini Angel'
+                regex: 'ANGEL,\\sDOMINI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ANGEL,\\sPRINCIPI',
+                alias: 'Domini Angel',
             },
             {
                 name: 'Angel, Principi',
-                features: ['Moonlight Aura', 'Truesight'],
-                alias: 'Principi Angel'
+                regex: 'ANGEL,\\sPRINCIPI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+ARCHANGEL',
+                alias: 'Principi Angel',
             },
             {
                 name: 'Archangel',
-                features: ['Command', 'Crown of Fire']
-            }
+                regex: 'ARCHANGEL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Cr.*)',
+            },
         ]
     }],
     [196, {
         entries: [
             {
                 name: 'Ape, Snow',
-                features: ['Thick Fur'],
-                alias: 'Snow Ape'
+                regex: 'APE,\\sSNOW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+APE',
+                alias: 'Snow Ape',
             },
             {
-                name: 'Ape'
+                name: 'Ape',
+                regex: 'APE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Ankheg',
-                size: 2
+                regex: 'ANKHEG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
-                name: 'Animated Armor'
+                name: 'Animated Armor',
+                regex: 'ANIMATED\\sARMOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Apprentice',
-                features: ['Beguile', 'Magic Bolt']
-            }
+                regex: 'APPRENTICE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*)',
+            },
         ]
     }],
     [197, {
         entries: [
             {
                 name: 'Archmage',
-                features: ['Death Bolt', 'Enervate', 'Fireblast', 'Float', 'Mithralskin', 'Void Step'],
+                regex: 'ARCHMAGE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(Fi.*?)\\s+(F.*?)\\s+(M.*?)\\s+(V.*?)\\s+ASSASSIN',
             },
             {
                 name: 'Assassin',
-                features: ['Execute'],
+                regex: 'ASSASSIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+AZER',
             },
             {
                 name: 'Azer',
-                features: ['Impervious'],
+                regex: 'AZER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BADGER',
             },
             {
                 name: 'Badger',
-                features: ['Rage']
+                regex: 'BADGER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BANDIT',
             },
             {
                 name: 'Bandit',
-                features: ['Ambush']
-            }
+                regex: 'BANDIT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [198, {
         entries: [
             {
                 name: 'Basilisk',
-                features: ['Petrify']
+                regex: 'BASILISK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BAT,\\sGIANT',
             },
             {
                 name: 'Bat, Giant',
+                regex: 'BAT,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
                 alias: 'Giant Bat',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Bat, Swarm',
-                alias: 'Bat Swarm'
+                regex: 'BAT,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                alias: 'Bat Swarm',
             },
             {
                 name: 'Bear, Brown',
-                features: ['Crush'],
+                regex: 'BEAR,\\sBROWN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BEAR,\\sPOLAR',
                 alias: 'Brown Bear',
                 size: 2,
                 replace: {
@@ -113,62 +118,63 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Bear, Polar',
-                features: ['Crush', 'Thick Fur'],
+                regex: 'BEAR,\\sPOLAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+BEASTMAN',
                 alias: 'Polar Bear',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Beastman',
-                features: ['Brutal']
-            }
+                regex: 'BEASTMAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [199, {
         entries: [
             {
                 name: 'Berserker',
-                features: ['Rage']
+                regex: 'BERSERKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BOAR',
             },
             {
                 name: 'Boar',
-                features: ['Gore']
+                regex: 'BOAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BLACK\\sPUDDING',
             },
             {
                 name: 'Black Pudding',
-                features: ['Impervious', 'Corrosive'],
-                size: 2
+                regex: 'BLACK\\sPUDDING\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+BRAIN\\sEATER',
+                size: 2,
             },
             {
                 name: 'Brain Eater',
-                features: ['Hear Thoughts', 'Latch', 'Mind Blast', 'Mind Control']
-            }
+                regex: 'BRAIN\\sEATER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+(M.*?)\\s+(M.*)',
+            },
         ]
     }],
     [200, {
         entries: [
             {
                 name: 'Bugbear',
-                features: ['Stealthy']
+                regex: 'BUGBEAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BULETTE',
             },
             {
                 name: 'Bulette',
-                features: ['Leap'],
-                size: 2
+                regex: 'BULETTE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+CAMEL',
+                size: 2,
             },
             {
                 name: 'Camel',
-                size: 2
+                regex: 'CAMEL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Cave Brute',
-                features: ['Bewilder'],
-                size: 2
+                regex: 'CAVE\\sBRUTE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+CAVE\\sCREEPER',
+                size: 2,
             },
             {
                 name: 'Cave Creeper',
-                features: ['Toxin'],
-                size: 2
-            }
+                regex: 'CAVE\\sCREEPER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                size: 2,
+            },
         ]
     }],
     [201, {
@@ -203,208 +209,213 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Cloaker',
-                features: ['Phantoms', 'Screech'],
-                size: 2
+                regex: 'CLOAKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+COCKATRICE',
+                size: 2,
             },
             {
                 name: 'Cockatrice',
-                features: ['Petrify']
+                regex: 'COCKATRICE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+COUATL',
             },
             {
                 name: 'Couatl',
-                features: ['Change Shape', 'Poison', 'Restore']
+                regex: 'COUATL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(R.*?)\\s+CRAB,\\sGIANT',
             },
             {
                 name: 'Crab, Giant',
-                features: ['Crush']
-            }
+                regex: 'CRAB,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [203, {
         entries: [
             {
                 name: 'Crocodile',
-                size: 2
+                regex: 'CROCODILE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Cultist',
-                features: ['Fearless', 'Deathtouch']
+                regex: 'CULTIST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+CYCLOPS',
             },
             {
                 name: 'Cyclops',
-                size: 3
+                regex: 'CYCLOPS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 3,
             },
             {
                 name: 'Darkmantle',
-                features: ['Darkness']
+                regex: 'DARKMANTLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEEP\\sONE',
             },
             {
                 name: 'Deep One',
-                features: ['Sunblind']
-            }
+                regex: 'DEEP\\sONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [204, {
         entries: [
             {
                 name: 'Demon, Balor',
-                features: ['Impervious', 'Grab', 'Hellfire'],
+                regex: 'DEMON,\\sBALOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(H.*?)\\s+DEMON,\\sGLABREZU',
                 alias: 'Balor',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Demon, Glabrezu',
-                features: ['Crush'],
+                regex: 'DEMON,\\sGLABREZU\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEMON,\\sDRETCH',
                 alias: 'Glabrezu',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Demon, Dretch',
-                features: ['Gas'],
-                alias: 'Dretch'
-            }
+                regex: 'DEMON,\\sDRETCH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                alias: 'Dretch',
+            },
         ]
     }],
     [205, {
         entries: [
             {
                 name: 'Demon, Marilith',
-                features: ['Parry'],
+                regex: 'DEMON,\\sMARILITH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEMON,\\sVROCK',
                 alias: 'Marilith',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Demon, Vrock',
-                features: ['Carrion Mist', 'Screech'],
+                regex: 'DEMON,\\sVROCK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)',
                 alias: 'Vrock',
-                size: 2
-            }
+                size: 2,
+            },
         ]
     }],
     [206, {
         entries: [
             {
                 name: 'Archdevil',
-                features: ['Impervious', 'Crown of Darkness', 'Soulbind']
+                regex: 'ARCHDEVIL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(S.*?)\\s+DEVIL,\\sBARBED',
             },
             {
                 name: 'Devil, Barbed',
-                features: ['Barb'],
-                alias: 'Barbed Devil'
-            }
+                regex: 'DEVIL,\\sBARBED\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                alias: 'Barbed Devil',
+            },
         ]
     }],
     [207, {
         entries: [
             {
                 name: 'Devil, Cubi',
-                features: ['Change Shape', 'Charm', 'Drain'],
-                alias: 'Cubi'
+                regex: 'DEVIL,\\sCUBI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(Dr.*?)\\s+DEVIL,\\sERINYES',
+                alias: 'Cubi',
             },
             {
                 name: 'Devil, Erinyes',
-                features: ['Poison'],
-                alias: 'Erinyes'
+                regex: 'DEVIL,\\sERINYES\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEVIL,\\sHORNED',
+                alias: 'Erinyes',
             },
             {
                 name: 'Devil, Horned',
-                features: ['Iron Hide'],
+                regex: 'DEVIL,\\sHORNED\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEVIL,\\sIMP',
                 alias: 'Horned Devil',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Devil, Imp',
-                features: ['Impervious', 'Contract', 'Poison'],
+                regex: 'DEVIL,\\sIMP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(P.*)',
                 alias: 'Imp',
-                size: 0.5
-            }
+                size: 0.5,
+            },
         ]
     }],
     [208, {
         entries: [
             {
                 name: 'Pterodactyl',
-                features: ['Grab']
+                regex: 'PTERODACTYL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+TYRANNOSAURUS',
             },
             {
                 name: 'Tyrannosaurus',
-                size: 3
+                regex: 'TYRANNOSAURUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 3,
             },
             {
                 name: 'Triceratops',
-                features: ['Charge'],
-                size: 3
+                regex: 'TRICERATOPS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BRACHIOSAURUS',
+                size: 3,
             },
             {
                 name: 'Brachiosaurus',
-                size: 4
+                regex: 'BRACHIOSAURUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 4,
             },
             {
                 name: 'Plesiosaurus',
-                size: 2
+                regex: 'PLESIOSAURUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Velociraptor',
-                features: ['Clever'],
-                size: 0.5
-            }
+                regex: 'VELOCIRAPTOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                size: 0.5,
+            },
         ]
     }],
     [209, {
         entries: [
             {
                 name: 'Djinni',
-                features: ['Impervious', 'Whirlwind', 'Wish'],
-                size: 2
+                regex: 'DJINNI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(W.*?)\\s+(W.*?)\\s+DOPPELGANGER',
+                size: 2,
             },
             {
                 name: 'Doppelganger',
-                features: ['Change Shape', 'Telepathy']
-            }
+                regex: 'DOPPELGANGER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*)',
+            },
         ]
     }],
     [210, {
         entries: [
             {
                 name: 'Dragon, Desert',
-                features: ['Stormblood', 'Lightning Breath', 'Mirage'],
+                regex: 'DRAGON,\\sDESERT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+(M.*?)\\s+DRAGON,\\sFIRE',
                 alias: 'Desert Dragon',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Dragon, Fire',
-                features: ['Fireblood', 'Fire Breath'],
+                regex: 'DRAGON,\\sFIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire B.*)',
                 alias: 'Fire Dragon',
-                size: 3
-            }
+                size: 3,
+            },
         ]
     }],
     [211, {
         entries: [
             {
                 name: 'Dragon, Forest',
-                features: ['Animate Plants', 'Poison Breath'],
+                regex: 'DRAGON,\\sFOREST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Po.*?)\\s+DRAGON,\\sFROST',
                 alias: 'Forest Dragon',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Dragon, Frost',
-                features: ['Frostblood', 'Ice Breath'],
+                regex: 'DRAGON,\\sFROST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+DRAGON,\\sSEA',
                 alias: 'Frost Dragon',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Dragon, Sea',
-                features: ['Steam Breath', 'Water Spout'],
+                regex: 'DRAGON,\\sSEA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(W.*?)\\s+DRAGON,\\sSWAMP',
                 alias: 'Sea Dragon',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Dragon, Swamp',
-                features: ['Smog Breath'],
+                regex: 'DRAGON,\\sSWAMP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
                 alias: 'Swamp Dragon',
-                size: 3
-            }
+                size: 3,
+            },
         ]
     }],
     [212, {
@@ -412,58 +423,57 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Drow',
-                features: ['Poison', 'Sunblind']
+                regex: 'DROW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+DROW,\\sPRIESTESS',
             },
             {
                 name: 'Drow, Priestess',
-                features: ['Poison', 'Sunblind', 'Snuff', 'Summon Spiders', 'Web'],
-                alias: 'Drow Priestess'
-            }
-            ,
+                regex: 'DROW,\\sPRIESTESS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+(S.*?)\\s+(Su.*?)\\s+(W.*?)\\s+DROW,\\sDRIDER',
+                alias: 'Drow Priestess',
+            },
             {
                 name: 'Drow, Drider',
-                features: ['Poison', 'Sunblind'],
+                regex: 'DROW,\\sDRIDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)',
                 alias: 'Drider',
-                size: 2
-            }
+                size: 2,
+            },
         ]
     }],
     [213, {
         entries: [
             {
                 name: 'Druid',
-                features: ['Barkskin', 'Conjure Flames', 'Imbue', 'Summon Bear', 'Thunderclap']
+                regex: 'DRUID\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(I.*?)\\s+(Su.*?)\\s+(T.*?)\\s+DRYAD',
             },
             {
                 name: 'Dryad',
-                features: ['Charm', 'Meld']
+                regex: 'DRYAD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+DUERGAR',
             },
             {
                 name: 'Duergar',
-                features: ['Enlarge', 'Invisibility', 'Sunblind']
-            }
+                regex: 'DUERGAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+(S.*)',
+            },
         ]
     }],
     [214, {
         entries: [
             {
                 name: 'Dung Beetle, Giant',
-                features: ['Knock'],
-                alias: 'Giant Dung Beetle'
+                regex: 'DUNG\\sBEETLE, GIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+EFREETI',
+                alias: 'Giant Dung Beetle',
             },
             {
                 name: 'Efreeti',
-                features: ['Impervious', 'Wall of Flame', 'Wish'],
-                size: 2
-            }
+                regex: 'EFREETI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(W.*?)\\s+(W.*)',
+                size: 2,
+            },
         ]
     }],
     [215, {
         entries: [
             {
                 name: 'Elemental, Air (Lesser)',
-                alias: 'Lesser Air Elemental',
                 regex: '(A .*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                alias: 'Lesser Air Elemental',
                 replace: {
                     '29/42': '29',
                     '2d6/3d6': '2d6',
@@ -472,8 +482,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Elemental, Earth (Lesser)',
-                alias: 'Lesser Earth Elemental',
                 regex: '(A t.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(A.*?)\\sE',
+                alias: 'Lesser Earth Elemental',
                 replace: {
                     '31/44': '31',
                     '2d6/3d6': '2d6',
@@ -482,8 +492,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Elemental, Fire (Lesser)',
-                alias: 'Lesser Fire Elemental',
                 regex: '(A r.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(I.*?)\\sE',
+                alias: 'Lesser Fire Elemental',
                 replace: {
                     '30/43': '30',
                     '2d6/3d6': '2d6',
@@ -492,8 +502,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Elemental, Water (Lesser)',
-                alias: 'Lesser Water Elemental',
                 regex: '(A c.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                alias: 'Lesser Water Elemental',
                 replace: {
                     '29/42': '29',
                     '2d6/3d6': '2d6',
@@ -502,8 +512,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Elemental, Air (Greater)',
-                alias: 'Greater Air Elemental',
                 regex: '(A .*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                alias: 'Greater Air Elemental',
                 replace: {
                     '29/42': '42',
                     '2d6/3d6': '3d6',
@@ -513,8 +523,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Elemental, Earth (Greater)',
-                alias: 'Greater Earth Elemental',
                 regex: '(A t.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(A.*?)\\sE',
+                alias: 'Greater Earth Elemental',
                 replace: {
                     '31/44': '44',
                     '2d6/3d6': '3d6',
@@ -524,8 +534,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Elemental, Fire (Greater)',
-                alias: 'Greater Fire Elemental',
                 regex: '(A r.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(I.*?)\\sE',
+                alias: 'Greater Fire Elemental',
                 replace: {
                     '30/43': '43',
                     '2d6/3d6': '3d6',
@@ -535,8 +545,8 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Elemental, Water (Greater)',
-                alias: 'Greater Water Elemental',
                 regex: '(A c.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE',
+                alias: 'Greater Water Elemental',
                 replace: {
                     '29/42': '42',
                     '2d6/3d6': '3d6',
@@ -550,120 +560,123 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Elephant',
-                features: ['Charge'],
-                size: 3
+                regex: 'ELEPHANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ELF',
+                size: 3,
             },
             {
                 name: 'Elf',
-                features: ['Feyblood']
+                regex: 'ELF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ETTERCAP',
             },
             {
                 name: 'Ettercap',
-                features: ['Poison Web']
+                regex: 'ETTERCAP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+FAIRY',
             },
             {
                 name: 'Fairy',
-                features: ['Poison'],
-                size: 0.5
+                regex: 'FAIRY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+FROG,\\sGIANT',
+                size: 0.5,
             },
             {
                 name: 'Frog, Giant',
-                features: ['Tongue'],
-                alias: 'Giant Frog'
+                regex: 'FROG,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GARGOYLE',
+                alias: 'Giant Frog',
             },
             {
                 name: 'Gargoyle',
-                features: ['Impervious']
-            }
+                regex: 'GARGOYLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [217, {
         entries: [
             {
                 name: 'Gelatinous Cube',
-                features: ['Engulf', 'Rubbery', 'Toxin'],
-                size: 2
+                regex: 'GELATINOUS\\sCUBE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*?)\\s+(T.*?)\\s+GHAST',
+                size: 2,
             },
             {
                 name: 'Ghast',
-                features: ['Undead', 'Carrion Stench', 'Paralyze']
+                regex: 'GHAST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(P.*?)\\s+GHOUL',
             },
             {
                 name: 'Ghoul',
-                features: ['Undead', 'Paralyze']
+                regex: 'GHOUL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+GHOST',
             },
             {
                 name: 'Ghost',
-                features: ['Greater Undead', 'Incorporeal', 'Life Drain', 'Possess']
-            }
+                regex: 'GHOST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(In.*?)\\s+(L.*?)\\s+(P.*)',
+            },
         ]
     }],
     [218, {
         entries: [
             {
                 name: 'Giant, Cloud',
-                features: ['Alert'],
+                regex: 'GIANT,\\sCLOUD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GIANT,\\sFIRE',
                 alias: 'Cloud Giant',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Giant, Fire',
-                features: ['Fireblood'],
+                regex: 'GIANT,\\sFIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
                 alias: 'Fire Giant',
-                size: 3
-            }
+                size: 3,
+            },
         ]
     }],
     [219, {
         entries: [
             {
                 name: 'Giant, Frost',
-                features: ['Frostblood'],
+                regex: 'GIANT,\\sFROST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GIANT,\\sSTONE',
                 alias: 'Frost Giant',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Giant, Stone',
-                features: ['Stone Hide'],
+                regex: 'GIANT,\\sSTONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GIANT,\\sGOAT',
                 alias: 'Stone Giant',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Giant, Goat',
+                regex: 'GIANT,\\sGOAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
                 alias: 'Goat Giant',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Giant, Storm',
-                features: ['Stormblood', 'Lightning Bolt'],
+                regex: 'GIANT,\\sSTORM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+GIANT,\\sHILL',
                 alias: 'Storm Giant',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Giant, Hill',
+                regex: 'GIANT,\\sHILL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
                 alias: 'Hill Giant',
-                size: 3
-            }
+                size: 3,
+            },
         ]
     }],
     [220, {
         entries: [
             {
                 name: 'Gibbering Mouther',
-                features: ['Gibbering', 'Latch']
+                regex: 'GIBBERING\\sMOUTHER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+GLADIATOR',
             },
             {
-                name: 'Gladiator'
+                name: 'Gladiator',
+                regex: 'GLADIATOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Gnoll',
-                features: ['Rage']
+                regex: 'GNOLL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GNOME,\\sDEEP',
             },
             {
                 name: 'Gnome, Deep',
-                features: ['Stone Meld'],
-                alias: 'Deep Gnome'
-            }
+                regex: 'GNOME,\\sDEEP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                alias: 'Deep Gnome',
+            },
         ]
     }],
     [221, {
@@ -671,18 +684,18 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Goblin',
-                features: ['Keen Senses']
+                regex: 'GOBLIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GOBLIN,\\sBOSS',
             },
             {
                 name: 'Goblin, Boss',
-                features: ['Keen Senses'],
-                alias: 'Goblin Boss'
+                regex: 'GOBLIN,\\sBOSS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GOBLIN,\\sSHAMAN',
+                alias: 'Goblin Boss',
             },
             {
                 name: 'Goblin, Shaman',
-                features: ['Keen Senses', 'Bug Brain', 'Skitter', 'Stink Bomb'],
-                alias: 'Goblin Shaman'
-            }
+                regex: 'GOBLIN,\\sSHAMAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(Sk.*?)\\s+(St.*)',
+                alias: 'Goblin Shaman',
+            },
         ]
     }],
     [222, {
@@ -690,63 +703,66 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Golem, Clay',
-                features: ['Golem', 'Curse'],
+                regex: 'GOLEM,\\sCLAY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+GOLEM,\\sFLESH',
                 alias: 'Clay Golem',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Golem, Flesh',
-                features: ['Golem', 'Berserk'],
-                alias: 'Flesh Golem'
+                regex: 'GOLEM,\\sFLESH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+GOLEM,\\sIRON',
+                alias: 'Flesh Golem',
             },
             {
                 name: 'Golem, Iron',
-                features: ['Golem', 'Poison Breath'],
+                regex: 'GOLEM,\\sIRON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+GOLEM,\\sSTONE',
                 alias: 'Iron Golem',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Golem, Stone',
-                features: ['Golem', 'Slow'],
+                regex: 'GOLEM,\\sSTONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)',
                 alias: 'Stone Golem',
-                size: 2
-            }
+                size: 2,
+            },
         ]
     }],
     [223, {
         entries: [
             {
                 name: 'Gorgon',
-                features: ['Charge', 'Petrifying Breath'],
-                size: 2
+                regex: 'GORGON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+GORILLA',
+                size: 2,
             },
             {
-                name: 'Gorilla'
+                name: 'Gorilla',
+                regex: 'GORILLA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Gray Ooze',
-                features: ['Impervious', 'Corrosive']
+                regex: 'GRAY\\sOOZE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+GRICK',
             },
             {
                 name: 'Grick',
-                features: ['Camouflage', 'Grab']
-            }
+                regex: 'GRICK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*)',
+            },
         ]
     }],
     [224, {
         entries: [
             {
                 name: 'Griffon',
-                size: 2
+                regex: 'GRIFFON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Grimlow',
-                features: ['Grab'],
-                size: 2
+                regex: 'GRIMLOW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GUARD',
+                size: 2,
             },
             {
-                name: 'Guard'
-            }
+                name: 'Guard',
+                regex: 'GUARD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+            },
         ]
     }],
     [225, {
@@ -754,51 +770,53 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Hag, Weald',
-                features: ['Drink Pain', 'Shapechange'],
-                alias: 'Weald Hag'
+                regex: 'HAG,\\sWEALD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+HAG,\\sNIGHT',
+                alias: 'Weald Hag',
             },
             {
                 name: 'Hag, Night',
-                features: ['Blind', 'Shapechange'],
-                alias: 'Night Hag'
+                regex: 'HAG,\\sNIGHT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+HAG,\\sSEA',
+                alias: 'Night Hag',
             },
             {
                 name: 'Hag, Sea',
-                features: ['Shapechange', 'Terrify'],
-                alias: 'Sea Hag'
-            }
+                regex: 'HAG,\\sSEA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*)',
+                alias: 'Sea Hag',
+            },
         ]
     }],
     [226, {
         entries: [
             {
                 name: 'Harpy',
-                features: ['Song']
+                regex: 'HARPY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HELL\\sHOUND',
             },
             {
                 name: 'Hell Hound',
-                features: ['Impervious', 'Fire Breath']
+                regex: 'HELL\\sHOUND\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire B.*?)\\s+HIPPOGRIFF',
             },
             {
                 name: 'Hippogriff',
-                size: 2
+                regex: 'HIPPOGRIFF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Hippopotamus',
-                features: ['Stumpy'],
-                size: 2
-            }
+                regex: 'HIPPOPOTAMUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                size: 2,
+            },
         ]
     }],
     [227, {
         entries: [
             {
                 name: 'Hobgoblin',
-                features: ['Phalanx']
+                regex: 'HOBGOBLIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HORSE',
             },
             {
                 name: 'Horse',
-                size: 2
+                regex: 'HORSE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             // Hydra defaults to one head (LV 2, HP 11)
             {
@@ -812,119 +830,124 @@ const RULEBOOK_MONSTERS = new Map([
             },
             {
                 name: 'Invisible Stalker',
-                features: ['Bound', 'Invisible', 'Tracking']
-            }
+                regex: 'INVISIBLE\\sSTALKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+(T.*)',
+            },
         ]
     }],
     [228, {
         entries: [
             {
                 name: 'Jellyfish',
-                features: ['Toxin'],
-                size: 0.5
+                regex: 'JELLYFISH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+KNIGHT',
+                size: 0.5,
             },
             {
                 name: 'Knight',
-                features: ['Oath']
+                regex: 'KNIGHT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+KOBOLD',
             },
             {
                 name: 'Kobold',
-                features: ['Dodge']
+                regex: 'KOBOLD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+KOBOLD,\\sSORCERER',
             },
             {
                 name: 'Kobold, Sorcerer',
-                features: ['Dodge', 'Scorpion Sting', 'Spider Swarm'],
-                alias: 'Kobold Sorcerer'
-            }
+                regex: 'KOBOLD,\\sSORCERER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+(Spi.*)',
+                alias: 'Kobold Sorcerer',
+            },
         ]
     }],
     [229, {
         entries: [
             {
                 name: 'Kraken',
-                features: ['Impervious', 'Crush', 'Lightning Bolt', 'Storm'],
-                size: 4
+                regex: 'KRAKEN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(L.*?)\\s+(Sto.*?)\\s+LEECH,\\sGIANT',
+                size: 4,
             },
             {
                 name: 'Leech, Giant',
-                features: ['Attach'],
+                regex: 'LEECH,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
                 alias: 'Giant Leech',
-                size: 0.5
-            }
+                size: 0.5,
+            },
         ]
     }],
     [230, {
         entries: [
             {
                 name: 'Leprechaun',
-                features: ['Alert', 'Slippery', 'Fool\'s Gold', 'Illusion', 'Invisibility']
+                regex: 'LEPRECHAUN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Lich',
-                features: ['Supreme Undead', 'Phylactery', 'Paralysis', 'Flight', 'Null', 'Shadow Leap', 'Sigil of Doom', 'Wither']
-            }
+                regex: 'LICH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(P.*?)\\s+(F.*?)\\s+(N.*?)\\s+(Sh.*?)\\s+(Si.*?)\\s+(W.*)',
+            },
         ]
     }],
     [231, {
         entries: [
             {
                 name: 'Lion',
-                size: 2
+                regex: 'LION\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
-                name: 'Lizardfolk'
+                name: 'Lizardfolk',
+                regex: 'LIZARDFOLK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Mage',
-                features: ['Arcane Armor', 'Blast', 'Cancel', 'Levitate', 'Snare']
+                regex: 'MAGE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(C.*?)\\s+(L.*?)\\s+(Sn.*?)\\s+MAMMOTH',
             },
             {
                 name: 'Mammoth',
-                features: ['Thick Fur', 'Charge'],
-                size: 3
-            }
+                regex: 'MAMMOTH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Ch.*)',
+                size: 3,
+            },
         ]
     }],
     [232, {
         entries: [
             {
                 name: 'Manta Ray, Giant',
-                features: ['Poison'],
+                regex: 'MANTA\\sRAY, GIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+MANTICORE',
                 alias: 'Giant Manta Ray',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Manticore',
-                features: ['Spikes'],
-                size: 2
+                regex: 'MANTICORE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+MASTIFF',
+                size: 2,
             },
             {
-                name: 'Mastiff'
+                name: 'Mastiff',
+                regex: 'MASTIFF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Medusa',
-                features: ['Godborn', 'Petrify', 'Poison']
+                regex: 'MEDUSA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(P.*?)\\s+MERFOLK',
             },
             {
-                name: 'Merfolk'
+                name: 'Merfolk',
+                regex: 'MERFOLK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Mimic',
-                features: ['Stick']
-            }
+                regex: 'MIMIC\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [233, {
         entries: [
             {
                 name: 'Minotaur',
-                features: ['Charge'],
-                size: 2
+                regex: 'MINOTAUR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+MOOSE',
+                size: 2,
             },
             {
                 name: 'Moose',
-                size: 2
-            }
+                regex: 'MOOSE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
+            },
         ]
     }],
     [234, {
@@ -939,31 +962,31 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Mummy',
-                features: ['Supreme Undead', 'Desiccated', 'Necrosis']
+                regex: 'MUMMY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+(N.*?)\\s+MUSHROOMFOLK',
             },
             {
                 name: 'Mushroomfolk',
-                features: ['Sunblind', 'Telepathic']
-            }
+                regex: 'MUSHROOMFOLK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*)',
+            },
         ]
     }],
     [237, {
         entries: [
             {
                 name: 'Naga',
-                features: ['Poison', 'Agony', 'Hypnotize', 'Whispers'],
-                size: 2
+                regex: 'NAGA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(A.*?)\\s+(H.*?)\\s+(W.*?)\\s+NAGA,\\sBONE',
+                size: 2,
             },
             {
                 name: 'Naga, Bone',
-                features: ['Greater Undead'],
-                size: 2
+                regex: 'NAGA,\\sBONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+NIGHTMARE',
+                size: 2,
             },
             {
                 name: 'Nightmare',
-                features: ['Impervious'],
-                size: 2
-            }
+                regex: 'NIGHTMARE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                size: 2,
+            },
         ]
     }],
     [238, {
@@ -978,143 +1001,147 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Ochre Jelly',
-                features: ['Split'],
-                size: 2
+                regex: 'OCHRE\\sJELLY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+OCTOPUS,\\sGIANT',
+                size: 2,
             },
             {
                 name: 'Octopus, Giant',
-                features: ['Grab', 'Ink'],
+                regex: 'OCTOPUS,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+OGRE',
                 alias: 'Giant Octopus',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Ogre',
-                size: 2
+                regex: 'OGRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Oni',
-                features: ['Shapeshift', 'Fade', 'Hellfrost', 'Mist'],
-                size: 2
-            }
+                regex: 'ONI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*?)\\s+(H.*?)\\s+(M.*)',
+                size: 2,
+            },
         ]
     }],
     [240, {
         entries: [
             {
                 name: 'Orc',
-                features: ['Rage']
+                regex: 'ORC\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ORC,\\sCHIEFTAIN',
             },
             {
                 name: 'Orc, Chieftain',
-                features: ['Rage'],
-                alias: 'Orc Chieftain'
+                regex: 'ORC,\\sCHIEFTAIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+OTYUGH',
+                alias: 'Orc Chieftain',
             },
             {
                 name: 'Otyugh',
-                features: ['Disease'],
-                size: 2
-            }
+                regex: 'OTYUGH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                size: 2,
+            },
         ]
     }],
     [241, {
         entries: [
             {
                 name: 'Primordial Slime',
-                features: ['Impervious', 'Dissolve']
+                regex: 'PRIMORDIAL\\sSLIME\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+VOID\\sSPAWN',
             },
             {
                 name: 'Void Spawn',
-                features: ['Impervious', 'Toxin'],
-                size: 2
+                regex: 'VOID\\sSPAWN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+VOID\\sSPIDER',
+                size: 2,
             },
             {
                 name: 'Void Spider',
-                features: ['Impervious', 'Phase', 'Poison']
+                regex: 'VOID\\sSPIDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(P.*?)\\s+RIME\\sWALKER',
             },
             {
                 name: 'Rime Walker',
-                features: ['Impervious', 'Ice Aura'],
-                size: 2
-            }
-
+                regex: 'RIME\\sWALKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Ic.*)',
+                size: 2,
+            },
         ]
     }],
     [242, {
         entries: [
             {
                 name: 'Owlbear',
-                features: ['Crush'],
-                size: 2
+                regex: 'OWLBEAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+PANTHER',
+                size: 2,
             },
             {
-                name: 'Panther'
+                name: 'Panther',
+                regex: 'PANTHER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
-                name: 'Peasant'
+                name: 'Peasant',
+                regex: 'PEASANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Pegasus',
-                size: 2
-            }
+                regex: 'PEGASUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
+            },
         ]
     }],
     [243, {
         entries: [
             {
                 name: 'Phoenix',
-                features: ['Impervious', 'Explosion', 'Heat Aura', 'Rebirth'],
-                size: 3
+                regex: 'PHOENIX\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(H.*?)\\s+(R.*?)\\s+PIRANHA,\\sSWARM',
+                size: 3,
             },
             {
                 name: 'Piranha, Swarm',
-                features: ['Savage'],
-                alias: 'Piranha Swarm'
+                regex: 'PIRANHA,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+PIRATE',
+                alias: 'Piranha Swarm',
             },
             {
-                name: 'Pirate'
+                name: 'Pirate',
+                regex: 'PIRATE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Priest',
-                features: ['Anoint', 'Healing Touch', 'Holy Flame', 'Rebuke']
-            }
+                regex: 'PRIEST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(H.*?)\\s+(Ho.*?)\\s+(R.*)',
+            },
         ]
     }],
     [244, {
         entries: [
             {
                 name: 'Purple Worm',
-                features: ['Poison', 'Swallow'],
-                size: 4
+                regex: 'PURPLE\\sWORM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+RAKSHASA',
+                size: 4,
             },
             {
                 name: 'Rakshasa',
-                features: ['Impervious', 'Mesmerism', 'Weakness']
-            }
+                regex: 'RAKSHASA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(W.*)',
+            },
         ]
     }],
     [245, {
         entries: [
             {
                 name: 'Rat',
-                features: ['Disease'],
-                size: 0.5
+                regex: 'RAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RAT,\\sGIANT',
+                size: 0.5,
             },
             {
                 name: 'Rat, Giant',
-                features: ['Disease'],
+                regex: 'RAT,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RAT,\\sDIRE',
                 alias: 'Giant Rat',
-                size: 0.5
+                size: 0.5,
             },
             {
                 name: 'Rat, Dire',
-                features: ['Disease'],
-                alias: 'Dire Rat'
+                regex: 'RAT,\\sDIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RAT,\\sSWARM',
+                alias: 'Dire Rat',
             },
             {
                 name: 'Rat, Swarm',
-                features: ['Disease'],
-                alias: 'Rat Swarm'
-            }
+                regex: 'RAT,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                alias: 'Rat Swarm',
+            },
         ]
     }],
     [246, {
@@ -1130,172 +1157,176 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Reaver',
-                features: ['Bloodlust']
+                regex: 'REAVER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+REMORHAZ',
             },
             {
                 name: 'Remorhaz',
-                features: ['Impervious', 'Melt', 'Swallow'],
-                size: 3
-            }
+                regex: 'REMORHAZ\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(S.*)',
+                size: 3,
+            },
         ]
     }],
     [248, {
         entries: [
             {
                 name: 'Rhinoceros',
-                features: ['Charge'],
-                size: 2
+                regex: 'RHINOCEROS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ROC',
+                size: 2,
             },
             {
                 name: 'Roc',
-                features: ['Grab'],
-                size: 3
+                regex: 'ROC\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ROPER',
+                size: 3,
             },
             {
                 name: 'Roper',
-                features: ['Impervious', 'Grab', 'Pull', 'Tendrils'],
-                size: 2
-            }
+                regex: 'ROPER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(P.*?)\\s+(T.*)',
+                size: 2,
+            },
         ]
     }],
     [249, {
         entries: [
             {
                 name: 'Rot Flower',
-                features: ['Toxin']
+                regex: 'ROT\\sFLOWER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RUST\\sMONSTER',
             },
             {
                 name: 'Rust Monster',
-                features: ['Corrosive']
+                regex: 'RUST\\sMONSTER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SAHUAGIN',
             },
             {
                 name: 'Sahuagin',
-                features: ['Half-Amphibious']
+                regex: 'SAHUAGIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SALAMANDER',
             },
             {
                 name: 'Salamander',
-                features: ['Impervious', 'Heat Aura']
+                regex: 'SALAMANDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(H.*?)\\s+SCARAB,\\sSWARM',
             },
             {
                 name: 'Scarab, Swarm',
-                alias: 'Scarab Swarm'
+                regex: 'SCARAB,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                alias: 'Scarab Swarm',
             },
             {
                 name: 'Scarecrow',
-                features: ['Scream']
-            }
+                regex: 'SCARECROW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [250, {
         entries: [
             {
                 name: 'Scorpion',
-                features: ['Poison'],
-                size: 0.5
+                regex: 'SCORPION\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SCORPION,\\sGIANT',
+                size: 0.5,
             },
             {
                 name: 'Scorpion, Giant',
-                features: ['Grab', 'Poison'],
+                regex: 'SCORPION,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+SHADOW',
                 alias: 'Giant Scorpion',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Shadow',
-                features: ['Drain']
-            }
+                regex: 'SHADOW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+            },
         ]
     }],
     [251, {
         entries: [
             {
                 name: 'Shambling Mound',
-                features: ['Impervious', 'Engulf'],
-                size: 2
+                regex: 'SHAMBLING\\sMOUND\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+SHARK',
+                size: 2,
             },
             {
                 name: 'Shark',
-                size: 2
+                regex: 'SHARK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Shark, Megalodon',
-                features: ['Fearless'],
+                regex: 'SHARK,\\sMEGALODON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SIREN',
                 alias: 'Megalodon',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Siren',
-                features: ['Song']
+                regex: 'SIREN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SKELETON',
             },
             {
                 name: 'Skeleton',
-                features: ['Undead']
+                regex: 'SKELETON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SMILODON',
             },
             {
                 name: 'Smilodon',
-                size: 2
-            }
+                regex: 'SMILODON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
+            },
         ]
     }],
     [252, {
         entries: [
             {
                 name: 'Snake, Giant',
-                features: ['Constrict'],
+                regex: 'SNAKE,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SNAKE,\\sCOBRA',
                 alias: 'Giant Snake',
-                size: 3
+                size: 3,
             },
             {
                 name: 'Snake, Cobra',
-                features: ['Poison'],
+                regex: 'SNAKE,\\sCOBRA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SNAKE,\\sSWARM',
                 alias: 'Cobra',
-                size: 0.5
+                size: 0.5,
             },
             {
                 name: 'Snake, Swarm',
-                features: ['Poison'],
-                alias: 'Snake Swarm'
+                regex: 'SNAKE,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SOLDIER',
+                alias: 'Snake Swarm',
             },
             {
-                name: 'Soldier'
-            }
+                name: 'Soldier',
+                regex: 'SOLDIER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+            },
         ]
     }],
     [253, {
         entries: [
             {
                 name: 'Sphinx',
-                features: ['Roar', 'Gate', 'Omens', 'Riddle', 'Time Bend', 'Unmake'],
-                size: 2
-            }
+                regex: 'SPHINX\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(Om.*?)\\s+(R.*?)\\s+(T.*?)\\s+(U.*)',
+                size: 2,
+            },
         ]
     }],
     [254, {
         entries: [
             {
                 name: 'Spider',
-                features: ['Poison'],
-                size: 0.5
+                regex: 'SPIDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SPIDER,\\sGIANT',
+                size: 0.5,
             },
             {
                 name: 'Spider, Giant',
-                features: ['Poison'],
+                regex: 'SPIDER,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SPIDER,\\sSWARM',
                 alias: 'Giant Spider',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Spider, Swarm',
-                features: ['Poison'],
-                alias: 'Spider Swarm'
+                regex: 'SPIDER,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+STINGBAT',
+                alias: 'Spider Swarm',
             },
             {
                 name: 'Stingbat',
-                features: ['Blood Drain'],
-                size: 0.5
+                regex: 'STINGBAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+STRANGLER',
+                size: 0.5,
             },
             {
                 name: 'Strangler',
-                features: ['Stealthy', 'Strangle']
-            }
+                regex: 'STRANGLER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)',
+            },
         ]
     }],
     [255, {
@@ -1328,172 +1359,176 @@ const RULEBOOK_MONSTERS = new Map([
         entries: [
             {
                 name: 'Thief',
-                features: ['Stealthy', 'Backstab']
+                regex: 'THIEF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+THUG',
             },
             {
-                name: 'Thug'
+                name: 'Thug',
+                regex: 'THUG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Treant',
-                features: ['Animate Tree'],
-                size: 3
+                regex: 'TREANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+TROLL',
+                size: 3,
             },
             {
                 name: 'Troll',
-                features: ['Regenerate'],
-                size: 2
-            }
+                regex: 'TROLL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)',
+                size: 2,
+            },
         ]
     }],
     [260, {
         entries: [
             {
                 name: 'Troll, Frost',
-                features: ['Impervious', 'Regenerate'],
+                regex: 'TROLL,\\sFROST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*?)\\s+UNICORN',
                 alias: 'Frost Troll',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Unicorn',
-                features: ['Healing Horn'],
-                size: 2
+                regex: 'UNICORN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+VAMPIRE',
+                size: 2,
             },
             {
                 name: 'Vampire',
-                features: ['Supreme Undead', 'Blood Drain', 'Charm', 'Shapechange', 'Vampire']
-            }
+                regex: 'VAMPIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(Ch.*?)\\s+(S.*?)\\s+(V.*)',
+            },
         ]
     }],
     [261, {
         entries: [
             {
                 name: 'Vampire Spawn',
-                features: ['Greater Undead', 'Blood Drain', 'Vampire']
+                regex: 'VAMPIRE\\sSPAWN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(V.*?)\\s+VIOLET\\sFUNGUS',
             },
             {
-                name: 'Violet Fungus'
-            }
+                name: 'Violet Fungus',
+                regex: 'VIOLET\\sFUNGUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+            },
         ]
     }],
     [262, {
         exclude: '262.*warriors.',
         entries: [
             {
-                name: 'Viperian'
+                name: 'Viperian',
+                regex: 'VIPERIAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
             },
             {
                 name: 'Viperian, Ophid',
-                features: ['Impervious'],
-                alias: 'Viperian Ophid'
+                regex: 'VIPERIAN,\\sOPHID\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+VIPERIAN,\\sWIZARD',
+                alias: 'Viperian Ophid',
             },
             {
                 name: 'Viperian, Wizard',
-                features: ['Hiss', 'Summon Cobra', 'Venom', 'Whispers'],
-                alias: 'Viperian Wizard'
-            }
+                regex: 'VIPERIAN,\\sWIZARD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Su.*?)\\s+(V.*?)\\s+(W.*)',
+                alias: 'Viperian Wizard',
+            },
         ]
     }],
     [263, {
         entries: [
             {
                 name: 'Vulture',
-                features: ['Carrion Tracker']
+                regex: 'VULTURE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WASP,\\sGIANT',
             },
             {
                 name: 'Wasp, Giant',
-                features: ['Venom'],
-                alias: 'Giant Wasp'
+                regex: 'WASP,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WEREWOLF',
+                alias: 'Giant Wasp',
             },
             {
                 name: 'Werewolf',
-                features: ['Impervious', 'Lycanthropy']
+                regex: 'WEREWOLF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+WERERAT',
             },
             {
                 name: 'Wererat',
-                features: ['Impervious', 'Lycanthropy']
+                regex: 'WERERAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+WIGHT',
             },
             {
                 name: 'Wight',
-                features: ['Greater Undead', 'Life Drain']
-            }
+                regex: 'WIGHT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*)',
+            },
         ]
     }],
     [264, {
         entries: [
             {
                 name: 'Will-o\'-Wisp',
-                features: ['Life Drain'],
-                size: 0.5
+                regex: 'WILL-O\'-WISP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 0.5,
             },
             {
                 name: 'Wolf',
-                features: ['Pack Hunter']
+                regex: 'WOLF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WOLF,\\sDIRE',
             },
             {
                 name: 'Wolf, Dire',
-                features: ['Pack Hunter'],
+                regex: 'WOLF,\\sDIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WOLF,\\sWINTER',
                 alias: 'Dire Wolf',
-                size: 2
+                size: 2,
             },
             {
                 name: 'Wolf, Winter',
-                features: ['Impervious', 'Frost Breath'],
-                alias: 'Winter Wolf'
-            }
+                regex: 'WOLF,\\sWINTER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*)',
+                alias: 'Winter Wolf',
+            },
         ]
     }],
     [265, {
         entries: [
             {
                 name: 'Worg',
-                size: 2
+                regex: 'WORG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)',
+                size: 2,
             },
             {
                 name: 'Wraith',
-                features: ['Greater Undead', 'Incorporeal', 'Life Drain']
+                regex: 'WRAITH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(In.*?)\\s+(L.*?)\\s+WYVERN',
             },
             {
                 name: 'Wyvern',
-                features: ['Poison'],
-                size: 2
+                regex: 'WYVERN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ZOMBIE',
+                size: 2,
             },
             {
                 name: 'Zombie',
-                features: ['Undead', 'Relentless']
-            }
+                regex: 'ZOMBIE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*)',
+            },
         ]
     }],
 ])
 const CURSED_SCROLL_1 = new Map([
-    [46, {
-        entries: [
-            {
-                name: 'Bittermold',
-                features: ['Rubbery']
-            },
-            {
-                name: 'Bogthorn',
-                features: ['Poison']
-            },
-            {
-                name: 'Dralech',
-                features: ['Shatter'],
-                size: 2
-            },
-            {
-                name: 'Gordock Breeg',
-                features: ['Algae-Eater']
-            },
-            {
-                name: 'Hexling',
-                features: ['Energy Drain']
-            },
-            {
-                name: 'Howler',
-                features: ['Mob']
-            }
-        ]
-    }],
+    // [46, {
+    //     entries: [
+    //         {
+    //             name: 'Bittermold',
+    //             features: ['Rubbery']
+    //         },
+    //         {
+    //             name: 'Bogthorn',
+    //             features: ['Poison']
+    //         },
+    //         {
+    //             name: 'Dralech',
+    //             features: ['Shatter'],
+    //             size: 2
+    //         },
+    //         {
+    //             name: 'Gordock Breeg',
+    //             features: ['Algae-Eater']
+    //         },
+    //         {
+    //             name: 'Hexling',
+    //             features: ['Energy Drain']
+    //         },
+    //         {
+    //             name: 'Howler',
+    //             features: ['Mob']
+    //         }
+    //     ]
+    // }],
     [47, {
         entries: [
             {
@@ -1516,32 +1551,32 @@ const CURSED_SCROLL_1 = new Map([
             }
         ]
     }],
-    [48, {
-        exclude: ' THE WILLOWMAN',
-        entries: [
-            {
-                name: 'Tar Bat',
-                features: ['Pyro'],
-                size: 0.5
-            },
-            {
-                name: 'Plogrina B.',
-                alias: 'Plogrina Bittermold',
-                features: ['Rubbery', 'Slime Form']
-            },
-            {
-                name: 'Skrell',
-                features: ['Clever'],
-                regex: 'LL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(C.*?)\\s+A\\s'
-            },
-            {
-                name: 'The Willowman',
-                features: ['Fearless', 'Terrify', 'Waking Nightmare'],
-                regex: '\\s+(A pa.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(F.*?)\\s+(T.*?)\\s+(W.*s\.)',
-                size: 2
-            }
-        ]
-    }]
+    // [48, {
+    //     exclude: ' THE WILLOWMAN',
+    //     entries: [
+    //         {
+    //             name: 'Tar Bat',
+    //             features: ['Pyro'],
+    //             size: 0.5
+    //         },
+    //         {
+    //             name: 'Plogrina B.',
+    //             alias: 'Plogrina Bittermold',
+    //             features: ['Rubbery', 'Slime Form']
+    //         },
+    //         {
+    //             name: 'Skrell',
+    //             features: ['Clever'],
+    //             regex: 'LL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(C.*?)\\s+A\\s'
+    //         },
+    //         {
+    //             name: 'The Willowman',
+    //             features: ['Fearless', 'Terrify', 'Waking Nightmare'],
+    //             regex: '\\s+(A pa.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(F.*?)\\s+(T.*?)\\s+(W.*s\\.)',
+    //             size: 2
+    //         }
+    //     ]
+    // }]
 ])
 const CURSED_SCROLL_2 = new Map([
     [40, {
@@ -1610,7 +1645,7 @@ const CURSED_SCROLL_2 = new Map([
             {
                 name: 'The Scourge',
                 features: ['Stormblood', 'Corruption', 'Lightning Breath', 'Mirage'],
-                regex: '\\s+(The\\s.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(S.*?)\\s+(C.*?)\\s+(L.*?)\\s+(M.*s\.)',
+                regex: '\\s+(The\\s.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(S.*?)\\s+(C.*?)\\s+(L.*?)\\s+(M.*s\\.)',
                 size: 3
             }
         ]
