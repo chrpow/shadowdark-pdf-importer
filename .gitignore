@@ -33,11 +33,11 @@ packages/
 /.vscode
 /build
 /dist
+/pdfjs-dist
 /node_modules
 /dist_foundry
 /foundryconfig.json
 #ignore PDF
 *.pdf
-/pdfjs-dist/*
 *.txt
 parser.js
