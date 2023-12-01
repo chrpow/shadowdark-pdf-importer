@@ -15,6 +15,7 @@
     ],
     "scripts": [],
     "esmodules": [
+        "importer.mjs",
         "shadowdark-pdf-importer.mjs",
         "vendor.mjs"
     ],

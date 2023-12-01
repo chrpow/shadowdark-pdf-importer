@@ -248,7 +248,8 @@ const RULEBOOK_MONSTERS = new Map([
                 },
                 {
                     name: "Crab, Giant",
-                    regex: "CRAB,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+                    regex: "CRAB,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
+                    alias: "Giant Crab"
                 }
             ]
         }

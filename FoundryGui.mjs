@@ -8,7 +8,7 @@ var __defProp2 = Object.defineProperty, __name2 = __name((target, value) =>
     "__name");
 
 import { c as compare } from "./vendor.mjs";
-import Foo from "./importer.mjs";
+import Importer from "./importer.mjs";
 
 const minimumVersion = "1.5.1", _PdfImporter = class {
     static { __name(this, "_PdfImporter") } constructor() {
@@ -66,7 +66,7 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
                         if (file) {
                             file.arrayBuffer().then(buff => {
                                 let x = new Uint8Array(buff);
-                                const imp = new Foo();
+                                const imp = new Importer();
                                 imp.getTextFromPDF(x)//, pageNumber)
                             });
                         }
