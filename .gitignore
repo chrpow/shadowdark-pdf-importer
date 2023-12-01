@@ -39,5 +39,6 @@ packages/
 #ignore PDF
 *.pdf
 node_modules/*
+pdfjs-dist/*
 *.txt
 parser.js
