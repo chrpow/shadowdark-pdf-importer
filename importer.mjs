@@ -13,7 +13,7 @@ export default class Importer {
         const bookInfo = await this.#identifyRulebook(doc);
 
         for (const [pageNumber, info] of bookInfo.map) {
-            console.log(`Parsing Page ${pageNumber}`);
+            console.log(`Shadowdark PDF Importer | Parsing Page ${pageNumber}`);
 
             const excludePattern = info?.exclude
                 ? new RegExp(info.exclude)
@@ -124,7 +124,7 @@ export default class Importer {
                             ]);
                         }
                     }
-                    console.log(`    Imported ${monster.name} successfully.`)
+                    console.log(`Shadowdark PDF Importer | Imported ${monster.name} successfully.`)
                 } catch {
                     ui.notifications.error(
                         `Failed to import ${monster.name}. Check the PDF file or submit an issue on Github if this error persists.`

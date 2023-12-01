@@ -2,12 +2,8 @@
     "id": "shadowdark-pdf-importer",
     "title": "Shadowdark PDF Importer",
     "description": "",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "authors": [
-        {
-            "name": "fryguy",
-            "discord": "fryguy#3851"
-        },
         {
             "name": "chrpow",
             "url": "https://github.com/chrpow"
