@@ -60,14 +60,11 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
                         if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
                        
                         const file = form.data.files[0]
-                        // const pageNumber = form.page.value
-                        console.log(file)
-                        // console.log(pageNumber)
                         if (file) {
                             file.arrayBuffer().then(buff => {
                                 let x = new Uint8Array(buff);
                                 const imp = new Importer();
-                                imp.getTextFromPDF(x)//, pageNumber)
+                                imp.getTextFromPDF(x)
                             });
                         }
                     }

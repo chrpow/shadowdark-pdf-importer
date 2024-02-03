@@ -4,6 +4,7 @@ import { BOOKS, MODULE } from "./constants.js";
 export default class Importer {
     constructor() { }
     async getTextFromPDF(file) {
+        const blocks = []
         this.useAlias = this.#getSetting("useAlias");
         this.useSizeData = this.#getSetting("useSizeData");
 
@@ -27,7 +28,10 @@ export default class Importer {
             const text = strings
                 .join(" ")
                 .replace(/\s\s+/g, " ")
+                .replace('- ', '-')
                 .replace(excludePattern, "");
+
+           
 
             monsters.forEach(async (monster, index) => {
                 try {
@@ -86,6 +90,7 @@ export default class Importer {
                         }
 
                         const monsterText = m.join("\n\n");
+                        blocks.push(monsterText)
 
                         const options = {};
                         if (this.useSizeData) options.size = monster.size;
@@ -132,6 +137,10 @@ export default class Importer {
                 }
             });
         }
+        // Split the JSON string into lines
+        const monsters = blocks.join('\n--------------\n')
+        let fileName = `${bookInfo.checkText.replace(' ', '_')}.txt`;
+        await this.#saveDataToFile(monsters, "text/plain", fileName);
     }
 
     async #identifyRulebook(doc) {
@@ -170,4 +179,17 @@ export default class Importer {
         }
         return value;
     }
+
+    async #saveDataToFile(content, contentType, fileName) {
+        const a = document.createElement('a');
+        const file = new Blob([content], { type: contentType });
+
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+
+        URL.revokeObjectURL(a.href);
+    }
+
+
 }

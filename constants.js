@@ -1,7 +1,7 @@
 export const MODULE = {
     ID: "shadowdark-pdf-importer"
 };
-const RULEBOOK_MONSTERS = new Map([
+const CORE_RULEBOOK = new Map([
     [
         194,
         {
@@ -2096,7 +2096,7 @@ export const BOOKS = new Map([
             checkPage: 332,
             checkText: "ShadowDark RPG Core Rulebook",
             offset: 4,
-            map: RULEBOOK_MONSTERS
+            map: CORE_RULEBOOK
         }
     ],
     [
