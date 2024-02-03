@@ -140,7 +140,7 @@ export default class Importer {
         // Split the JSON string into lines
         const monsters = blocks.join('\n--------------\n')
         let fileName = `${bookInfo.checkText.replace(' ', '_')}.txt`;
-        await this.#saveDataToFile(monsters, "text/plain", fileName);
+        // await this.#saveDataToFile(monsters, "text/plain", fileName);
     }
 
     async #identifyRulebook(doc) {

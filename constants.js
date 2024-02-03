@@ -2097,24 +2097,24 @@ const LFTD_1 = new Map([
             entries: [
                 {
                     name: "Devil, Marbas",
-                    regex: "", 
+                    regex: "DEVIL, MARBAS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+E", 
                     alias: "Marbas"
                 },
                 {
                     name: "Elemental, Steam",
-                    regex: "DRAGONFLY\\sCULTIST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DRAGONFLY,\\sGIANT",
+                    regex: "ELEMENTAL, STEAM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(V.*?)\\s+G",
                     alias: "Steam Elemental",
                     size: 2
                 },
                 {
                     name: "Golem, Amber",
-                    regex: "",
+                    regex: "GOLEM, AMBER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(G.*?)\\s+(F.*?)\\s+K",
                     alias: "Amber Golem",
                     size: 2
                 },
                 {
                     name: "Krixi Pigfoggle",
-                    regex: ")",
+                    regex: "KRIXI PIGFOGGLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(Sl.*)",
                 }
             ]
         }
@@ -2125,15 +2125,15 @@ const LFTD_1 = new Map([
             entries: [
                 {
                     name: "Living Rug",
-                    regex: ""
+                    regex: "LIVING RUG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+W"
                 },
                 {
                     name: "Wittan",
-                    regex: ""
+                    regex: "WITTAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(In.*?)\\s+(F.*?)\\s+Y"
                 },
                 {
                     name: "Yithian",
-                    regex: ""
+                    regex: "YITHIAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*)"
                 },
             ]
         }
@@ -2144,11 +2144,17 @@ const LFTD_1 = new Map([
             entries: [
                 {
                     name: "Clockwork Soldier",
-                    regex: ""
+                    regex: "CLOCKWORK SOLDIER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(W.*?)\\s+H",
+                    replace: {
+                        "3* s": "3 s",
+                        "3* c": "3 c",
+                        "r*": "r",
+                        "1:": "1: [4 = #ATK 3, MV double near], [3 = #ATK 2, MV near], [2 = #ATK 1, MV close], [1 = #ATK 0, MV none]"
+                    }
                 },
                 {
                     name: "Hedrone",
-                    regex: "",
+                    regex: "HEDRONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(P.*?)\\s+MO",
                     size: 0.5
                 }
             ]
@@ -2160,7 +2166,112 @@ const LFTD_1 = new Map([
             entries: [
                 {
                     name: "Tindalos",
-                    regex: "XX"
+                    regex: "TINDALOS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+(A.*)"
+                }
+            ]
+        }
+    ]
+]);
+const LFTD_2 = new Map([
+    [
+        36,
+        {
+            entries: [
+                {
+                    name: "Count Brasov",
+                    regex: "COUNT BRASOV\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(Ch.*?)\\s+(E.*?)\\s+(F.*?)\\s+(G.*?)\\s+(M.*?)\\s+(Al.*)"
+                }
+            ]
+        }
+    ],
+    [
+        37,
+        {
+            entries: [
+                {
+                    name: "Duchess Dragomir",
+                    regex: "DUCHESS DRAGOMIR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+(P.*?)\\s+(T.*?)\\s+(E.*?)\\s+(Fl.*?)\\s+(N.*?)\\s+(Sh.*?)\\s+(Si.*?)\\s+(Sk.*?)\\s+(W.*)"
+                }
+            ]
+        }
+    ],
+    [
+        62,
+        {
+            entries: [
+                {
+                    name: "Capcaun",
+                    regex: "CAPCAUN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(T.*?)\\s+M",
+                    size: 2
+                },
+                {
+                    name: "Martolea",
+                    regex: "MARTOLEA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(A.*?)\\s+MU"
+                },
+                {
+                    name: "Muma",
+                    regex: "MUMA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*?)\\s+(L.*?)\\s+(For.*)\\s+N"
+                }
+            ]
+        }
+    ],
+    [
+        63,
+        {
+            entries: [
+                {
+                    name: "Smey",
+                    regex: "SMEY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire B.*?)\\s+(S.*?)\\s+S",
+                    size: 2
+                },
+                {
+                    name: "Smeyick",
+                    regex: "SMEYICK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+S"
+                },
+                {
+                    name: "Samca",
+                    regex: "SAMCA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+(F.*?)\\s+S",
+                    size: 2
+                },
+                {
+                    name: "Slayer",
+                    regex: "SLAYER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+6"
+                }
+            ]
+        }
+    ],
+    [
+        64,
+        {
+            entries: [
+                {
+                    name: "Mesmer",
+                    regex: "MESMER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(V.*?)\\s+MO"
+                },
+                {
+                    name: "Moroi",
+                    regex: "MOROI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(In.*?)\\s+(S.*?)\\s+(Gh.*?)\\s+VA"
+                }
+            ]
+        }
+    ],
+    [
+        65,
+        {
+            entries: [
+                {
+                    name: "Pricolici",
+                    regex: "PRICOLICI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(S.*?)\\s+ST"
+                },
+                {
+                    name: "Stingbat, Vampire",
+                    regex: "STINGBAT, VAMPIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(Su.*?)\\s+TH",
+                    alias: "Vampire Stingbat",
+                    size: 0.5
+                },
+                {
+                    name: "Thrall",
+                    regex: "THRALL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+VA"
                 }
             ]
         }
@@ -2252,9 +2363,18 @@ export const BOOKS = new Map([
         "Letters from the Dark Vol. I: Out of Time",
         {
             checkPage: 1,
-            checkText: "SDFLSDF",
+            checkText: "D ESIGNED AND W RITTEN BY C HRIS P OWELL L ETTERS FROM THE D ARK V OL . I: O UT OF T IME",
             offset:0,
             map: LFTD_1
+        }
+    ],
+    [
+        "Letters from the Dark Vol. II: Slayer's Moon",
+        {
+            checkPage: 1,
+            checkText: "D ESIGNED AND W RITTEN BY C HRIS P OWELL D ESIGNED AND W RITTEN BY C HRIS P OWELL L ETTERS FROM THE D ARK V OL . II: S LAYER ’ S M OON",
+            offset:0,
+            map: LFTD_2
         }
     ]
 ]);
