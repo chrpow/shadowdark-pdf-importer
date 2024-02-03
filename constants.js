@@ -2102,7 +2102,7 @@ const LFTD_1 = new Map([
                 },
                 {
                     name: "Elemental, Steam",
-                    regex: "ELEMENTAL, STEAM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+G",
+                    regex: "ELEMENTAL, STEAM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(V.*?)\\s+G",
                     alias: "Steam Elemental",
                     size: 2
                 },
