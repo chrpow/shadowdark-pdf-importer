@@ -2089,6 +2089,83 @@ const CONCEALED_ABBEY = new Map([
         }
     ]
 ]);
+
+const LFTD_1 = new Map([
+    [
+        44,
+        {
+            entries: [
+                {
+                    name: "Devil, Marbas",
+                    regex: "", 
+                    alias: "Marbas"
+                },
+                {
+                    name: "Elemental, Steam",
+                    regex: "DRAGONFLY\\sCULTIST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DRAGONFLY,\\sGIANT",
+                    alias: "Steam Elemental",
+                    size: 2
+                },
+                {
+                    name: "Golem, Amber",
+                    regex: "",
+                    alias: "Amber Golem",
+                    size: 2
+                },
+                {
+                    name: "Krixi Pigfoggle",
+                    regex: ")",
+                }
+            ]
+        }
+    ],
+    [
+        45,
+        {
+            entries: [
+                {
+                    name: "Living Rug",
+                    regex: ""
+                },
+                {
+                    name: "Wittan",
+                    regex: ""
+                },
+                {
+                    name: "Yithian",
+                    regex: ""
+                },
+            ]
+        }
+    ],
+    [
+        46,
+        {
+            entries: [
+                {
+                    name: "Clockwork Soldier",
+                    regex: ""
+                },
+                {
+                    name: "Hedrone",
+                    regex: "",
+                    size: 0.5
+                }
+            ]
+        }
+    ],
+    [
+        47,
+        {
+            entries: [
+                {
+                    name: "Tindalos",
+                    regex: "XX"
+                }
+            ]
+        }
+    ]
+]);
 export const BOOKS = new Map([
     [
         "Shadowdark RPG Core Rulebook",
@@ -2169,6 +2246,15 @@ export const BOOKS = new Map([
             checkText: "The Concealed Abbey of the Dragonfly Horde",
             offset: 0,
             map: CONCEALED_ABBEY
+        }
+    ],
+    [
+        "Letters from the Dark Vol. I: Out of Time",
+        {
+            checkPage: 1,
+            checkText: "SDFLSDF",
+            offset:0,
+            map: LFTD_1
         }
     ]
 ]);
