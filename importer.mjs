@@ -31,8 +31,6 @@ export default class Importer {
                 .replace('- ', '-')
                 .replace(excludePattern, "");
 
-           
-
             monsters.forEach(async (monster, index) => {
                 try {
                     const pattern = [];
