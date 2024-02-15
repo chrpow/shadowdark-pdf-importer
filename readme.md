@@ -1,4 +1,4 @@
-#Shadowdark PDF Importer
+# Shadowdark PDF Importer
 
 If you like Token Action HUD Shadowdark, consider supporting me by purchasing one of my [Shadowdark products](https://preview.drivethrurpg.com/en/publisher/26600/chris-powell).
 
@@ -15,4 +15,4 @@ Step 3: Select a supported Shadowdark PDF in your file explorer, then click "Imp
 
 That's it!
 
-"Shadowdark PDF Importer is an independent product published under the Shadowdark RPG Third-Party License and is not affiliated with The Arcane Library, LLC. Shadowdark RPG © 2023 The Arcane Library, LLC."
+Shadowdark PDF Importer is an independent product published under the Shadowdark RPG Third-Party License and is not affiliated with The Arcane Library, LLC. Shadowdark RPG © 2023 The Arcane Library, LLC.
