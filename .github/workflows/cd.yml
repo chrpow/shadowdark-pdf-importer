@@ -36,7 +36,7 @@ jobs:
     - run: npm run build
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip -r ./module.zip module.json readme.md LICENSE languages/ scripts/shadowdark-pdf-importer.min.js styles/
+    - run: zip -r ./module.zip .
 
     # Create a release for this specific version
     - name: Update Release with Files
@@ -51,38 +51,3 @@ jobs:
         artifacts: "./module.json, ./module.zip"
         tag: ${{ github.event.release.tag_name }}
         body: ${{ github.event.release.body }}
-
-
-# name: shadowdark-pdf-importer CD
-
-# on:
-#   push:
-#     branches: [release]
-#   workflow_dispatch:
-
-# jobs:
-#   release:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v3
-
-#       - name: Update Manifest
-#         run: |
-#           SYSTEM_VERSION=$(grep -oP '(?<="version": ")[^"]+' shadowdark-pdf-importer/module.json | tr -d '\n')
-#           echo "systemVersion=$SYSTEM_VERSION" >> $GITHUB_ENV
-
-#       - name: Zip Files
-#         run: zip shadowdark-pdf-importer.zip -r shadowdark-pdf-importer
-
-#       - name: Create Version Release
-#         id: create_version_release
-#         uses: ncipollo/release-action@v1
-#         with:
-#           name: ${{ env.systemVersion }}
-#           allowUpdates: false
-#           draft: false
-#           prerelease: false
-#           token: ${{ secrets.GITHUB_TOKEN }}
-#           artifacts: "./shadowdark-pdf-importer/module.json,./shadowdark-pdf-importer.zip"
-#           tag: ${{ env.systemVersion }}
