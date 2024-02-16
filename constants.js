@@ -578,7 +578,7 @@ const CORE_RULEBOOK = new Map([
                 },
                 {
                     name: "Elemental, Air (Greater)",
-                    regex: "(A .*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
+                    regex: "(A h.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
                     alias: "Greater Air Elemental",
                     replace: {
                         "29/42": "42",
