@@ -48,7 +48,7 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
 
     async importFromPDFDialog() {
         new Dialog({
-            title: "Import PDF (version 0.0.1)",
+            title: "Import PDF (version 0.0.6)",
             content: await renderTemplate("modules/shadowdark-pdf-importer/import-window.html", {}),
             buttons: {
                 import: {

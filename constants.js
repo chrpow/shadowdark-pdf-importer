@@ -538,7 +538,7 @@ const CORE_RULEBOOK = new Map([
             entries: [
                 {
                     name: "Elemental, Air (Lesser)",
-                    regex: "(A .*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
+                    regex: "(A h.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
                     alias: "Lesser Air Elemental",
                     replace: {
                         "29/42": "29",
@@ -2279,7 +2279,7 @@ const LFTD_2 = new Map([
 ]);
 export const BOOKS = new Map([
     [
-        "Shadowdark RPG Core Rulebook",
+        "Shadowdark RPG (Core Rulebook)",
         {
             checkPage: 332,
             checkText: "ShadowDark RPG Core Rulebook",
