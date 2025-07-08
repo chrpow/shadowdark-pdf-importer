@@ -38,8 +38,15 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
     hookImportButton() {
         Hooks.on("renderSettings", (app, html, data) => {
             console.log("Shadowdark PDF Importer | Adding pdf import button to settings tab");
-            const importButton = $('<div><button class="bestiary-browser-btn"><i class="fa-solid fa-book-skull"></i> Shadowdark PDF Importer</button></div>');
-            game.user.isGM && html.find("ul#game-details").after(importButton), importButton.click(ev => {
+            let importButton = $('<div><button class="bestiary-browser-btn"><i class="fa-solid fa-book-skull"></i> Shadowdark PDF Importer</button></div>');
+            let findStr = "ul#game-details";
+            
+            if (game.version.startsWith("13.")) {
+                findStr = ".modules";
+                importButton = $('<button type="button"><i class="fa-solid fa-book-skull"></i> Shadowdark PDF Importer</button>');
+            }
+            
+            game.user.isGM && $(html).find(findStr).after(importButton), importButton.click(ev => {
                 if (ev.preventDefault(), !compare(game.system.version, minimumVersion, ">=")) return ui.notifications.error(`You need to be using a version of the Shadowdark system at least ${minimumVersion}. You are only using version ${game.system.version}!`);
                 this.importFromPDFDialog()
             })

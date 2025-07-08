@@ -18,7 +18,7 @@
     "flags": {},
     "compatibility": {
         "minimum": "11",
-        "verified": "11.315"
+        "verified": "13.346"
     },
     "relationships": {
         "systems": [
