@@ -78,8 +78,8 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
                 },
                 no: { icon: '<i class="fas fa-times"></i>', label: "Cancel" },
 				dev: {
-					icon : '<i class="fas fa-times"></i>',
-					label: "dev",
+					icon : '<i class="fa-solid fa-square-binary"></i>',
+					label: "Developer Import",
 					callback: async html => {
                         if (html instanceof HTMLElement) return;
                         const form = html.find("form")[0];
