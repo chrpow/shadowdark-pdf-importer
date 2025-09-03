@@ -30,6 +30,14 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
                     default: true,
                     type: Boolean
                 }),
+				game.settings.register("shadowdark-pdf-importer", "devMode", {
+                    name: "Enable Developer Mode",
+                    hint: "Adds a button to print PDF output directly to the console. Useful for writing custom regex expressions.",
+                    scope: "world",
+                    config: !0,
+                    default: false,
+                    type: Boolean
+                }),
                 game.pdfImporter = {
                     import: () => this.importFromPDFDialog()
                 }
@@ -54,48 +62,50 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
     }
 
     async importFromPDFDialog() {
+		const buttons = {};
+		buttons.import = {
+			icon: '<i class="fas fa-file-import"></i>',
+			label: "Import PDF",
+			callback: async html => {
+				if (html instanceof HTMLElement) return;
+				const form = html.find("form")[0];
+				if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
+				
+				const file = form.data.files[0]
+				if (file) {
+					file.arrayBuffer().then(buff => {
+						let x = new Uint8Array(buff);
+						const imp = new Importer();
+						imp.getTextFromPDF(x)
+					});
+				}
+			}
+		}
+		buttons.no = { icon: '<i class="fas fa-times"></i>', label: "Cancel" }
+		if (game.settings.get("shadowdark-pdf-importer", "devMode")) {
+			buttons.dev= {
+				icon : '<i class="fa-solid fa-square-binary"></i>',
+				label: "Developer Import",
+				callback: async html => {
+					if (html instanceof HTMLElement) return;
+					const form = html.find("form")[0];
+					if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
+					
+					const file = form.data.files[0]
+					if (file) {
+						file.arrayBuffer().then(buff => {
+							let x = new Uint8Array(buff);
+							const imp = new Importer();
+							imp.printDev(x)
+						});
+					}
+				}
+			}
+		};
         new Dialog({
             title: "Import PDF (version 0.0.6)",
             content: await renderTemplate("modules/shadowdark-pdf-importer/import-window.html", {}),
-            buttons: {
-                import: {
-                    icon: '<i class="fas fa-file-import"></i>',
-                    label: "Import PDF",
-                    callback: async html => {
-                        if (html instanceof HTMLElement) return;
-                        const form = html.find("form")[0];
-                        if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
-                       
-                        const file = form.data.files[0]
-                        if (file) {
-                            file.arrayBuffer().then(buff => {
-                                let x = new Uint8Array(buff);
-                                const imp = new Importer();
-                                imp.getTextFromPDF(x)
-                            });
-                        }
-                    }
-                },
-                no: { icon: '<i class="fas fa-times"></i>', label: "Cancel" },
-				dev: {
-					icon : '<i class="fa-solid fa-square-binary"></i>',
-					label: "Developer Import",
-					callback: async html => {
-                        if (html instanceof HTMLElement) return;
-                        const form = html.find("form")[0];
-                        if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
-                       
-                        const file = form.data.files[0]
-                        if (file) {
-                            file.arrayBuffer().then(buff => {
-                                let x = new Uint8Array(buff);
-                                const imp = new Importer();
-                                imp.printDev(x)
-                            });
-                        }
-                    }
-				}
-            },
+            buttons: buttons,
             default: "import"
         },
             {
