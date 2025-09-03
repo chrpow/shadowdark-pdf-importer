@@ -46,7 +46,7 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
                 importButton = $('<button type="button"><i class="fa-solid fa-book-skull"></i> Shadowdark PDF Importer</button>');
             }
             
-            game.user.isGM && $(html).find(findStr).after(importButton), importButton.click(ev => {
+            game.user.isGM && html.find(findStr).after(importButton), importButton.click(ev => {
                 if (ev.preventDefault(), !compare(game.system.version, minimumVersion, ">=")) return ui.notifications.error(`You need to be using a version of the Shadowdark system at least ${minimumVersion}. You are only using version ${game.system.version}!`);
                 this.importFromPDFDialog()
             })
@@ -76,7 +76,25 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
                         }
                     }
                 },
-                no: { icon: '<i class="fas fa-times"></i>', label: "Cancel" }
+                no: { icon: '<i class="fas fa-times"></i>', label: "Cancel" },
+				dev: {
+					icon : '<i class="fas fa-times"></i>',
+					label: "dev",
+					callback: async html => {
+                        if (html instanceof HTMLElement) return;
+                        const form = html.find("form")[0];
+                        if (!form.data.files.length) return ui.notifications.error("You did not upload a data file!");
+                       
+                        const file = form.data.files[0]
+                        if (file) {
+                            file.arrayBuffer().then(buff => {
+                                let x = new Uint8Array(buff);
+                                const imp = new Importer();
+                                imp.printDev(x)
+                            });
+                        }
+                    }
+				}
             },
             default: "import"
         },
