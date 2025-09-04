@@ -2,7 +2,7 @@ Manifest: https://github.com/chrpow/shadowdark-pdf-importer/releases/latest/down
 
 # Shadowdark PDF Importer
 
-If you like Shadowdark PDF Importer, consider supporting me by purchasing one of my [Shadowdark products](https://preview.drivethrurpg.com/en/publisher/26600/chris-powell).
+If you like Shadowdark PDF Importer, consider supporting me by purchasing one of my [Shadowdark products](https://lettersfromthedark.com/).
 
 This module will automatically generate monsters in FoundryVTT from a Shadowdark Rulebook PDF.
 
