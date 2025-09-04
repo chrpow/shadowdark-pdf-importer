@@ -3,6 +3,34 @@ import { BOOKS, MODULE } from "./constants.js";
 
 export default class Importer {
 	constructor() { }
+
+	async printDev(file) {
+		const doc = await getDocument(file).promise;
+		var pageNumber = 1;
+		while (true) {
+			try {
+			console.log(`Page ${pageNumber}`);
+
+			const page = await doc.getPage(pageNumber);
+			const content = await page.getTextContent();
+			const strings = content.items.map(function (item) {
+				return item.str;
+			});
+			const text = strings
+				.join(" ")
+				.replace(/\s\s+/g, " ")
+				.replace('- ', '-')
+			
+			console.log(text)
+			pageNumber += 1;
+			}
+			catch {
+				console.log('End of file')
+				break;
+			}
+		}
+	}
+
 	async getTextFromPDF(file) {
 		const blocks = []
 		const ids = []
@@ -34,6 +62,8 @@ export default class Importer {
 					.replace(/\s\s+/g, " ")
 					.replace('- ', '-')
 					.replace(excludePattern, "");
+
+				if (this.#getSetting("devMode")) console.log(text)
 
 				monsters.forEach(async (monster, index) => {
 					try {
@@ -84,14 +114,21 @@ export default class Importer {
 
 							m[0] = monster.name;
 
+							if (this.#getSetting("devMode")) console.log(m)
+
 							if (monster.replace) {
 								for (const target in monster.replace) {
 									const replacement = monster.replace[target];
 									m = m.map((s) => s.replace(target, replacement));
 								}
 							}
-
-							const monsterText = m.join("\n\n");
+							let monsterText = "";
+							if (m.length > 4) {
+								for (let i = 0; i < 3; i++) {
+									monsterText += m.shift() + "\n";
+								}
+							}
+							monsterText += m.join("\n\n");
 							blocks.push(monsterText)
 
 							const options = {};
@@ -145,7 +182,7 @@ export default class Importer {
 		}
 		await Promise.all(promiseArray)
 
-		console.log(ids)
+		if (this.#getSetting("devMode")) console.log(ids)
 
 		// Create a new folder
 		let folder = await this.#createFolder(book.title, "Actor")
@@ -197,17 +234,5 @@ export default class Importer {
 		}
 		return value;
 	}
-
-	async #saveDataToFile(content, contentType, fileName) {
-		const a = document.createElement('a');
-		const file = new Blob([content], { type: contentType });
-
-		a.href = URL.createObjectURL(file);
-		a.download = fileName;
-		a.click();
-
-		URL.revokeObjectURL(a.href);
-	}
-
-
 }
+

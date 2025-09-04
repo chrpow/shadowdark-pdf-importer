@@ -1,1716 +1,8 @@
 export const MODULE = {
 	ID: "shadowdark-pdf-importer"
 };
-const CORE_RULEBOOK = new Map([
-	[
-		194,
-		{
-			exclude: "Monster Statistics",
-			entries: [
-				{
-					name: "Aboleth",
-					regex: "ABOLETH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(T.*?)\\s+ACOLYTE",
-					size: 2
-				},
-				{
-					name: "Acolyte",
-					regex: "ACOLYTE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		195,
-		{
-			exclude: "ANGELS.*",
-			entries: [
-				{
-					name: "Angel, Seraph",
-					regex: "ANGEL,\\sSERAPH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ANGEL,\\sDOMINI",
-					alias: "Seraph"
-				},
-				{
-					name: "Angel, Domini",
-					regex: "ANGEL,\\sDOMINI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ANGEL,\\sPRINCIPI",
-					alias: "Domini Angel"
-				},
-				{
-					name: "Angel, Principi",
-					regex: "ANGEL,\\sPRINCIPI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+ARCHANGEL",
-					alias: "Principi Angel"
-				},
-				{
-					name: "Archangel",
-					regex: "ARCHANGEL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Cr.*)"
-				}
-			]
-		}
-	],
-	[
-		196,
-		{
-			entries: [
-				{
-					name: "Ape, Snow",
-					regex: "APE,\\sSNOW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+APE",
-					alias: "Snow Ape"
-				},
-				{
-					name: "Ape",
-					regex: "APE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Ankheg",
-					regex: "ANKHEG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Animated Armor",
-					regex: "ANIMATED\\sARMOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Apprentice",
-					regex: "APPRENTICE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*)"
-				}
-			]
-		}
-	],
-	[
-		197,
-		{
-			entries: [
-				{
-					name: "Archmage",
-					regex: "ARCHMAGE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(Fi.*?)\\s+(F.*?)\\s+(M.*?)\\s+(V.*?)\\s+ASSASSIN"
-				},
-				{
-					name: "Assassin",
-					regex: "ASSASSIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+AZER"
-				},
-				{
-					name: "Azer",
-					regex: "AZER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BADGER"
-				},
-				{
-					name: "Badger",
-					regex: "BADGER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BANDIT"
-				},
-				{
-					name: "Bandit",
-					regex: "BANDIT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		198,
-		{
-			entries: [
-				{
-					name: "Basilisk",
-					regex: "BASILISK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BAT,\\sGIANT"
-				},
-				{
-					name: "Bat, Giant",
-					regex: "BAT,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					alias: "Giant Bat",
-					size: 2
-				},
-				{
-					name: "Bat, Swarm",
-					regex: "BAT,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					alias: "Bat Swarm"
-				},
-				{
-					name: "Bear, Brown",
-					regex: "BEAR,\\sBROWN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BEAR,\\sPOLAR",
-					alias: "Brown Bear",
-					size: 2,
-					replace: {
-						"b)": "b)," // The comma is missing in the book text
-					}
-				},
-				{
-					name: "Bear, Polar",
-					regex: "BEAR,\\sPOLAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+BEASTMAN",
-					alias: "Polar Bear",
-					size: 2
-				},
-				{
-					name: "Beastman",
-					regex: "BEASTMAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		199,
-		{
-			entries: [
-				{
-					name: "Berserker",
-					regex: "BERSERKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BOAR"
-				},
-				{
-					name: "Boar",
-					regex: "BOAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BLACK\\sPUDDING"
-				},
-				{
-					name: "Black Pudding",
-					regex: "BLACK\\sPUDDING\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+BRAIN\\sEATER",
-					size: 2
-				},
-				{
-					name: "Brain Eater",
-					regex: "BRAIN\\sEATER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+(M.*?)\\s+(M.*)"
-				}
-			]
-		}
-	],
-	[
-		200,
-		{
-			entries: [
-				{
-					name: "Bugbear",
-					regex: "BUGBEAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BULETTE"
-				},
-				{
-					name: "Bulette",
-					regex: "BULETTE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+CAMEL",
-					size: 2
-				},
-				{
-					name: "Camel",
-					regex: "CAMEL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Cave Brute",
-					regex: "CAVE\\sBRUTE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+CAVE\\sCREEPER",
-					size: 2
-				},
-				{
-					name: "Cave Creeper",
-					regex: "CAVE\\sCREEPER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		201,
-		{
-			entries: [
-				{
-					name: "Centaur",
-					size: 2
-				},
-				{
-					name: "Centipede, Giant",
-					features: ["Poison"],
-					alias: "Giant Centipede"
-				},
-				{
-					name: "Centipede, Swarm",
-					features: ["Poison"],
-					alias: "Centipede Swarm"
-				},
-				{
-					name: "Chimera",
-					features: ["Fire Breath"],
-					size: 2
-				},
-				{
-					name: "Chuul",
-					features: ["Grab"],
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		202,
-		{
-			entries: [
-				{
-					name: "Cloaker",
-					regex: "CLOAKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+COCKATRICE",
-					size: 2
-				},
-				{
-					name: "Cockatrice",
-					regex: "COCKATRICE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+COUATL"
-				},
-				{
-					name: "Couatl",
-					regex: "COUATL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(R.*?)\\s+CRAB,\\sGIANT"
-				},
-				{
-					name: "Crab, Giant",
-					regex: "CRAB,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Giant Crab"
-				}
-			]
-		}
-	],
-	[
-		203,
-		{
-			entries: [
-				{
-					name: "Crocodile",
-					regex: "CROCODILE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Cultist",
-					regex: "CULTIST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+CYCLOPS"
-				},
-				{
-					name: "Cyclops",
-					regex: "CYCLOPS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 3
-				},
-				{
-					name: "Darkmantle",
-					regex: "DARKMANTLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEEP\\sONE"
-				},
-				{
-					name: "Deep One",
-					regex: "DEEP\\sONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		204,
-		{
-			entries: [
-				{
-					name: "Demon, Balor",
-					regex: "DEMON,\\sBALOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(H.*?)\\s+DEMON,\\sGLABREZU",
-					alias: "Balor",
-					size: 3
-				},
-				{
-					name: "Demon, Glabrezu",
-					regex: "DEMON,\\sGLABREZU\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEMON,\\sDRETCH",
-					alias: "Glabrezu",
-					size: 2
-				},
-				{
-					name: "Demon, Dretch",
-					regex: "DEMON,\\sDRETCH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Dretch"
-				}
-			]
-		}
-	],
-	[
-		205,
-		{
-			entries: [
-				{
-					name: "Demon, Marilith",
-					regex: "DEMON,\\sMARILITH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEMON,\\sVROCK",
-					alias: "Marilith",
-					size: 2
-				},
-				{
-					name: "Demon, Vrock",
-					regex: "DEMON,\\sVROCK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)",
-					alias: "Vrock",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		206,
-		{
-			entries: [
-				{
-					name: "Archdevil",
-					regex: "ARCHDEVIL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(S.*?)\\s+DEVIL,\\sBARBED"
-				},
-				{
-					name: "Devil, Barbed",
-					regex: "DEVIL,\\sBARBED\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Barbed Devil"
-				}
-			]
-		}
-	],
-	[
-		207,
-		{
-			entries: [
-				{
-					name: "Devil, Cubi",
-					regex: "DEVIL,\\sCUBI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(Dr.*?)\\s+DEVIL,\\sERINYES",
-					alias: "Cubi"
-				},
-				{
-					name: "Devil, Erinyes",
-					regex: "DEVIL,\\sERINYES\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEVIL,\\sHORNED",
-					alias: "Erinyes"
-				},
-				{
-					name: "Devil, Horned",
-					regex: "DEVIL,\\sHORNED\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DEVIL,\\sIMP",
-					alias: "Horned Devil",
-					size: 2
-				},
-				{
-					name: "Devil, Imp",
-					regex: "DEVIL,\\sIMP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(P.*)",
-					alias: "Imp",
-					size: 0.5
-				}
-			]
-		}
-	],
-	[
-		208,
-		{
-			entries: [
-				{
-					name: "Pterodactyl",
-					regex: "PTERODACTYL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+TYRANNOSAURUS"
-				},
-				{
-					name: "Tyrannosaurus",
-					regex: "TYRANNOSAURUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 3
-				},
-				{
-					name: "Triceratops",
-					regex: "TRICERATOPS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BRACHIOSAURUS",
-					size: 3
-				},
-				{
-					name: "Brachiosaurus",
-					regex: "BRACHIOSAURUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 4
-				},
-				{
-					name: "Plesiosaurus",
-					regex: "PLESIOSAURUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Velociraptor",
-					regex: "VELOCIRAPTOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					size: 0.5
-				}
-			]
-		}
-	],
-	[
-		209,
-		{
-			entries: [
-				{
-					name: "Djinni",
-					regex: "DJINNI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(W.*?)\\s+(W.*?)\\s+DOPPELGANGER",
-					size: 2
-				},
-				{
-					name: "Doppelganger",
-					regex: "DOPPELGANGER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*)"
-				}
-			]
-		}
-	],
-	[
-		210,
-		{
-			entries: [
-				{
-					name: "Dragon, Desert",
-					regex: "DRAGON,\\sDESERT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+(M.*?)\\s+DRAGON,\\sFIRE",
-					alias: "Desert Dragon",
-					size: 3
-				},
-				{
-					name: "Dragon, Fire",
-					regex: "DRAGON,\\sFIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire B.*)",
-					alias: "Fire Dragon",
-					size: 3
-				}
-			]
-		}
-	],
-	[
-		211,
-		{
-			entries: [
-				{
-					name: "Dragon, Forest",
-					regex: "DRAGON,\\sFOREST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Po.*?)\\s+DRAGON,\\sFROST",
-					alias: "Forest Dragon",
-					size: 3
-				},
-				{
-					name: "Dragon, Frost",
-					regex: "DRAGON,\\sFROST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+DRAGON,\\sSEA",
-					alias: "Frost Dragon",
-					size: 3
-				},
-				{
-					name: "Dragon, Sea",
-					regex: "DRAGON,\\sSEA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(W.*?)\\s+DRAGON,\\sSWAMP",
-					alias: "Sea Dragon",
-					size: 3
-				},
-				{
-					name: "Dragon, Swamp",
-					regex: "DRAGON,\\sSWAMP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Swamp Dragon",
-					size: 3
-				}
-			]
-		}
-	],
-	[
-		212,
-		{
-			exclude: "212.*goddess.",
-			entries: [
-				{
-					name: "Drow",
-					regex: "DROW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+DROW,\\sPRIESTESS"
-				},
-				{
-					name: "Drow, Priestess",
-					regex: "DROW,\\sPRIESTESS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+(S.*?)\\s+(Su.*?)\\s+(W.*?)\\s+DROW,\\sDRIDER",
-					alias: "Drow Priestess"
-				},
-				{
-					name: "Drow, Drider",
-					regex: "DROW,\\sDRIDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)",
-					alias: "Drider",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		213,
-		{
-			entries: [
-				{
-					name: "Druid",
-					regex: "DRUID\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(I.*?)\\s+(Su.*?)\\s+(T.*?)\\s+DRYAD"
-				},
-				{
-					name: "Dryad",
-					regex: "DRYAD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+DUERGAR"
-				},
-				{
-					name: "Duergar",
-					regex: "DUERGAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+(S.*)"
-				}
-			]
-		}
-	],
-	[
-		214,
-		{
-			entries: [
-				{
-					name: "Dung Beetle, Giant",
-					regex: "DUNG\\sBEETLE, GIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+EFREETI",
-					alias: "Giant Dung Beetle"
-				},
-				{
-					name: "Efreeti",
-					regex: "EFREETI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(W.*?)\\s+(W.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		215,
-		{
-			entries: [
-				{
-					name: "Elemental, Air (Lesser)",
-					regex: "(A h.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
-					alias: "Lesser Air Elemental",
-					replace: {
-						"29/42": "29",
-						"2d6/3d6": "2d6",
-						"6/9": "6"
-					}
-				},
-				{
-					name: "Elemental, Earth (Lesser)",
-					regex: "(A t.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(A.*?)\\sE",
-					alias: "Lesser Earth Elemental",
-					replace: {
-						"31/44": "31",
-						"2d6/3d6": "2d6",
-						"6/9": "6"
-					}
-				},
-				{
-					name: "Elemental, Fire (Lesser)",
-					regex: "(A r.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(I.*?)\\sE",
-					alias: "Lesser Fire Elemental",
-					replace: {
-						"30/43": "30",
-						"2d6/3d6": "2d6",
-						"6/9": "6"
-					}
-				},
-				{
-					name: "Elemental, Water (Lesser)",
-					regex: "(A c.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
-					alias: "Lesser Water Elemental",
-					replace: {
-						"29/42": "29",
-						"2d6/3d6": "2d6",
-						"6/9": "6"
-					}
-				},
-				{
-					name: "Elemental, Air (Greater)",
-					regex: "(A h.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
-					alias: "Greater Air Elemental",
-					replace: {
-						"29/42": "42",
-						"2d6/3d6": "3d6",
-						"6/9": "9"
-					},
-					size: 2
-				},
-				{
-					name: "Elemental, Earth (Greater)",
-					regex: "(A t.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(A.*?)\\sE",
-					alias: "Greater Earth Elemental",
-					replace: {
-						"31/44": "44",
-						"2d6/3d6": "3d6",
-						"6/9": "9"
-					},
-					size: 2
-				},
-				{
-					name: "Elemental, Fire (Greater)",
-					regex: "(A r.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(I.*?)\\sE",
-					alias: "Greater Fire Elemental",
-					replace: {
-						"30/43": "43",
-						"2d6/3d6": "3d6",
-						"6/9": "9"
-					},
-					size: 2
-				},
-				{
-					name: "Elemental, Water (Greater)",
-					regex: "(A c.*?)\\s+(AC.*?LV.*?\\d\\/\\d).*?\\s(I.*?)\\s(W.*?)\\sE",
-					alias: "Greater Water Elemental",
-					replace: {
-						"29/42": "42",
-						"2d6/3d6": "3d6",
-						"6/9": "9"
-					},
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		216,
-		{
-			entries: [
-				{
-					name: "Elephant",
-					regex: "ELEPHANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ELF",
-					size: 3
-				},
-				{
-					name: "Elf",
-					regex: "ELF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ETTERCAP"
-				},
-				{
-					name: "Ettercap",
-					regex: "ETTERCAP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+FAIRY"
-				},
-				{
-					name: "Fairy",
-					regex: "FAIRY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+FROG,\\sGIANT",
-					size: 0.5
-				},
-				{
-					name: "Frog, Giant",
-					regex: "FROG,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GARGOYLE",
-					alias: "Giant Frog"
-				},
-				{
-					name: "Gargoyle",
-					regex: "GARGOYLE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		217,
-		{
-			entries: [
-				{
-					name: "Gelatinous Cube",
-					regex: "GELATINOUS\\sCUBE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*?)\\s+(T.*?)\\s+GHAST",
-					size: 2
-				},
-				{
-					name: "Ghast",
-					regex: "GHAST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(P.*?)\\s+GHOUL"
-				},
-				{
-					name: "Ghoul",
-					regex: "GHOUL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+GHOST"
-				},
-				{
-					name: "Ghost",
-					regex: "GHOST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(In.*?)\\s+(L.*?)\\s+(P.*)"
-				}
-			]
-		}
-	],
-	[
-		218,
-		{
-			entries: [
-				{
-					name: "Giant, Cloud",
-					regex: "GIANT,\\sCLOUD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GIANT,\\sFIRE",
-					alias: "Cloud Giant",
-					size: 3
-				},
-				{
-					name: "Giant, Fire",
-					regex: "GIANT,\\sFIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Fire Giant",
-					size: 3
-				}
-			]
-		}
-	],
-	[
-		219,
-		{
-			entries: [
-				{
-					name: "Giant, Frost",
-					regex: "GIANT,\\sFROST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GIANT,\\sSTONE",
-					alias: "Frost Giant",
-					size: 3
-				},
-				{
-					name: "Giant, Stone",
-					regex: "GIANT,\\sSTONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GIANT,\\sGOAT",
-					alias: "Stone Giant",
-					size: 3
-				},
-				{
-					name: "Giant, Goat",
-					regex: "GIANT,\\sGOAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					alias: "Goat Giant",
-					size: 3
-				},
-				{
-					name: "Giant, Storm",
-					regex: "GIANT,\\sSTORM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+GIANT,\\sHILL",
-					alias: "Storm Giant",
-					size: 3
-				},
-				{
-					name: "Giant, Hill",
-					regex: "GIANT,\\sHILL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					alias: "Hill Giant",
-					size: 3
-				}
-			]
-		}
-	],
-	[
-		220,
-		{
-			entries: [
-				{
-					name: "Gibbering Mouther",
-					regex: "GIBBERING\\sMOUTHER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+GLADIATOR"
-				},
-				{
-					name: "Gladiator",
-					regex: "GLADIATOR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Gnoll",
-					regex: "GNOLL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GNOME,\\sDEEP"
-				},
-				{
-					name: "Gnome, Deep",
-					regex: "GNOME,\\sDEEP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Deep Gnome"
-				}
-			]
-		}
-	],
-	[
-		221,
-		{
-			exclude: "221.*sorcery.",
-			entries: [
-				{
-					name: "Goblin",
-					regex: "GOBLIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GOBLIN,\\sBOSS"
-				},
-				{
-					name: "Goblin, Boss",
-					regex: "GOBLIN,\\sBOSS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GOBLIN,\\sSHAMAN",
-					alias: "Goblin Boss"
-				},
-				{
-					name: "Goblin, Shaman",
-					regex: "GOBLIN,\\sSHAMAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(Sk.*?)\\s+(St.*)",
-					alias: "Goblin Shaman"
-				}
-			]
-		}
-	],
-	[
-		222,
-		{
-			exclude: "222.*rituals.",
-			entries: [
-				{
-					name: "Golem, Clay",
-					regex: "GOLEM,\\sCLAY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+GOLEM,\\sFLESH",
-					alias: "Clay Golem",
-					size: 2
-				},
-				{
-					name: "Golem, Flesh",
-					regex: "GOLEM,\\sFLESH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+GOLEM,\\sIRON",
-					alias: "Flesh Golem"
-				},
-				{
-					name: "Golem, Iron",
-					regex: "GOLEM,\\sIRON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+GOLEM,\\sSTONE",
-					alias: "Iron Golem",
-					size: 2
-				},
-				{
-					name: "Golem, Stone",
-					regex: "GOLEM,\\sSTONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)",
-					alias: "Stone Golem",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		223,
-		{
-			entries: [
-				{
-					name: "Gorgon",
-					regex: "GORGON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+GORILLA",
-					size: 2
-				},
-				{
-					name: "Gorilla",
-					regex: "GORILLA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Gray Ooze",
-					regex: "GRAY\\sOOZE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+GRICK"
-				},
-				{
-					name: "Grick",
-					regex: "GRICK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*)"
-				}
-			]
-		}
-	],
-	[
-		224,
-		{
-			entries: [
-				{
-					name: "Griffon",
-					regex: "GRIFFON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Grimlow",
-					regex: "GRIMLOW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+GUARD",
-					size: 2
-				},
-				{
-					name: "Guard",
-					regex: "GUARD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				}
-			]
-		}
-	],
-	[
-		225,
-		{
-			exclude: "225.*woods.",
-			entries: [
-				{
-					name: "Hag, Weald",
-					regex: "HAG,\\sWEALD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+HAG,\\sNIGHT",
-					alias: "Weald Hag"
-				},
-				{
-					name: "Hag, Night",
-					regex: "HAG,\\sNIGHT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+HAG,\\sSEA",
-					alias: "Night Hag"
-				},
-				{
-					name: "Hag, Sea",
-					regex: "HAG,\\sSEA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*)",
-					alias: "Sea Hag"
-				}
-			]
-		}
-	],
-	[
-		226,
-		{
-			entries: [
-				{
-					name: "Harpy",
-					regex: "HARPY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HELL\\sHOUND"
-				},
-				{
-					name: "Hell Hound",
-					regex: "HELL\\sHOUND\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire B.*?)\\s+HIPPOGRIFF"
-				},
-				{
-					name: "Hippogriff",
-					regex: "HIPPOGRIFF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Hippopotamus",
-					regex: "HIPPOPOTAMUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		227,
-		{
-			entries: [
-				{
-					name: "Hobgoblin",
-					regex: "HOBGOBLIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HORSE"
-				},
-				{
-					name: "Horse",
-					regex: "HORSE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				// Hydra defaults to one head (LV 2, HP 11)
-				{
-					name: "Hydra",
-					regex: "(A t.*?)\\s+(AC.*?LV \\*)\\s+(H.*?)\\s+I",
-					replace: {
-						"HP *": "HP 11",
-						"LV *": "LV 2"
-					},
-					size: 3
-				},
-				{
-					name: "Invisible Stalker",
-					regex: "INVISIBLE\\sSTALKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+(T.*)"
-				}
-			]
-		}
-	],
-	[
-		228,
-		{
-			entries: [
-				{
-					name: "Jellyfish",
-					regex: "JELLYFISH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+KNIGHT",
-					size: 0.5
-				},
-				{
-					name: "Knight",
-					regex: "KNIGHT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+KOBOLD"
-				},
-				{
-					name: "Kobold",
-					regex: "KOBOLD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+KOBOLD,\\sSORCERER"
-				},
-				{
-					name: "Kobold, Sorcerer",
-					regex: "KOBOLD,\\sSORCERER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+(Spi.*)",
-					alias: "Kobold Sorcerer"
-				}
-			]
-		}
-	],
-	[
-		229,
-		{
-			entries: [
-				{
-					name: "Kraken",
-					regex: "KRAKEN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(L.*?)\\s+(Sto.*?)\\s+LEECH,\\sGIANT",
-					size: 4
-				},
-				{
-					name: "Leech, Giant",
-					regex: "LEECH,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Giant Leech",
-					size: 0.5
-				}
-			]
-		}
-	],
-	[
-		230,
-		{
-			entries: [
-				{
-					name: "Leprechaun",
-					regex: "LEPRECHAUN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Lich",
-					regex: "LICH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(P.*?)\\s+(F.*?)\\s+(N.*?)\\s+(Sh.*?)\\s+(Si.*?)\\s+(W.*)"
-				}
-			]
-		}
-	],
-	[
-		231,
-		{
-			entries: [
-				{
-					name: "Lion",
-					regex: "LION\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Lizardfolk",
-					regex: "LIZARDFOLK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Mage",
-					regex: "MAGE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(C.*?)\\s+(L.*?)\\s+(Sn.*?)\\s+MAMMOTH"
-				},
-				{
-					name: "Mammoth",
-					regex: "MAMMOTH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Ch.*)",
-					size: 3
-				}
-			]
-		}
-	],
-	[
-		232,
-		{
-			entries: [
-				{
-					name: "Manta Ray, Giant",
-					regex: "MANTA\\sRAY, GIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+MANTICORE",
-					alias: "Giant Manta Ray",
-					size: 3
-				},
-				{
-					name: "Manticore",
-					regex: "MANTICORE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+MASTIFF",
-					size: 2
-				},
-				{
-					name: "Mastiff",
-					regex: "MASTIFF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Medusa",
-					regex: "MEDUSA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(P.*?)\\s+MERFOLK"
-				},
-				{
-					name: "Merfolk",
-					regex: "MERFOLK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Mimic",
-					regex: "MIMIC\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		233,
-		{
-			entries: [
-				{
-					name: "Minotaur",
-					regex: "MINOTAUR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+MOOSE",
-					size: 2
-				},
-				{
-					name: "Moose",
-					regex: "MOOSE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		234,
-		{
-			entries: [
-				{
-					name: "Mordanticus the Flayed",
-					regex: "(A.*?)\\s+(A.*V.*?\\d+)\\s+(L.*?)\\s+(C.*)\\s+(N.*)\\s+(P.*?)\\s+(A.*?)\\s+(B.*?)\\s+(B.*?)\\s+(B.*?)\\s+(P.*?)\\s+(Tr.*)\\s+M"
-				}
-			]
-		}
-	],
-	[
-		236,
-		{
-			entries: [
-				{
-					name: "Mummy",
-					regex: "MUMMY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+(N.*?)\\s+MUSHROOMFOLK"
-				},
-				{
-					name: "Mushroomfolk",
-					regex: "MUSHROOMFOLK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*)"
-				}
-			]
-		}
-	],
-	[
-		237,
-		{
-			entries: [
-				{
-					name: "Naga",
-					regex: "NAGA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(A.*?)\\s+(H.*?)\\s+(W.*?)\\s+NAGA,\\sBONE",
-					size: 2
-				},
-				{
-					name: "Naga, Bone",
-					regex: "NAGA,\\sBONE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+NIGHTMARE",
-					size: 2
-				},
-				{
-					name: "Nightmare",
-					regex: "NIGHTMARE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		238,
-		{
-			entries: [
-				{
-					name: "Obe-Ixx of Azarumme",
-					regex: "(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(B.*?)\\s+(Ch.*?)\\s+(Di.*?)\\s+(M.*?)\\s+(U.*?)\\s+O"
-				}
-			]
-		}
-	],
-	[
-		239,
-		{
-			entries: [
-				{
-					name: "Ochre Jelly",
-					regex: "OCHRE\\sJELLY\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+OCTOPUS,\\sGIANT",
-					size: 2
-				},
-				{
-					name: "Octopus, Giant",
-					regex: "OCTOPUS,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+OGRE",
-					alias: "Giant Octopus",
-					size: 2
-				},
-				{
-					name: "Ogre",
-					regex: "OGRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Oni",
-					regex: "ONI\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*?)\\s+(H.*?)\\s+(M.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		240,
-		{
-			entries: [
-				{
-					name: "Orc",
-					regex: "ORC\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ORC,\\sCHIEFTAIN"
-				},
-				{
-					name: "Orc, Chieftain",
-					regex: "ORC,\\sCHIEFTAIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+OTYUGH",
-					alias: "Orc Chieftain"
-				},
-				{
-					name: "Otyugh",
-					regex: "OTYUGH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		241,
-		{
-			entries: [
-				{
-					name: "Primordial Slime",
-					regex: "PRIMORDIAL\\sSLIME\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+VOID\\sSPAWN"
-				},
-				{
-					name: "Void Spawn",
-					regex: "VOID\\sSPAWN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+VOID\\sSPIDER",
-					size: 2
-				},
-				{
-					name: "Void Spider",
-					regex: "VOID\\sSPIDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(P.*?)\\s+RIME\\sWALKER"
-				},
-				{
-					name: "Rime Walker",
-					regex: "RIME\\sWALKER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Ic.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		242,
-		{
-			entries: [
-				{
-					name: "Owlbear",
-					regex: "OWLBEAR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+PANTHER",
-					size: 2
-				},
-				{
-					name: "Panther",
-					regex: "PANTHER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Peasant",
-					regex: "PEASANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Pegasus",
-					regex: "PEGASUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		243,
-		{
-			entries: [
-				{
-					name: "Phoenix",
-					regex: "PHOENIX\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(H.*?)\\s+(R.*?)\\s+PIRANHA,\\sSWARM",
-					size: 3
-				},
-				{
-					name: "Piranha, Swarm",
-					regex: "PIRANHA,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+PIRATE",
-					alias: "Piranha Swarm"
-				},
-				{
-					name: "Pirate",
-					regex: "PIRATE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Priest",
-					regex: "PRIEST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(H.*?)\\s+(Ho.*?)\\s+(R.*)"
-				}
-			]
-		}
-	],
-	[
-		244,
-		{
-			entries: [
-				{
-					name: "Purple Worm",
-					regex: "PURPLE\\sWORM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+RAKSHASA",
-					size: 4
-				},
-				{
-					name: "Rakshasa",
-					regex: "RAKSHASA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(W.*)"
-				}
-			]
-		}
-	],
-	[
-		245,
-		{
-			entries: [
-				{
-					name: "Rat",
-					regex: "RAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RAT,\\sGIANT",
-					size: 0.5
-				},
-				{
-					name: "Rat, Giant",
-					regex: "RAT,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RAT,\\sDIRE",
-					alias: "Giant Rat",
-					size: 0.5
-				},
-				{
-					name: "Rat, Dire",
-					regex: "RAT,\\sDIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RAT,\\sSWARM",
-					alias: "Dire Rat"
-				},
-				{
-					name: "Rat, Swarm",
-					regex: "RAT,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					alias: "Rat Swarm"
-				}
-			]
-		}
-	],
-	[
-		246,
-		{
-			entries: [
-				{
-					name: "Rathgamnon",
-					regex: "(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(Ro.*?)\\s+(A.*?)\\s+(A.*?)\\s+(A.*?)\\s+(G.*?)\\s+(P.*?)\\s+(T.*?)\\s+RA",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		247,
-		{
-			entries: [
-				{
-					name: "Reaver",
-					regex: "REAVER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+REMORHAZ"
-				},
-				{
-					name: "Remorhaz",
-					regex: "REMORHAZ\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(S.*)",
-					size: 3
-				}
-			]
-		}
-	],
-	[
-		248,
-		{
-			entries: [
-				{
-					name: "Rhinoceros",
-					regex: "RHINOCEROS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ROC",
-					size: 2
-				},
-				{
-					name: "Roc",
-					regex: "ROC\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ROPER",
-					size: 3
-				},
-				{
-					name: "Roper",
-					regex: "ROPER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(P.*?)\\s+(T.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		249,
-		{
-			entries: [
-				{
-					name: "Rot Flower",
-					regex: "ROT\\sFLOWER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+RUST\\sMONSTER"
-				},
-				{
-					name: "Rust Monster",
-					regex: "RUST\\sMONSTER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SAHUAGIN"
-				},
-				{
-					name: "Sahuagin",
-					regex: "SAHUAGIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SALAMANDER"
-				},
-				{
-					name: "Salamander",
-					regex: "SALAMANDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(H.*?)\\s+SCARAB,\\sSWARM"
-				},
-				{
-					name: "Scarab, Swarm",
-					regex: "SCARAB,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					alias: "Scarab Swarm"
-				},
-				{
-					name: "Scarecrow",
-					regex: "SCARECROW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		250,
-		{
-			entries: [
-				{
-					name: "Scorpion",
-					regex: "SCORPION\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SCORPION,\\sGIANT",
-					size: 0.5
-				},
-				{
-					name: "Scorpion, Giant",
-					regex: "SCORPION,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+SHADOW",
-					alias: "Giant Scorpion",
-					size: 2
-				},
-				{
-					name: "Shadow",
-					regex: "SHADOW\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
-				}
-			]
-		}
-	],
-	[
-		251,
-		{
-			entries: [
-				{
-					name: "Shambling Mound",
-					regex: "SHAMBLING\\sMOUND\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+SHARK",
-					size: 2
-				},
-				{
-					name: "Shark",
-					regex: "SHARK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Shark, Megalodon",
-					regex: "SHARK,\\sMEGALODON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SIREN",
-					alias: "Megalodon",
-					size: 3
-				},
-				{
-					name: "Siren",
-					regex: "SIREN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SKELETON"
-				},
-				{
-					name: "Skeleton",
-					regex: "SKELETON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SMILODON"
-				},
-				{
-					name: "Smilodon",
-					regex: "SMILODON\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		252,
-		{
-			entries: [
-				{
-					name: "Snake, Giant",
-					regex: "SNAKE,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SNAKE,\\sCOBRA",
-					alias: "Giant Snake",
-					size: 3
-				},
-				{
-					name: "Snake, Cobra",
-					regex: "SNAKE,\\sCOBRA\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SNAKE,\\sSWARM",
-					alias: "Cobra",
-					size: 0.5
-				},
-				{
-					name: "Snake, Swarm",
-					regex: "SNAKE,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SOLDIER",
-					alias: "Snake Swarm"
-				},
-				{
-					name: "Soldier",
-					regex: "SOLDIER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				}
-			]
-		}
-	],
-	[
-		253,
-		{
-			entries: [
-				{
-					name: "Sphinx",
-					regex: "SPHINX\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(Om.*?)\\s+(R.*?)\\s+(T.*?)\\s+(U.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		254,
-		{
-			entries: [
-				{
-					name: "Spider",
-					regex: "SPIDER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SPIDER,\\sGIANT",
-					size: 0.5
-				},
-				{
-					name: "Spider, Giant",
-					regex: "SPIDER,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SPIDER,\\sSWARM",
-					alias: "Giant Spider",
-					size: 2
-				},
-				{
-					name: "Spider, Swarm",
-					regex: "SPIDER,\\sSWARM\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+STINGBAT",
-					alias: "Spider Swarm"
-				},
-				{
-					name: "Stingbat",
-					regex: "STINGBAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+STRANGLER",
-					size: 0.5
-				},
-				{
-					name: "Strangler",
-					regex: "STRANGLER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)"
-				}
-			]
-		}
-	],
-	[
-		255,
-		{
-			entries: [
-				{
-					name: "The Ten-Eyed Oracle",
-					regex: "(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(E.*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d\\..*?)\\s+(\\d+\\..*?)\\s+T",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		256,
-		{
-			entries: [
-				{
-					name: "The Tarrasque",
-					regex: "(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(De.*?)\\s+(P.*?)\\s+(R.*?)\\s+(R.*?)\\s+(R.*?)\\s+(S.*?)\\s+(S.*?)\\s+TH",
-					size: 4
-				}
-			]
-		}
-	],
-	[
-		258,
-		{
-			entries: [
-				{
-					name: "The Wandering Merchant",
-					regex: "(A.*?)\\s+(AC.*V.*?\\d+)\\s+(L.*?)\\s+(A.*?)\\s+(B.*?)\\s+(D.*?)\\s+(L.*?)\\s+(R.*?)\\s+(S.*?)\\s+TH"
-				}
-			]
-		}
-	],
-	[
-		259,
-		{
-			entries: [
-				{
-					name: "Thief",
-					regex: "THIEF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+THUG"
-				},
-				{
-					name: "Thug",
-					regex: "THUG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Treant",
-					regex: "TREANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+TROLL",
-					size: 3
-				},
-				{
-					name: "Troll",
-					regex: "TROLL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
-					size: 2
-				}
-			]
-		}
-	],
-	[
-		260,
-		{
-			entries: [
-				{
-					name: "Troll, Frost",
-					regex: "TROLL,\\sFROST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*?)\\s+UNICORN",
-					alias: "Frost Troll",
-					size: 2
-				},
-				{
-					name: "Unicorn",
-					regex: "UNICORN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+VAMPIRE",
-					size: 2
-				},
-				{
-					name: "Vampire",
-					regex: "VAMPIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(Ch.*?)\\s+(S.*?)\\s+(V.*)"
-				}
-			]
-		}
-	],
-	[
-		261,
-		{
-			entries: [
-				{
-					name: "Vampire Spawn",
-					regex: "VAMPIRE\\sSPAWN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(V.*?)\\s+VIOLET\\sFUNGUS"
-				},
-				{
-					name: "Violet Fungus",
-					regex: "VIOLET\\sFUNGUS\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				}
-			]
-		}
-	],
-	[
-		262,
-		{
-			exclude: "262.*warriors.",
-			entries: [
-				{
-					name: "Viperian",
-					regex: "VIPERIAN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
-				},
-				{
-					name: "Viperian, Ophid",
-					regex: "VIPERIAN,\\sOPHID\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+VIPERIAN,\\sWIZARD",
-					alias: "Viperian Ophid"
-				},
-				{
-					name: "Viperian, Wizard",
-					regex: "VIPERIAN,\\sWIZARD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Su.*?)\\s+(V.*?)\\s+(W.*)",
-					alias: "Viperian Wizard"
-				}
-			]
-		}
-	],
-	[
-		263,
-		{
-			entries: [
-				{
-					name: "Vulture",
-					regex: "VULTURE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WASP,\\sGIANT"
-				},
-				{
-					name: "Wasp, Giant",
-					regex: "WASP,\\sGIANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WEREWOLF",
-					alias: "Giant Wasp"
-				},
-				{
-					name: "Werewolf",
-					regex: "WEREWOLF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+WERERAT"
-				},
-				{
-					name: "Wererat",
-					regex: "WERERAT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*?)\\s+WIGHT"
-				},
-				{
-					name: "Wight",
-					regex: "WIGHT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(L.*)"
-				}
-			]
-		}
-	],
-	[
-		264,
-		{
-			entries: [
-				{
-					name: "Will-o'-Wisp",
-					regex: "WILL-O'-WISP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 0.5
-				},
-				{
-					name: "Wolf",
-					regex: "WOLF\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WOLF,\\sDIRE"
-				},
-				{
-					name: "Wolf, Dire",
-					regex: "WOLF,\\sDIRE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+WOLF,\\sWINTER",
-					alias: "Dire Wolf",
-					size: 2
-				},
-				{
-					name: "Wolf, Winter",
-					regex: "WOLF,\\sWINTER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*)",
-					alias: "Winter Wolf"
-				}
-			]
-		}
-	],
-	[
-		265,
-		{
-			entries: [
-				{
-					name: "Worg",
-					regex: "WORG\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)",
-					size: 2
-				},
-				{
-					name: "Wraith",
-					regex: "WRAITH\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(In.*?)\\s+(L.*?)\\s+WYVERN"
-				},
-				{
-					name: "Wyvern",
-					regex: "WYVERN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+ZOMBIE",
-					size: 2
-				},
-				{
-					name: "Zombie",
-					regex: "ZOMBIE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*)"
-				}
-			]
-		}
-	]
-]);
-const CURSED_SCROLL_1 = new Map([
+
+const CS1 = new Map([
 	[
 		46,
 		{
@@ -1796,7 +88,7 @@ const CURSED_SCROLL_1 = new Map([
 		}
 	]
 ]);
-const CURSED_SCROLL_2 = new Map([
+const CS2 = new Map([
 	[
 		40,
 		{
@@ -1885,7 +177,7 @@ const CURSED_SCROLL_2 = new Map([
 		}
 	]
 ]);
-const CURSED_SCROLL_3 = new Map([
+const CS3 = new Map([
 	[
 		44,
 		{
@@ -1972,7 +264,7 @@ const CURSED_SCROLL_3 = new Map([
 	]
 ]);
 
-const MONSTER_MONDAY_1 = new Map([
+const MM1 = new Map([
 	[
 		2,
 		{
@@ -1995,7 +287,7 @@ const MONSTER_MONDAY_1 = new Map([
 		}
 	]
 ]);
-const MONSTER_MONDAY_2 = new Map([
+const MM2 = new Map([
 	[
 		2,
 		{
@@ -2014,7 +306,7 @@ const MONSTER_MONDAY_2 = new Map([
 		}
 	]
 ]);
-const MONSTER_MONDAY_3 = new Map([
+const MM3 = new Map([
 	[
 		2,
 		{
@@ -2048,7 +340,7 @@ const MONSTER_MONDAY_3 = new Map([
 		}
 	]
 ]);
-const MONSTER_MONDAY_4 = new Map([
+const MM4 = new Map([
 	[
 		2,
 		{
@@ -2056,6 +348,245 @@ const MONSTER_MONDAY_4 = new Map([
 				{
 					name: "Mazzim the Mesmerist",
 					regex: "(A\\s.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(E.*?)\\s+(I.*?)\\s+(M.*)MA"
+				}
+			]
+		}
+	]
+]);
+const MM5 = new Map([
+	[
+		2,
+		{
+			entries: [
+				{
+					name: "Lord Hedron Antioch",
+					regex: "\\d\\s+(L.*br.*)\\s+(AC.*?LV.*?\\d+?)\\s+(S.*?)\\s+(B.*?)\\s+(Ch.*?)\\s+(Di.*?)\\s+(H.*?)\\s+(V.*?)\\s+L"
+				}
+			]
+		}
+	]
+]);
+const MM6 = new Map([
+	[
+		2,
+		{
+			entries: [
+				{
+					name: "Fungibold",
+					regex: "F.*\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)\\s+FU"
+				},
+				{
+					name: "Fungibold, Magi",
+					regex: "MAGI\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(H.*?)\\s+(S.*?)\\s+(Conf.*?)\\s+(M.*?)\\s+(P.*?)\\s+In",
+					alias: "Fungibold Magi"
+				}
+			]
+		}
+	]
+]);
+const MM7 = new Map([
+	[
+		2,
+		{
+			entries: [
+				{
+					name: "The Mad Jester",
+					regex: "(Pr.*)\\s(AC.*?LV.*?\\d+?)\\s+(D.*?)\\s+(G.*?)\\s+(I.*?)\\s+(Tu.*?)\\s+TH"
+				}
+			]
+		}
+	]
+]);
+const MM8 = new Map([
+	[
+		2,
+		{
+			entries: [
+				{
+					name: "DEMON, LASH",
+					regex: "H\\s(.*)\\s+(AC.*?LV.*?\\d+?)\\s+(B.*?)\\s+(B.*?)\\s+(V.*?)\\sL",
+					Alias: "Lash Demon"
+				}
+			]
+		}
+	]
+]);
+const MM9 = new Map([
+	[
+		2,
+		{
+			entries: [
+				{
+					name: "Sister Marjory",
+					regex: "Y\\s(.*)\\s+(AC.*?LV.*?\\d+?)\\s+(H.*?)\\s+(A.*?)\\s+(E.*?)\\s+(G.*?)\\sL"
+				},
+				{
+					name: "Little Sister",
+					regex: " SISTER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(E.*?)\\s+(F.*?)\\sE"
+				},
+				{
+					name: "Elder Sister",
+					regex: "R SISTER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(B.*?)\\s+(E.*?)\\s+(Se.*?)\\s+(Sc.*?)\\s+C"
+				}
+			]
+		}
+	]
+]);
+const MM10 = new Map([
+	[
+		2,
+		{
+			entries: [
+				{
+					name: "The Piper",
+					regex: "rd\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(C.*?)\\s+(Pa.*?)\\s+(Pu.*?)\\s+(S.*?)\\sTH",
+					replace: {
+						"( ": "("
+					}
+				}
+			]
+		}
+	]
+]);
+const MM11 = new Map([
+	[
+		2,
+		{
+			entries: [
+				{
+					name: "The Shadowbarge",
+					regex: "!\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(L.*?)\\s+(So.*?)\\s+(E.*?)\\s+(W.*?)\\s+(T.*?)\\sT",
+					size: 4
+				}
+			]
+		}
+	]
+]);
+const MM12 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Cran-Gelatinous Cube",
+					regex: "\\d\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(P.*?)\\s+(R.*?)\\s+(C.*?)\\s+(E.*?)\\s+(Di.*?)\\sC",
+					size: 2
+				}
+			]
+		}
+	]
+]);
+const MM13 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Fire Goblin",
+					regex: "N\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(K.*?)\\s+(B.*?)\\s+B"
+				},
+				{
+					name: "Blast Goblin",
+					regex: "T GOBLIN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(K.*?)\\s+(I.*?)\\s+When t"
+				}
+			]
+		}
+	]
+]);
+const MM14 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Roggenwulf",
+					regex: "F\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(I.*?)\\s+(H.*?)\\s+(S.*?)\\sW"
+				}
+			]
+		}
+	]
+]);
+const MM15 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Green Knight",
+					regex: "T\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(H.*?)\\s+(Oa.*?)\\sO"
+				}
+			]
+		}
+	]
+]);
+const MM16 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Lantern Head",
+					regex: "D\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(G.*?)\\s+(C.*?)\\s+(Ste.*?)\\s+(W.*?)\\sThe d"
+				}
+			]
+		}
+	]
+]);
+const MM17 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Naga, Jewel",
+					regex: "L\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(P.*?)\\s+(B.*?)\\s+(K.*?)\\s+(Se.*)",
+					alias: "Jewel Naga",
+					size: 2
+				}
+			]
+		}
+	]
+]);
+const MM18 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Jolly Roger",
+					regex: "R\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(G.*?)\\s+(L.*?)\\s+(S.*?)\\s+(W.*)"
+				}
+			]
+		}
+	]
+]);
+const MM19 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Hydra Worm",
+					regex: "\\d\\s+(.*?)\\s+(AC.*?LV \\*)\\s+(H.*?)\\s+(S.*?)\\sH",
+					replace: {
+						"HP * + 3": "HP 12",
+						"LV *": "LV 2"
+					},
+					size: 4
+				}
+			]
+		}
+	]
+]);
+const MM20 = new Map([
+	[
+		1,
+		{
+			entries: [
+				{
+					name: "Zomblob",
+					regex: "B\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(U.*?)\\s+(E.*?)\\s+(R.*)",
+					size: 2
 				}
 			]
 		}
@@ -2090,7 +621,7 @@ const CONCEALED_ABBEY = new Map([
 	]
 ]);
 
-const LFTD_1 = new Map([
+const LFTD1 = new Map([
 	[
 		44,
 		{
@@ -2172,7 +703,7 @@ const LFTD_1 = new Map([
 		}
 	]
 ]);
-const LFTD_2 = new Map([
+const LFTD2 = new Map([
 	[
 		36,
 		{
@@ -2277,7 +808,7 @@ const LFTD_2 = new Map([
 		}
 	]
 ]);
-const LFTD_3 = new Map([
+const LFTD3 = new Map([
 	[
 		54,
 		{
@@ -2432,23 +963,741 @@ const LFTD_3 = new Map([
 		}
 	]
 ]);
-export const BOOKS = new Map([
+const LFTD4 = new Map([
 	[
-		"Shadowdark RPG (Core Rulebook)",
+		8,
 		{
-			checkPage: 332,
-			checkText: "ShadowDark RPG Core Rulebook",
-			offset: 4,
-			map: CORE_RULEBOOK
+			entries: [
+				{
+					name: "Hireling",
+					regex: "HIRELING\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
+				}
+			]
 		}
 	],
+	[
+		61,
+		{
+			entries: [
+				{
+					name: "Deep One, Priest",
+					regex: "T\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(S.*?)\\s+(A.*?)\\s+(R.*?)\\s+3",
+					alias: "Deep One Priest"
+				}
+			]
+		}
+	],
+	[
+		71,
+		{
+			entries: [
+				{
+					name: "Aether Slime",
+					regex: "AETHER SLIME\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
+					size: 2
+				}
+			]
+		}
+	],
+]);
+const LFTD5 = new Map([
+	[
+		9,
+		{
+			entries: [
+				{
+					name: "Buné",
+					regex: "(Dr.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)\\s+(Bi.*)\\s+(E.*)\\sC"
+				}
+			]
+		}
+	],
+	[
+		10,
+		{
+			entries: [
+				{
+					name: "Pazuzu",
+					regex: "(Fo.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)\\s+(P.*)\\s+(V.*)\\s+LI",
+					size: 2
+				}
+			]
+		}
+	],
+	[
+		11,
+		{
+			entries: [
+				{
+					name: "Berith",
+					regex: "(In.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)\\s+(I.*)\\s+(C.*)\\sST",
+					size: 2
+				}
+			]
+		}
+	],
+	[
+		12,
+		{
+			entries: [
+				{
+					name: "Mammon",
+					regex: "(Pi.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)\\s+(W.*)\\s+(A.*)\\sAL",
+					size: 2
+				}
+			]
+		}
+	],
+	[
+		13,
+		{
+			entries: [
+				{
+					name: "Lamashtu",
+					regex: "(Pa.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)\\s+(T.*)\\s+(M.*)\\sTH",
+					size: 2
+				}
+			]
+		}
+	],
+	[
+		14,
+		{
+			entries: [
+				{
+					name: "Belphegor",
+					regex: "(Fe.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(M.*?)\\s+(S.*?)\\sT"
+				}
+			]
+		}
+	],
+	[
+		15,
+		{
+			entries: [
+				{
+					name: "Megara",
+					regex: "(Ce.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+(R.*?)\\s+D",
+					size: 2
+				}
+			]
+		}
+	],
+	[
+		16,
+		{
+			entries: [
+				{
+					name: "Verrine",
+					regex: "(Ra.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+(P.*?)\\s+M",
+					replace: {
+						"truth ." : "truth."
+					}
+				}
+			]
+		}
+	],
+	[
+		17,
+		{
+			entries: [
+				{
+					name: "Malphas",
+					regex: "MALPHAS\\s(A.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(U.*?)\\s+(B.*?)\\s+C"
+				}
+			]
+		}
+	],
+	[
+		20,
+		{
+			entries: [
+				{
+					name: "Aamon",
+					regex: "AAMON\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+A",
+					size: 0.5
+				},
+				{
+					name: "Aguar",
+					regex: "AGUAR\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+BA",
+					size: 2
+				},
+				{
+					name: "Bachim",
+					regex: "BACHIM\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+BA"
+				},
+				{
+					name: "Barbato",
+					regex: "BARBATO\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+B",
+					size: 2
+				},
+				{
+					name: "Buer",
+					regex: "BUER\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\sN",
+					size: 0.5
+				}
+			]
+		}
+	],
+	[
+		21,
+		{
+			entries: [
+				{
+					name: "Cambion",
+					regex: "CAMBION\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Fire B.*?)\\sC"
+				},
+				{
+					name: "Caym",
+					regex: "CAYM\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+CE"
+				},
+				{
+					name: "Cerbere",
+					regex: "CERBERE\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(T.*?)\\s+(F.*?)\\s+DA",
+					size: 3
+				},
+				{
+					name: "Dantalion",
+					regex: "DANTALION\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*?)\\s+G"
+				},
+				{
+					name: "Geryon",
+					regex: "GERYON\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+(P.*?)\\s+G",
+					size: 3
+				},
+				{
+					name: "Gomory",
+					regex: "GOMORY\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+				}
+			]
+		}
+	],
+	[
+		22,
+		{
+			entries: [
+				{
+					name: "Grootslang",
+					regex: "GROOTSLANG\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(C.*?)\\s+(Sw.*?)\\s+H",
+					size: 3
+				},
+				{
+					name: "Habor",
+					regex: "HABOR\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\sL",
+					size: 0.5
+				},
+				{
+					name: "Lamia",
+					regex: "LAMIA\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+L",
+					size: 2
+				},
+				{
+					name: "Lemure",
+					regex: "LEMURE\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+(C.*?)\\s+M"
+				},
+				{
+					name: "Marbas",
+					regex: "MARBAS\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*)"
+				}
+			]
+		}
+	],
+	[
+		23,
+		{
+			entries: [
+				{
+					name: "Murmuur",
+					regex: "MURMUUR\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+O",
+					size: 2
+				},
+				{
+					name: "Oray",
+					regex: "ORAY\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+S",
+					replace: {
+						"1d6 s" : "6 s"
+					}
+				},
+				{
+					name: "Styg",
+					regex: "STYG\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*?)\\s+(S.*?)\\s+V"
+				},
+				{
+					name: "Vual",
+					regex: "VUAL\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*?)\\s+(Hu.*?)\\s+X",
+					size: 3
+				},
+				{
+					name: "Xaphan",
+					regex: "XAPHAN\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+Z",
+					size: 0.5
+				},
+				{
+					name: "Zabub",
+					regex: "ZABUB\\s(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
+					size: 0.5
+				}
+			]
+		}
+	]
+]);
+const LFTD6 = new Map([
+	[
+		24,
+		{
+			entries: [
+				{
+					name: "Dragon Turtle",
+					regex: "LE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(A.*?)\\s+(St.*?)\\s+G",
+					replace: {
+						"th -": "th-"
+					},
+					size: 4
+				},
+				{
+					name: "Goblin, Monkey",
+					regex: "Y\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Sn.*?)\\s+G",
+					alias: "Monkey Goblin",
+					replace: {
+						"W - 1": "W -1"
+					}
+				},
+				{
+					name: "Goblin, Shark",
+					regex: "RK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
+					alias: "Shark Goblin"
+				}
+			]
+		}
+	],
+	[
+		25,
+		{
+			entries: [
+				{
+					name: "Hippocamp",
+					regex: "MP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+M",
+					size: 2
+				},
+				{
+					name: "Morlock",
+					regex: "CK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+S"
+				},
+				{
+					name: "Sharkfolk",
+					regex: "LK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+S"
+				},
+				{
+					name: "Shipworm, Giant",
+					regex: "T\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+S",
+					alias: "Giant Shipworm",
+					size: 2
+				},
+				{
+					name: "Snalp",
+					regex: "LP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+TR"
+				},
+				{
+					name: "Troglodyte",
+					regex: "TE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+W"
+				},
+				{
+					name: "Wumpus",
+					regex: "US\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)",
+					size: 2
+				}
+			]
+		}
+	],
+	[
+		76,
+		{
+			entries: [
+				{
+					name: "Alchemist",
+					regex: "ST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+A"
+				},
+				{
+					name: "Artisan",
+					regex: "N\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+"
+				},
+				{
+					name: "Barkeep",
+					regex: "EP\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+M"
+				},
+				{
+					name: "Merchant",
+					regex: "HANT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+"
+				},
+				{
+					name: "Prisoner",
+					regex: "NER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+U"
+				},
+				{
+					name: "Urchin",
+					regex: "IN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+				}
+			]
+		}
+	],
+	[
+		77,
+		{
+			entries: [
+				{
+					name: "Executioner",
+					regex: "NER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+J"
+				},
+				{
+					name: "Jester",
+					regex: "TER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(J.*?)\\s+N"
+				},
+				{
+					name: "Noble",
+					regex: "LE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+"
+				},
+				{
+					name: "Royal Guard",
+					regex: "RD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+SP"
+				},
+				{
+					name: "Spy",
+					regex: "Y\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Di.*?)\\s+(P.*?)\\s+(S.*)"
+				}
+			]
+		}
+	],
+	[
+		78,
+		{
+			entries: [
+				{
+					name: "Arsonist",
+					regex: "ST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+A"
+				},
+				{
+					name: "Charlatan",
+					regex: "AN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+T"
+				}
+			]
+		}
+	],
+	[
+		79,
+		{
+			entries: [
+				{
+					name: "Cult Leader",
+					regex: "ER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+(E.*?)\\s+(U.*?)\\s+C"
+				},
+				{
+					name: "Entropist",
+					regex: "PIST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Il.*?)\\s+(D.*?)\\s+T"
+				},
+				{
+					name: "Thrall",
+					regex: "LL\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+				}
+			]
+		}
+	],
+	[
+		80,
+		{
+			entries: [
+				{
+					name: "Exorcist",
+					regex: "ST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(E.*?)\\s+(H.*?)\\s+H"
+				},
+				{
+					name: "High Priest",
+					regex: "EST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(B.*?)\\s+(P.*?)\\s+(R.*?)\\s+(Se.*)"
+				}
+			]
+		}
+	],
+	[
+		81,
+		{
+			entries: [
+				{
+					name: "Inquisitor",
+					regex: "R\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(I.*?)\\s+J"
+				},
+				{
+					name: "Justiciar",
+					regex: "AR\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+M"
+				},
+				{
+					name: "Monk",
+					regex: "NK\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+P"
+				},
+				{
+					name: "Paladin",
+					regex: "N\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+P"
+				}
+			]
+		}
+	],
+	[
+		82,
+		{
+			entries: [
+				{
+					name: "Acrobat",
+					regex: "T\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(V.*?)\\s+AN"
+				},
+				{
+					name: "Animal Tamer",
+					regex: "R\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+B"
+				},
+				{
+					name: "Bard",
+					regex: "RD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+F"
+				},
+				{
+					name: "Fire Eater",
+					regex: "TER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+FO"
+				},
+				{
+					name: "Fortune Teller",
+					regex: "LER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+G"
+				}
+			]
+		}
+	],
+	[
+		83,
+		{
+			entries: [
+				{
+					name: "Bodyguard",
+					regex: "YGUARD\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+G"
+				},
+				{
+					name: "Jailer",
+					regex: "LER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*ape.)"
+				},
+				{
+					name: "Town Watch",
+					regex: "H\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?ts.)"
+				}
+			]
+		}
+	],
+	[
+		84,
+		{
+			entries: [
+				{
+					name: "Adept",
+					regex: "T\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(R.*?)\\s+(Sh.*?)\\s+A"
+				}
+			]
+		}
+	],
+	[
+		85,
+		{
+			entries: [
+				{
+					name: "Evoker",
+					regex: "ER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(Br.*?)\\s+(For.*?)\\s+(P.*?)\\s+M"
+				},
+				{
+					name: "Necromancer",
+					regex: "CER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(D.*?)\\s+(N.*?)\\s+(Te.*?)\\s+(V.*?)\\s+W"
+				},
+				{
+					name: "Witch",
+					regex: "H\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(F.*?)\\s+(He.*?)\\s+(Witch B.*)"
+				}				
+			]
+		}
+	],
+	[
+		86,
+		{
+			entries: [
+				{
+					name: "Beastmaster",
+					regex: "R\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+D"
+				},
+				{
+					name: "Elementalist",
+					regex: "ST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(G.*?)\\s+(H.*?)\\s+(I.*?)\\s+(Q.*?)\\s+SH"
+				},
+				{
+					name: "Shifter",
+					regex: "FTER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*)"
+				}				
+			]
+		}
+	],
+	[
+		87,
+		{
+			entries: [
+				{
+					name: "Explorer",
+					regex: "ER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HE"
+				},
+				{
+					name: "Herbalist",
+					regex: "ST\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+HE"
+				},
+				{
+					name: "Hermit",
+					regex: "IT\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+R"
+				},
+				{
+					name: "Ranger",
+					regex: "GER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(S.*?)\\s+S"
+				},
+				{
+					name: "Slayer",
+					regex: "YER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*)"
+				}				
+			]
+		}
+	],
+	[
+		88,
+		{
+			entries: [
+				{
+					name: "Cannoneer",
+					regex: "ER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+DO"
+				},
+				{
+					name: "Dockhand",
+					regex: "ND\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+HA"
+				},
+				{
+					name: "Harpooner",
+					regex: "NER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+P"
+				},
+				{
+					name: "Sea Captain",
+					regex: "IN\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+(P.*?)\\s+S"
+				},
+				{
+					name: "Swabbie",
+					regex: "IE\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)"
+				}				
+			]
+		}
+	],
+	[
+		89,
+		{
+			entries: [
+				{
+					name: "Army Captain",
+					regex: "N\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+B"
+				},
+				{
+					name: "Musketeer",
+					regex: "EER\\s+(.*?)\\s+(AC.*?LV.*?\\d+?)\\s+(.*?)\\s+R"
+				}			
+			]
+		}
+	]
+]);
+// const LFTD7 = new Map([
+// 	[
+// 		21,
+// 		{
+// 			entries: [
+// 				{
+// 					name: "Beastman, Elder",
+// 					regex: "R\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(O.*?)\s+(T.*?)\s+B",
+// 					alias: "Beastman Elder"
+// 				},
+// 				{
+// 					name: "Beastman, Gatherer",
+// 					regex: "RER\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(A.*?)\s+(So.*?)\s+B",
+// 					alias: "Beastman Gatherer"
+// 				},
+// 				{
+// 					name: "Beastman, Hunter",
+// 					regex: "TER\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(A.*?)\s+B",
+// 					alias: "Beastman Hunter"
+// 				},
+// 				{
+// 					name: "Beastman, Shaman",
+// 					regex: "AMAN\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(B.*?)\s+(K.*)",
+// 					alias: "Beastman Shaman"
+// 				},
+// 			]
+// 		}
+// 	],
+// 	[
+// 		24,
+// 		{
+// 			entries: [
+// 				{
+// 					name: "Aardgnoll",
+// 					regex: "DGNOLL\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+AA"
+// 				},
+// 				{
+// 					name: "Aardgnoll, Druid",
+// 					regex: "ID\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(B.*?)\s+(F.*?)\s+(T.*?)\s+(Tu.*?)\s+G",
+// 					alias: "Aardgnoll Druid"
+// 				},
+// 				{
+// 					name: "Gnoll, Drimimancer",
+// 					regex: "ER\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(B.*?)\s+(Co.*?)\s+G",
+// 					alias: "Gnoll Drimimancer"
+// 				},
+// 				{
+// 					name: "Gnoll, Matriarch",
+// 					regex: "H\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(C.*?)\s+(F.*)",
+// 					alias: "Gnoll Matriarch"
+// 				},
+// 			]
+// 		}
+// 	],
+// 	[
+// 		25,
+// 		{
+// 			entries: [
+// 				{
+// 					name: "Gnoll, Mutant",
+// 					regex: "T\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(U.*?)\s+G",
+// 					alias: "Gnoll Mutant"
+// 				},
+// 				{
+// 					name: "Gnoll, Pack Priest",
+// 					regex: "ST\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(E.*?)\s+(Fr.*?)\s+(Su.*?)\s+G",
+// 					alias: "Gnoll Pack Priest"
+// 				},
+// 				{
+// 					name: "Gnoll, Ravager",
+// 					regex: "ER\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+(N.*?)\s+H",
+// 					alias: "Gnoll Ravager"
+// 				},
+// 				{
+// 					name: "Hyena",
+// 					regex: "NA\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*?)\s+H"
+// 				},
+// 				{
+// 					name: "Hyena, Dire",
+// 					regex: "RE\s+(.*?)\s+(AC.*?LV.*?\d+?)\s+(.*)",
+// 					alias: "Dire Hyena"
+// 				},
+// 			]
+// 		}
+// 	]
+// ]);
+export const BOOKS = new Map([
 	[
 		"Cursed Scroll 1: Diablerie",
 		{
 			checkPage: 1,
 			checkText: "Cursed Scroll Shadowdark Zine Vol. 1: Diablerie!",
 			offset: 0,
-			map: CURSED_SCROLL_1
+			map: CS1
 		}
 	],
 	[
@@ -2457,7 +1706,7 @@ export const BOOKS = new Map([
 			checkPage: 1,
 			checkText: "Cursed Scroll Shadowdark Zine 2: Red Sands",
 			offset: 0,
-			map: CURSED_SCROLL_2
+			map: CS2
 		}
 	],
 	[
@@ -2466,7 +1715,7 @@ export const BOOKS = new Map([
 			checkPage: 1,
 			checkText: "Cursed Scroll Shadowdark Zine 3: Midnight Sun",
 			offset: 0,
-			map: CURSED_SCROLL_3
+			map: CS3
 		}
 	],
 	[
@@ -2475,7 +1724,7 @@ export const BOOKS = new Map([
 			checkPage: 2,
 			checkText: "Brain Eaters",
 			offset: 0,
-			map: MONSTER_MONDAY_1
+			map: MM1
 		}
 	],
 	[
@@ -2484,7 +1733,7 @@ export const BOOKS = new Map([
 			checkPage: 2,
 			checkText: "Crabstrosity",
 			offset: 0,
-			map: MONSTER_MONDAY_2
+			map: MM2
 		}
 	],
 	[
@@ -2493,7 +1742,7 @@ export const BOOKS = new Map([
 			checkPage: 2,
 			checkText: "Ooze Cubes",
 			offset: 0,
-			map: MONSTER_MONDAY_3
+			map: MM3
 		}
 	],
 	[
@@ -2502,7 +1751,151 @@ export const BOOKS = new Map([
 			checkPage: 2,
 			checkText: "Mazzim the Mesmerist",
 			offset: 0,
-			map: MONSTER_MONDAY_4
+			map: MM4
+		}
+	],
+		[
+		"Monster Monday 5: Lord Hedron Antioch",
+		{
+			checkPage: 2,
+			checkText: "Lord Hedron Antioch",
+			offset: 0,
+			map: MM5
+		}
+	],		
+	[
+		"Monster Monday 6: Fungibolds",
+		{
+			checkPage: 2,
+			checkText: "Fungibold",
+			offset: 0,
+			map: MM6
+		}
+	],
+		[
+		"Monster Monday 7: The Mad Jester",
+		{
+			checkPage: 2,
+			checkText: "The Mad Jester",
+			offset: 0,
+			map: MM7
+		}
+	],
+		[
+		"Monster Monday 8: Lash Demon",
+		{
+			checkPage: 2,
+			checkText: "DEMON, LASH",
+			offset: 0,
+			map: MM8
+		}
+	],
+	[
+		"Monster Monday 9: Sisters of Saint Sofia",
+		{
+			checkPage: 2,
+			checkText: "SISTER MARJORY",
+			offset: 0,
+			map: MM9
+		}
+	],
+	[
+		"Monster Monday 10: The Piper",
+		{
+			checkPage: 2,
+			checkText: "The Piper",
+			offset: 0,
+			map: MM10
+		}
+	],
+		[
+		"Monster Monday 11: Shadowbarge",
+		{
+			checkPage: 2,
+			checkText: "The Shadowbarge",
+			offset: 0,
+			map: MM11
+		}
+	],
+		[
+		"Monster Monday 12: Cran-Gelatinous Cube",
+		{
+			checkPage: 1,
+			checkText: "Cran-Gelatinous Cube",
+			offset: 0,
+			map: MM12
+		}
+	],
+		[
+		"Monster Monday 13: Fire Goblins",
+		{
+			checkPage: 1,
+			checkText: "Fire Goblins",
+			offset: 0,
+			map: MM13
+		}
+	],
+		[
+		"Monster Monday 14: Roggenwulf",
+		{
+			checkPage: 1,
+			checkText: "Roggenwulf",
+			offset: 0,
+			map: MM14
+		}
+	],
+		[
+		"Monster Monday 15: Green Knight",
+		{
+			checkPage: 1,
+			checkText: "Green Knight",
+			offset: 0,
+			map: MM15
+		}
+	],
+		[
+		"Monster Monday 16: Lantern Head",
+		{
+			checkPage: 1,
+			checkText: "Lantern Head",
+			offset: 0,
+			map: MM16
+		}
+	],
+		[
+		"Monster Monday 17: Jewel Naga",
+		{
+			checkPage: 1,
+			checkText: "Jewel Naga",
+			offset: 0,
+			map: MM17
+		}
+	],
+		[
+		"Monster Monday 18: Jolly Roger",
+		{
+			checkPage: 1,
+			checkText: "Jolly Roger",
+			offset: 0,
+			map: MM18
+		}
+	],
+		[
+		"Monster Monday 19: Hydra Worm",
+		{
+			checkPage: 1,
+			checkText: "Hydra Worm",
+			offset: 0,
+			map: MM19
+		}
+	],
+		[
+		"Monster Monday 20: Zomblob",
+		{
+			checkPage: 1,
+			checkText: "Zomblob",
+			offset: 0,
+			map: MM20
 		}
 	],
 	[
@@ -2517,28 +1910,82 @@ export const BOOKS = new Map([
 	[
 		"Letters from the Dark Vol. I: Out of Time",
 		{
-			checkPage: 1,
-			checkText: "D ESIGNED AND W RITTEN BY C HRIS P OWELL L ETTERS FROM THE D ARK V OL . I: O UT OF T IME",
+			checkPage: 52,
+			checkText: "LETTERS FROM THE DARK VOL. I: OUT OF TIME",
 			offset: 0,
-			map: LFTD_1
+			map: LFTD1
 		}
 	],
 	[
 		"Letters from the Dark Vol. II: Slayer's Moon",
 		{
-			checkPage: 1,
-			checkText: "D ESIGNED AND W RITTEN BY C HRIS P OWELL D ESIGNED AND W RITTEN BY C HRIS P OWELL L ETTERS FROM THE D ARK V OL . II: S LAYER ’ S M OON",
+			checkPage: 70,
+			checkText: "LETTERS FROM THE DARK VOL. II: SLAYER’S MOON",
 			offset: 0,
-			map: LFTD_2
+			map: LFTD2
 		}
 	],
 	[
 		"Letters from the Dark Vol. III: Tales of the Fey",
 		{
-			checkPage: 1,
-			checkText: "D ESIGNED AND W RITTEN BY C HRIS P OWELL Tales of the Fey",
+			checkPage: 64,
+			checkText: "The idyllic Ballyhob Glen",
 			offset: 0,
-			map: LFTD_3
+			map: LFTD3
 		}
-	]
+	],
+	[
+		"Letters from the Dark Vol. IV: Borderlands",
+		{
+			checkPage: 76,
+			checkText: "LETTERS FROM THE DARK VOL. IV: BORDERLANDS",
+			offset: 0,
+			map: LFTD4
+		}
+	],
+	[
+		"Letters from the Dark Vol. V: Hell to Pay",
+		{
+			checkPage: 106,
+			checkText: "LETTERS FROM THE DARK VOL. V: HELL TO PAY",
+			offset: 0,
+			map: LFTD5
+		}
+	],
+	[
+		"Letters from the Dark Vol. VI: Scallywags",
+		{
+			checkPage: 94,
+			checkText: "LETTERS FROM THE DARK VOL. VI: SCALLYWAGS",
+			offset: 0,
+			map: LFTD6
+		}
+	]//,
+	// [
+	// 	"Letters from the Dark Vol. VII: Monster Mash",
+	// 	{
+	// 		checkPage: 94,
+	// 		checkText: "Are we the baddies?",
+	// 		offset: 0,
+	// 		map: LFTD7
+	// 	}
+	// ],
+	// [
+	// 	"Letters from the Dark Vol. VIII: Lucky Stars",
+	// 	{
+	// 		checkPage: 100,
+	// 		checkText: "One giant leap!",
+	// 		offset: 0,
+	// 		map: LFTD8
+	// 	}
+	// ],
+	// [
+	// 	"Letters from the Dark Vol. IX: Book of the Dead",
+	// 	{
+	// 		checkPage: 88,
+	// 		checkText: "Who wants to live forever?",
+	// 		offset: 0,
+	// 		map: LFTD9
+	// 	}
+	// ]
 ]);
