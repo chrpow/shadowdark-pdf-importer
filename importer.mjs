@@ -63,7 +63,7 @@ export default class Importer {
 					.replace('- ', '-')
 					.replace(excludePattern, "");
 
-				console.log(text)
+				if (this.#getSetting("devMode")) console.log(text)
 
 				monsters.forEach(async (monster, index) => {
 					try {
@@ -114,7 +114,7 @@ export default class Importer {
 
 							m[0] = monster.name;
 
-							console.log(m)
+							if (this.#getSetting("devMode")) console.log(m)
 
 							if (monster.replace) {
 								for (const target in monster.replace) {
@@ -182,7 +182,7 @@ export default class Importer {
 		}
 		await Promise.all(promiseArray)
 
-		console.log(ids)
+		if (this.#getSetting("devMode")) console.log(ids)
 
 		// Create a new folder
 		let folder = await this.#createFolder(book.title, "Actor")
