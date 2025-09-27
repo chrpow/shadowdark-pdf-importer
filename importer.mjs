@@ -60,7 +60,11 @@ export default class Importer {
 				const text = strings
 					.join(" ")
 					.replace(/\s\s+/g, " ")
-					.replace('- ', '-')
+					.replace(
+						/(-|\+)\s+(\d)/g, (match, sign, num) => {
+							return `${sign}${num}`;
+						}
+					)
 					.replace(excludePattern, "");
 
 				if (this.#getSetting("devMode")) console.log(text)
