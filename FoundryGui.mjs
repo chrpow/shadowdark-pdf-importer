@@ -103,7 +103,7 @@ const minimumVersion = "1.5.1", _PdfImporter = class {
 			}
 		};
         new Dialog({
-            title: "Import PDF (version 0.0.6)",
+            title: "Import PDF",
             content: await renderTemplate("modules/shadowdark-pdf-importer/import-window.html", {}),
             buttons: buttons,
             default: "import"

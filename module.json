@@ -2,7 +2,7 @@
     "id": "shadowdark-pdf-importer",
     "title": "Shadowdark PDF Importer",
     "description": "",
-    "version": "0.0.8",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "chrpow",
@@ -17,8 +17,8 @@
     ],
     "flags": {},
     "compatibility": {
-        "minimum": "11",
-        "verified": "13.346"
+        "minimum": "13",
+        "verified": "13.348"
     },
     "relationships": {
         "systems": [
